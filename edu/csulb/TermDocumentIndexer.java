@@ -6,7 +6,9 @@ import cecs429.index.TermDocumentIndex;
 import cecs429.text.BasicTokenProcessor;
 import cecs429.text.TokenProcessor;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.*;
@@ -137,14 +139,30 @@ public class TermDocumentIndexer {
 	
 	public static void main(String[] args) {
 		// Index the current working directory.
-		final Path currentWorkingPath = Paths.get("").toAbsolutePath();
+		final Path currentWorkingPath = Paths.get("C:\\CSULB\\git\\SET_homework1\\MobyDickChapters").toAbsolutePath();
 		Index index = indexDirectory(currentWorkingPath);
 		
 		// We aren't ready to use a full query parser; for now, we'll only support single-term queries.
 		String query = "whale"; // hard-coded search for "whale"
-		for (Posting p : index.getPostings(query)) {
-			System.out.println("Document ID " + p.getDocumentId());
-		}
+		do{
+			BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+			System.out.print("Enter your query: ");
+
+
+			try {
+				query = reader.readLine();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			System.out.println("Your query is: " + query);
+
+
+			for (Posting p : index.getPostings(query)) {
+				System.out.println("Document ID " + p.getDocumentId());
+			}
+
+		} while (!query.equalsIgnoreCase("quit"));
+
 		
 		// TODO: fix this application so the user is asked for a term to search.
 	}
