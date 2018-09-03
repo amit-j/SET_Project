@@ -41,8 +41,18 @@ public class TermDocumentIndex implements Index {
 		
 		// TODO: implement this method.
 		// Binary search the mVocabulary array for the given term.
+		int vIndex = Collections.binarySearch(mVocabulary,term);
+		if(vIndex<0)
+		    return results; //we return the empty results when we don't have any matching terms in the dictionary.
+
 		// Walk down the mMatrix row for the term and collect the document IDs (column indices)
 		// of the "true" entries.
+		for(int file=0;file<mMatrix[vIndex].length;file++){
+			if(mMatrix[vIndex][file])
+				results.add(new Posting(file));
+
+		}
+
 		
 		return results;
 	}

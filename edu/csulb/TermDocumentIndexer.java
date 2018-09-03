@@ -106,6 +106,7 @@ public class TermDocumentIndexer {
 					String word = processor.processToken(scan.next());
 					if (word.length() > 0) {
 						dictionary.add(word);
+
 					}
 				}
 			}
