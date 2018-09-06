@@ -8,6 +8,7 @@ import cecs429.index.Posting;
 import cecs429.index.TermDocumentIndex;
 import cecs429.text.BasicTokenProcessor;
 import cecs429.text.EnglishTokenStream;
+import com.google.gson.Gson;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -17,8 +18,14 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
+
 public class BetterTermDocumentIndexer {
+
+    Gson gson;
+
+
 	public static void main(String[] args) {
+
 		DocumentCorpus corpus = DirectoryCorpus.loadTextDirectory(Paths.get("").toAbsolutePath(), ".txt");
 		Index index = indexCorpus(corpus) ;
 		// We aren't ready to use a full query parser; for now, we'll only support single-term queries.
