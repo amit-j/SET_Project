@@ -158,7 +158,7 @@ public class TermDocumentIndexer {
 
 
 			for (Posting p : index.getPostings(query)) {
-				System.out.println("Document ID " + p.getDocumentId());
+				System.out.println("JsonDocument ID " + p.getDocumentId());
 			}
 
 		} while (!query.equalsIgnoreCase("quit"));

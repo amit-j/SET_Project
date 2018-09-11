@@ -26,7 +26,7 @@ public class BetterTermDocumentIndexer {
 
 	public static void main(String[] args) {
 
-		DocumentCorpus corpus = DirectoryCorpus.loadTextDirectory(Paths.get("").toAbsolutePath(), ".txt");
+		DocumentCorpus corpus = DirectoryCorpus.loadJsonDirectory(Paths.get("C://Articles/").toAbsolutePath(), ".json");
 		Index index = indexCorpus(corpus) ;
 		// We aren't ready to use a full query parser; for now, we'll only support single-term queries.
 		String query = "whale"; // hard-coded search for "whale"
@@ -45,7 +45,7 @@ public class BetterTermDocumentIndexer {
 
 
             for (Posting p : index.getPostings(query)) {
-                System.out.println("Document " + corpus.getDocument(p.getDocumentId()).getTitle());
+                System.out.println("JsonDocument " + corpus.getDocument(p.getDocumentId()).getTitle());
             }
 
         }
@@ -60,8 +60,8 @@ public class BetterTermDocumentIndexer {
 		// First, build the vocabulary hash set.
 		
 		// TODO:
-		// Get all the documents in the corpus by calling GetDocuments().
-		// Iterate through the documents, and:
+		// Get all the jsonDocuments in the corpus by calling GetDocuments().
+		// Iterate through the jsonDocuments, and:
 		// Tokenize the document's content by constructing an EnglishTokenStream around the document's content.
 		// Iterate through the tokens in the document, processing them using a BasicTokenProcessor,
 		//		and adding them to the HashSet vocabulary.

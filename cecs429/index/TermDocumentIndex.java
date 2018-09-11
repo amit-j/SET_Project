@@ -3,7 +3,7 @@ package cecs429.index;
 import java.util.*;
 
 /**
- * Implements an Index using a term-document matrix. Requires knowing the full corpus vocabulary and number of documents
+ * Implements an Index using a term-document matrix. Requires knowing the full corpus vocabulary and number of jsonDocuments
  * prior to construction.
  */
 public class TermDocumentIndex implements Index {
@@ -14,7 +14,7 @@ public class TermDocumentIndex implements Index {
 	/**
 	 * Constructs an empty index with with given vocabulary set and corpus size.
 	 * @param vocabulary a collection of all terms in the corpus vocabulary.
-	 * @param corpuseSize the number of documents in the corpus.
+	 * @param corpuseSize the number of jsonDocuments in the corpus.
 	 */
 	public TermDocumentIndex(Collection<String> vocabulary, int corpuseSize) {
 		mMatrix = new boolean[vocabulary.size()][corpuseSize];

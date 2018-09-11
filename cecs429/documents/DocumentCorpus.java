@@ -1,16 +1,16 @@
 package cecs429.documents;
 
 /**
- * Represents a collection of documents used to build an index.
+ * Represents a collection of jsonDocuments used to build an index.
  */
 public interface DocumentCorpus {
 	/**
-	 * Gets all documents in the corpus.
+	 * Gets all jsonDocuments in the corpus.
 	 */
 	Iterable<Document> getDocuments();
 	
 	/**
-	 * The number of documents in the corpus.
+	 * The number of jsonDocuments in the corpus.
 	 */
 	int getCorpusSize();
 	

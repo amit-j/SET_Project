@@ -21,7 +21,7 @@ public class DirectoryCorpus implements DocumentCorpus {
 	// Maintains a map of registered file types that the corpus knows how to load.
 	private HashMap<String, FileDocumentFactory> mFactories = new HashMap<>();
 	
-	// A filtering function for identifying documents that should get loaded.
+	// A filtering function for identifying jsonDocuments that should get loaded.
 	private Predicate<String> mFileFilter;
 	
 	private Path mDirectoryPath;
@@ -47,7 +47,7 @@ public class DirectoryCorpus implements DocumentCorpus {
 	}
 	
 	/**
-	 * Reads all documents in the corpus into a map from ID to document object.
+	 * Reads all jsonDocuments in the corpus into a map from ID to document object.
 	 */
 	private HashMap<Integer, Document> readDocuments() throws IOException {
 		Iterable<Path> allFiles = findFiles();
@@ -136,7 +136,7 @@ public class DirectoryCorpus implements DocumentCorpus {
 	}
 	
 	/**
-	 * Registers a factory method for loading documents of the given file extension. By default, a corpus
+	 * Registers a factory method for loading jsonDocuments of the given file extension. By default, a corpus
 	 * does not know how to load any files -- this method must be called prior to getDocuments().
 	 */
 	public void registerFileDocumentFactory(String fileExtension, FileDocumentFactory factory) {
@@ -144,12 +144,18 @@ public class DirectoryCorpus implements DocumentCorpus {
 	}
 	
 	/**
-	 * Constructs a corpus over a directory of simple text documents.
-	 * @param fileExtension The extension of the text documents to load, e.g., ".txt".
+	 * Constructs a corpus over a directory of simple text jsonDocuments.
+	 * @param fileExtension The extension of the text jsonDocuments to load, e.g., ".txt".
 	 */
 	public static DirectoryCorpus loadTextDirectory(Path absolutePath, String fileExtension) {
 		DirectoryCorpus corpus = new DirectoryCorpus(absolutePath);
 		corpus.registerFileDocumentFactory(fileExtension, TextFileDocument::loadTextFileDocument);
+		return corpus;
+	}
+
+	public static DirectoryCorpus loadJsonDirectory(Path absolutePath, String fileExtension) {
+		DirectoryCorpus corpus = new DirectoryCorpus(absolutePath);
+		corpus.registerFileDocumentFactory(fileExtension, JsonFileDocument::loadJsonFileDocument);
 		return corpus;
 	}
 }
