@@ -1,5 +1,6 @@
 package cecs429.text;
 
+import java.io.IOException;
 import java.io.Reader;
 import java.util.*;
 
@@ -19,8 +20,17 @@ public class EnglishTokenStream implements TokenStream {
 		}
 	
 		@Override
-		public boolean hasNext() {
-			return mScanner.hasNext();
+		public boolean hasNext()  {
+
+			if(mScanner.hasNext()== false) {
+                try {
+                    close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+			   return mScanner.hasNext();
 		}
 		
 		@Override
@@ -40,5 +50,11 @@ public class EnglishTokenStream implements TokenStream {
 	public Iterable<String> getTokens() {
 		// Fancy trick to convert an Iterator to an Iterable.
 		return () -> new EnglishTokenIterator();
+	}
+
+	@Override
+	public void close() throws IOException {
+		if(mReader!=null)
+			mReader.close();
 	}
 }

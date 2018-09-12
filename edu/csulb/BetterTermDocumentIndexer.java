@@ -26,7 +26,7 @@ public class BetterTermDocumentIndexer {
 
 	public static void main(String[] args) {
 
-		DocumentCorpus corpus = DirectoryCorpus.loadJsonDirectory(Paths.get("C://Articles/").toAbsolutePath(), ".json");
+		DocumentCorpus corpus = DirectoryCorpus.loadTextDirectory(Paths.get("C://Articles/").toAbsolutePath(), ".json");
 		Index index = indexCorpus(corpus) ;
 		// We aren't ready to use a full query parser; for now, we'll only support single-term queries.
 		String query = "whale"; // hard-coded search for "whale"
