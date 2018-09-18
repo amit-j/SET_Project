@@ -26,7 +26,7 @@ public class BetterTermDocumentIndexer {
 
 	public static void main(String[] args) {
 
-		DocumentCorpus corpus = DirectoryCorpus.loadTextDirectory(Paths.get("C://Articles/").toAbsolutePath(), ".json");
+		DocumentCorpus corpus = DirectoryCorpus.loadJsonDirectory(Paths.get("C://Articles/").toAbsolutePath(), ".json");
 		Index index = indexCorpus(corpus) ;
 		// We aren't ready to use a full query parser; for now, we'll only support single-term queries.
 		String query = "whale"; // hard-coded search for "whale"
@@ -72,6 +72,7 @@ public class BetterTermDocumentIndexer {
 
             EnglishTokenStream tokenStream = new EnglishTokenStream(document.getContent());
 
+            System.out.println("reading document: "+document.getTitle());
             for(String token:tokenStream.getTokens()){
 
                 vocabulary.add(processor.processToken(token));
@@ -80,8 +81,11 @@ public class BetterTermDocumentIndexer {
 
 
         }
-		
-		// TODO:
+
+        System.out.println("************************completed reading all the docs..*********************");
+
+
+        // TODO:
 		// Constuct a TermDocumentMatrix once you know the size of the vocabulary.
 		// THEN, do the loop again! But instead of inserting into the HashSet, add terms to the index with addPosting.
 

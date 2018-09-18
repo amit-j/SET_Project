@@ -45,7 +45,7 @@ public class JsonFileDocument implements FileDocument {
             title  =  document.getTitle();
             url = document.getUrl();
 
-            document = null;
+            //document = null;
 
             return reader;
 

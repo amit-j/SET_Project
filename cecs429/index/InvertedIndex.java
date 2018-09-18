@@ -18,7 +18,14 @@ public class InvertedIndex implements  Index{
 
     @Override
     public List<String> getVocabulary() {
-        return null;
+
+        List<String> mList  = new ArrayList<>();
+
+        for(String s:mIndex.keySet()){
+            mList.add(s);
+
+        }
+return mList;
     }
 
     public void addTerm(String term, int documentId) {

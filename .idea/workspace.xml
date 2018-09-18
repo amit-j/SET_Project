@@ -2,16 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f5e58e88-6926-4c1b-b1e5-19b9f9acfae4" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/cecs429/index/InvertedIndex.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/edu/csulb/InvertedIndexer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cecs429/index/PositionalInvertedIndex.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cecs429/text/EnglishTokenStream.java" beforeDir="false" afterPath="$PROJECT_DIR$/cecs429/text/EnglishTokenStream.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cecs429/text/TokenStream.java" beforeDir="false" afterPath="$PROJECT_DIR$/cecs429/text/TokenStream.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cecs429/documents/JsonFileDocument.java" beforeDir="false" afterPath="$PROJECT_DIR$/cecs429/documents/JsonFileDocument.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cecs429/index/InvertedIndex.java" beforeDir="false" afterPath="$PROJECT_DIR$/cecs429/index/InvertedIndex.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cecs429/index/Posting.java" beforeDir="false" afterPath="$PROJECT_DIR$/cecs429/index/Posting.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/edu/csulb/BetterTermDocumentIndexer.java" beforeDir="false" afterPath="$PROJECT_DIR$/edu/csulb/BetterTermDocumentIndexer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/homework1/cecs429/text/EnglishTokenStream$EnglishTokenIterator.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/homework1/cecs429/text/EnglishTokenStream$EnglishTokenIterator.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/homework1/cecs429/text/EnglishTokenStream.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/homework1/cecs429/text/EnglishTokenStream.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/homework1/cecs429/text/TokenStream.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/homework1/cecs429/text/TokenStream.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/edu/csulb/InvertedIndexer.java" beforeDir="false" afterPath="$PROJECT_DIR$/edu/csulb/InvertedIndexer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/homework1/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/homework1/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/homework1/cecs429/documents/JsonFileDocument.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/homework1/cecs429/documents/JsonFileDocument.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/homework1/cecs429/index/InvertedIndex.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/homework1/cecs429/index/InvertedIndex.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/homework1/cecs429/index/Posting.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/homework1/cecs429/index/Posting.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/homework1/edu/csulb/BetterTermDocumentIndexer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/homework1/edu/csulb/BetterTermDocumentIndexer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/homework1/edu/csulb/InvertedIndexer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/homework1/edu/csulb/InvertedIndexer.class" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -24,35 +27,35 @@
     <session id="-1649097227">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="4" />
+          <entry key="project.closed" value="7" />
           <entry key="project.open.time.0" value="1" />
           <entry key="project.open.time.7" value="2" />
-          <entry key="project.open.time.8" value="1" />
-          <entry key="project.open.time.9" value="1" />
-          <entry key="project.opened" value="5" />
+          <entry key="project.open.time.8" value="3" />
+          <entry key="project.open.time.9" value="2" />
+          <entry key="project.opened" value="8" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="java" value="45" />
+          <entry key="java" value="83" />
           <entry key="json" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="JAVA" value="45" />
+          <entry key="JAVA" value="83" />
           <entry key="JSON" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="dummy" value="8" />
-          <entry key="java" value="1732" />
+          <entry key="java" value="2921" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="1732" />
+          <entry key="JAVA" value="2921" />
           <entry key="PLAIN_TEXT" value="8" />
         </counts>
       </usages-collector>
@@ -61,57 +64,14 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/cecs429/documents/TextFileDocument.java">
+        <entry file="file://$PROJECT_DIR$/cecs429/index/PositionalInvertedIndex.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="118">
-              <caret line="49" column="31" selection-start-line="49" selection-start-column="31" selection-end-line="49" selection-end-column="31" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/cecs429/index/InvertedIndex.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="155">
-              <caret line="45" lean-forward="true" selection-start-line="45" selection-end-line="45" />
+            <state relative-caret-position="510">
+              <caret line="53" lean-forward="true" selection-start-line="53" selection-end-line="53" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#261#262#0" expanded="true" />
-                <element signature="e#300#301#0" expanded="true" />
-                <element signature="e#242#243#0" expanded="true" />
-                <element signature="e#269#270#0" expanded="true" />
-                <element signature="e#765#774#0" expanded="true" />
+                <element signature="e#1260#1269#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/edu/csulb/InvertedIndexer.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="87">
-              <caret line="40" column="35" selection-start-line="40" selection-start-column="31" selection-end-line="40" selection-end-column="35" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/cecs429/index/Index.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="12" column="18" selection-start-line="12" selection-start-column="18" selection-end-line="12" selection-end-column="18" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/cecs429/text/BasicTokenProcessor.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="6" selection-start-line="6" selection-end-line="6" />
             </state>
           </provider>
         </entry>
@@ -119,35 +79,21 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/cecs429/index/Posting.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="8" column="26" selection-start-line="8" selection-start-column="26" selection-end-line="8" selection-end-column="26" />
+            <state relative-caret-position="289">
+              <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
+              <folding>
+                <element signature="e#476#477#0" expanded="true" />
+                <element signature="e#501#502#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/cecs429/index/TermDocumentIndex.java">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/edu/csulb/InvertedIndexer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-100">
-              <caret line="39" column="8" lean-forward="true" selection-start-line="39" selection-start-column="8" selection-end-line="39" selection-end-column="50" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/cecs429/documents/DocumentCorpus.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="26" lean-forward="true" selection-start-column="26" selection-end-column="26" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/edu/csulb/BetterTermDocumentIndexer.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="121">
-              <caret line="105" lean-forward="true" selection-start-line="28" selection-start-column="8" selection-end-line="105" />
+            <state relative-caret-position="232">
+              <caret line="64" column="88" selection-start-line="64" selection-start-column="88" selection-end-line="64" selection-end-column="88" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -156,13 +102,34 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/cecs429/documents/DirectoryCorpus.java">
+        <entry file="file://$PROJECT_DIR$/cecs429/text/EnglishTokenStream.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-137">
-              <caret line="139" column="63" lean-forward="true" selection-start-line="139" selection-start-column="63" selection-end-line="139" selection-end-column="63" />
+            <state relative-caret-position="102">
+              <caret line="8" column="3" lean-forward="true" selection-start-line="8" selection-start-column="3" selection-end-line="8" selection-end-column="3" />
               <folding>
-                <element signature="e#1307#1308#0" expanded="true" />
-                <element signature="e#1342#1343#0" expanded="true" />
+                <element signature="e#894#895#0" expanded="true" />
+                <element signature="e#925#926#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="jar://C:/Program Files/Java/jdk1.8.0_181/src.zip!/java/io/FileInputStream.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="152">
+              <caret line="180" column="5" lean-forward="true" selection-start-line="180" selection-start-column="5" selection-end-line="180" selection-end-column="5" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/cecs429/index/InvertedIndex.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="578">
+              <caret line="39" column="13" lean-forward="true" selection-start-line="39" selection-start-column="13" selection-end-line="39" selection-end-column="13" />
+              <folding>
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -207,27 +174,29 @@
         <option value="$PROJECT_DIR$/cecs429/documents/DirectoryCorpus.java" />
         <option value="$PROJECT_DIR$/homework3/GsonParsing.java" />
         <option value="$PROJECT_DIR$/homework3/JsonDocument.java" />
-        <option value="$PROJECT_DIR$/cecs429/documents/JsonFileDocument.java" />
         <option value="$PROJECT_DIR$/cecs429/text/TokenStream.java" />
         <option value="$PROJECT_DIR$/cecs429/text/EnglishTokenStream.java" />
-        <option value="$PROJECT_DIR$/edu/csulb/BetterTermDocumentIndexer.java" />
-        <option value="$PROJECT_DIR$/edu/csulb/InvertedIndexer.java" />
         <option value="$PROJECT_DIR$/cecs429/index/InvertedIndex.java" />
+        <option value="$PROJECT_DIR$/cecs429/documents/JsonFileDocument.java" />
+        <option value="$PROJECT_DIR$/edu/csulb/BetterTermDocumentIndexer.java" />
+        <option value="$PROJECT_DIR$/cecs429/index/PositionalPosting.java" />
+        <option value="$PROJECT_DIR$/cecs429/index/Posting.java" />
+        <option value="$PROJECT_DIR$/cecs429/index/PositionalInvertedIndex.java" />
+        <option value="$PROJECT_DIR$/edu/csulb/InvertedIndexer.java" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
-    <option name="x" value="153" />
-    <option name="y" value="-18" />
-    <option name="width" value="1920" />
-    <option name="height" value="966" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-12" />
+    <option name="y" value="-12" />
+    <option name="width" value="1104" />
+    <option name="height" value="1944" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -263,22 +232,13 @@
               <item name="SET_homework2" type="462c0819:PsiDirectoryNode" />
               <item name="csulb" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="SET_homework2" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SET_homework2" type="462c0819:PsiDirectoryNode" />
-              <item name="homework3" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="SET_homework2" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SET_homework2" type="462c0819:PsiDirectoryNode" />
-              <item name="MobyDickChapters" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="AndroidView" />
       <pane id="PackagesPane" />
+      <pane id="Scope" />
+      <pane id="AndroidView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -286,7 +246,7 @@
     <property name="Repository.Attach.JavaDocs" value="false" />
     <property name="Repository.Attach.Sources" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1536734200773" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1537238118535" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
@@ -312,14 +272,14 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.Unnamed (1)">
+  <component name="RunManager" selected="Application.Inverted Indexer">
     <configuration default="true" type="Applet" factoryName="Applet">
       <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="BetterTermDocumentIndexer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+    <configuration name="BetterTermDocumentIndexer" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="edu.csulb.BetterTermDocumentIndexer" />
       <module name="homework1" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/MobyDickChapters" />
@@ -341,7 +301,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Unnamed (1)" type="Application" factoryName="Application">
+    <configuration name="Inverted Indexer" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="edu.csulb.InvertedIndexer" />
       <module name="homework1" />
       <method v="2">
@@ -386,14 +346,13 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="Application.Unnamed (1)" />
       <item itemvalue="Application.Unnamed" />
       <item itemvalue="Application.BetterTermDocumentIndexer" />
+      <item itemvalue="Application.Inverted Indexer" />
       <item itemvalue="Application.GsonParsing" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.BetterTermDocumentIndexer" />
         <item itemvalue="Application.GsonParsing" />
       </list>
     </recent_temporary>
@@ -431,14 +390,14 @@
       <window_info id="UI Designer" order="0" />
       <window_info id="Capture Tool" order="1" />
       <window_info id="Image Layers" order="2" />
-      <window_info active="true" content_ui="combo" id="Project" order="3" visible="true" weight="0.21862349" />
+      <window_info content_ui="combo" id="Project" order="3" visible="true" weight="0.23076923" />
       <window_info id="Structure" order="4" weight="0.24939272" />
       <window_info id="Designer" order="5" />
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3285968" />
       <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49959514" weight="0.3285968" />
-      <window_info anchor="bottom" id="Debug" order="3" visible="true" weight="0.39786857" />
+      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.39786857" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.49959514" weight="0.3285968" />
@@ -492,21 +451,6 @@
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/cecs429/index/TermDocumentIndex.java</url>
-          <line>38</line>
-          <properties class="cecs429.index.TermDocumentIndex" method="getPostings">
-            <option name="EMULATED" value="true" />
-          </properties>
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/cecs429/index/TermDocumentIndex.java</url>
-          <line>30</line>
-          <properties class="cecs429.index.TermDocumentIndex" method="addTerm">
-            <option name="EMULATED" value="true" />
-          </properties>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/homework3/GsonParsing.java</url>
           <line>24</line>
@@ -514,22 +458,22 @@
           <option name="timeStamp" value="5" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/edu/csulb/InvertedIndexer.java</url>
+          <line>71</line>
+          <properties />
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/edu/csulb/BetterTermDocumentIndexer.java</url>
           <line>28</line>
           <properties />
-          <option name="timeStamp" value="8" />
+          <option name="timeStamp" value="11" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/edu/csulb/InvertedIndexer.java</url>
-          <line>22</line>
+          <url>file://$PROJECT_DIR$/edu/csulb/BetterTermDocumentIndexer.java</url>
+          <line>93</line>
           <properties />
-          <option name="timeStamp" value="9" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/edu/csulb/InvertedIndexer.java</url>
-          <line>67</line>
-          <properties />
-          <option name="timeStamp" value="10" />
+          <option name="timeStamp" value="16" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -561,24 +505,10 @@
   <component name="editorHistoryManager">
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_144/src.zip!/java/util/Collections.java" />
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_144/src.zip!/java/nio/file/SimpleFileVisitor.java" />
-    <entry file="file://$PROJECT_DIR$/cecs429/documents/FileDocumentFactory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="35" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_181/src.zip!/java/nio/file/Path.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="178">
           <caret line="134" column="9" selection-start-line="134" selection-start-column="9" selection-end-line="134" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/cecs429/text/TokenProcessor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="11" selection-start-line="9" selection-start-column="11" selection-end-line="9" selection-end-column="11" />
         </state>
       </provider>
     </entry>
@@ -589,25 +519,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/cecs429/documents/FileDocument.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="8" selection-start-column="8" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/MobyDickChapters/all-nps-sites.json">
       <provider selected="true" editor-type-id="LargeFileEditor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/cecs429/documents/JsonFileDocument.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="130">
-          <caret line="43" column="53" lean-forward="true" selection-start-line="43" selection-start-column="53" selection-end-line="43" selection-end-column="53" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/homework3/GsonParsing.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -619,24 +532,45 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/homework3/JsonDocument.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="206">
+          <caret line="22" column="18" selection-start-line="22" selection-start-column="18" selection-end-line="22" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cecs429/index/Index.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="18" selection-start-line="12" selection-start-column="18" selection-end-line="12" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_181/src.zip!/java/nio/file/FileVisitResult.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="76">
+          <caret line="35" column="12" selection-start-line="35" selection-start-column="12" selection-end-line="35" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_181/src.zip!/java/util/Collections.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="178">
+          <caret line="210" column="8" selection-start-line="210" selection-start-column="8" selection-end-line="210" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cecs429/index/TermDocumentIndex.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="43" column="41" lean-forward="true" selection-start-line="43" selection-start-column="41" selection-end-line="43" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/edu/csulb/TermDocumentIndexer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="163">
-          <caret line="126" column="28" selection-start-line="126" selection-start-column="28" selection-end-line="126" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/cecs429/text/EnglishTokenStream.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="33" column="9" lean-forward="true" selection-start-line="33" selection-start-column="9" selection-end-line="33" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_181/src.zip!/java/io/FileInputStream.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="186" column="39" lean-forward="true" selection-start-line="186" selection-start-column="37" selection-end-line="186" selection-end-column="41" />
+        <state relative-caret-position="-1870">
+          <caret line="23" column="24" selection-start-line="23" selection-start-column="24" selection-end-line="23" selection-end-column="24" />
         </state>
       </provider>
     </entry>
@@ -647,36 +581,69 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/homework3/JsonDocument.java">
+    <entry file="file://$PROJECT_DIR$/cecs429/documents/FileDocument.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="206">
-          <caret line="22" column="18" selection-start-line="22" selection-start-column="18" selection-end-line="22" selection-end-column="18" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#443#444#0" expanded="true" />
-            <element signature="e#470#471#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/cecs429/documents/TextFileDocument.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="118">
-          <caret line="49" column="31" selection-start-line="49" selection-start-column="31" selection-end-line="49" selection-end-column="31" />
+        <state relative-caret-position="119">
+          <caret line="7" column="17" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/cecs429/documents/DocumentCorpus.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="26" lean-forward="true" selection-start-column="26" selection-end-column="26" />
+        <state relative-caret-position="85">
+          <caret line="5" column="17" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cecs429/documents/TextFileDocument.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="578">
+          <caret line="43" column="4" selection-start-line="43" selection-start-column="4" selection-end-line="43" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/edu/csulb/BetterTermDocumentIndexer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="22" selection-start-line="22" selection-end-line="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cecs429/documents/JsonFileDocument.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="680">
+          <caret line="49" selection-start-line="49" selection-end-line="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cecs429/text/BasicTokenProcessor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" selection-start-line="9" selection-end-line="9" />
+          <folding>
+            <element signature="e#350#351#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/gson-2.6.2-sources.jar!/com/google/gson/GsonBuilder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1139">
+          <caret line="103" selection-start-line="103" selection-end-line="103" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cecs429/documents/FileDocumentFactory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="31" selection-start-line="5" selection-start-column="31" selection-end-line="5" selection-end-column="31" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/cecs429/documents/DirectoryCorpus.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-137">
-          <caret line="139" column="63" lean-forward="true" selection-start-line="139" selection-start-column="63" selection-end-line="139" selection-end-column="63" />
+        <state relative-caret-position="2448">
+          <caret line="157" column="78" selection-start-line="157" selection-start-column="78" selection-end-line="157" selection-end-column="78" />
           <folding>
             <element signature="e#1307#1308#0" expanded="true" />
             <element signature="e#1342#1343#0" expanded="true" />
@@ -684,65 +651,80 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/edu/csulb/BetterTermDocumentIndexer.java">
+    <entry file="file://$PROJECT_DIR$/cecs429/text/TokenProcessor.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="121">
-          <caret line="105" lean-forward="true" selection-start-line="28" selection-start-column="8" selection-end-line="105" />
+        <state relative-caret-position="153">
+          <caret line="9" column="11" selection-start-line="9" selection-start-column="11" selection-end-line="9" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cecs429/text/EnglishTokenStream.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="8" column="3" lean-forward="true" selection-start-line="8" selection-start-column="3" selection-end-line="8" selection-end-column="3" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#894#895#0" expanded="true" />
+            <element signature="e#925#926#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/cecs429/text/BasicTokenProcessor.java">
+    <entry file="file://$PROJECT_DIR$/cecs429/index/PositionalPosting.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" selection-start-line="6" selection-end-line="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/cecs429/index/Index.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="12" column="18" selection-start-line="12" selection-start-column="18" selection-end-line="12" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/edu/csulb/InvertedIndexer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="87">
-          <caret line="40" column="35" selection-start-line="40" selection-start-column="31" selection-end-line="40" selection-end-column="35" />
+        <state relative-caret-position="170">
+          <caret line="10" selection-start-line="10" selection-end-line="26" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#415#416#0" expanded="true" />
+            <element signature="e#449#450#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/cecs429/index/Posting.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="26" selection-start-line="8" selection-start-column="26" selection-end-line="8" selection-end-column="26" />
+        <state relative-caret-position="289">
+          <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
+          <folding>
+            <element signature="e#476#477#0" expanded="true" />
+            <element signature="e#501#502#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/cecs429/index/TermDocumentIndex.java">
+    <entry file="file://$PROJECT_DIR$/cecs429/index/PositionalInvertedIndex.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-100">
-          <caret line="39" column="8" lean-forward="true" selection-start-line="39" selection-start-column="8" selection-end-line="39" selection-end-column="50" />
+        <state relative-caret-position="510">
+          <caret line="53" lean-forward="true" selection-start-line="53" selection-end-line="53" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1260#1269#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/cecs429/index/InvertedIndex.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="155">
-          <caret line="45" lean-forward="true" selection-start-line="45" selection-end-line="45" />
+        <state relative-caret-position="578">
+          <caret line="39" column="13" lean-forward="true" selection-start-line="39" selection-start-column="13" selection-end-line="39" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#261#262#0" expanded="true" />
-            <element signature="e#300#301#0" expanded="true" />
-            <element signature="e#242#243#0" expanded="true" />
-            <element signature="e#269#270#0" expanded="true" />
-            <element signature="e#765#774#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_181/src.zip!/java/io/FileInputStream.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="180" column="5" lean-forward="true" selection-start-line="180" selection-start-column="5" selection-end-line="180" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/edu/csulb/InvertedIndexer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="232">
+          <caret line="64" column="88" selection-start-line="64" selection-start-column="88" selection-end-line="64" selection-end-column="88" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
