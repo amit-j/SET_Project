@@ -104,8 +104,10 @@ public class TermDocumentIndexer {
 			try (Scanner scan = new Scanner(file)) {
 				while (scan.hasNext()) {
 					// read one word at a time; process and add it to dictionary.
-					
-					String word = processor.processToken(scan.next());
+					String word = "";
+					for(String term : processor.processToken(scan.next())) {
+						word = term;
+					}
 					if (word.length() > 0) {
 						dictionary.add(word);
 
@@ -125,7 +127,10 @@ public class TermDocumentIndexer {
 			// read one word at a time; process and update the matrix.
 			try (Scanner scan = new Scanner(file)) {
 				while (scan.hasNext()) {
-					String word = processor.processToken(scan.next());
+					String word = "";
+					for(String term : processor.processToken(scan.next())) {
+						word = term;
+					}
 					if (word.length() > 0) {
 						index.addTerm(word, fileIndex);
 					}

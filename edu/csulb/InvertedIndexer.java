@@ -5,6 +5,7 @@ import cecs429.documents.Document;
 import cecs429.documents.DocumentCorpus;
 import cecs429.index.*;
 import cecs429.text.BasicTokenProcessor;
+import cecs429.text.BetterTokenProcessor;
 import cecs429.text.EnglishTokenStream;
 
 import java.io.BufferedReader;
@@ -13,12 +14,14 @@ import java.io.InputStreamReader;
 import java.nio.file.Paths;
 import java.util.HashSet;
 
+
 public class InvertedIndexer {
 
 
     public static void main(String[] args){
     DocumentCorpus corpus = DirectoryCorpus.loadJsonDirectory(Paths.get("C://Articles/").toAbsolutePath(), ".json");
     Index index = indexCorpus(corpus) ;
+    BetterTokenProcessor processor = new BetterTokenProcessor();
     // We aren't ready to use a full query parser; for now, we'll only support single-term queries.
     String query = "whale"; // hard-coded search for "whale"
 
@@ -35,9 +38,12 @@ public class InvertedIndexer {
         //System.out.println("Your query is: " + query);
 
 
-        for (Posting p : index.getPostings(query)) {
-            System.out.println("Json Document " + corpus.getDocument(p.getDocumentId()).getTitle());
-        }
+            for(String term : processor.processToken(query)) {
+
+                for (Posting p : index.getPostings(term)) {
+                    System.out.println("Json Document " + corpus.getDocument(p.getDocumentId()).getTitle());
+                }
+            }
 
     }
 
@@ -45,7 +51,7 @@ public class InvertedIndexer {
 }
 
     private static Index indexCorpus(DocumentCorpus corpus) {
-        BasicTokenProcessor processor = new BasicTokenProcessor();
+        BetterTokenProcessor processor = new BetterTokenProcessor();
 
         PositionalInvertedIndex index = new PositionalInvertedIndex();
 
@@ -62,7 +68,9 @@ public class InvertedIndexer {
 
             int position = 0;
             for(String token:tokenStream.getTokens()){
-                index.addTerm(processor.processToken(token),document.getId(), position++);
+                for(String term : processor.processToken(token)) {
+                    index.addTerm(term, document.getId(), position++);
+                }
             }
 
 

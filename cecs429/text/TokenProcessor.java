@@ -7,5 +7,5 @@ public interface TokenProcessor {
 	/**
 	 * Normalizes a token into a term.
 	 */
-	String processToken(String token);
+	String[] processToken(String token);
 }

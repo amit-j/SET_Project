@@ -74,8 +74,9 @@ public class BetterTermDocumentIndexer {
 
             System.out.println("reading document: "+document.getTitle());
             for(String token:tokenStream.getTokens()){
-
-                vocabulary.add(processor.processToken(token));
+                for(String term : processor.processToken(token)) {
+                    vocabulary.add(term);
+                }
             }
 
 
@@ -96,8 +97,9 @@ public class BetterTermDocumentIndexer {
             EnglishTokenStream tokenStream = new EnglishTokenStream(document.getContent());
 
             for(String token:tokenStream.getTokens()){
-
-               index.addTerm(processor.processToken(token),document.getId());
+                for(String term : processor.processToken(token)) {
+                    index.addTerm(term, document.getId());
+                }
             }
 
 
