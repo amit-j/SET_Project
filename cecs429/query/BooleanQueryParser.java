@@ -152,7 +152,7 @@ public class BooleanQueryParser {
 		//check if this is a phrase literal
 
 	if (subquery.charAt(startIndex)=='"'){
-
+			++startIndex;
 			int endOfPhrase = subquery.indexOf('"',startIndex);
 		if (endOfPhrase < 0) {
 			// this is an incomplete phrase lit, we will assume it as a term literal containing '"'

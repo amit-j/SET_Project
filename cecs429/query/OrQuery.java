@@ -3,6 +3,7 @@ package cecs429.query;
 import cecs429.index.Index;
 import cecs429.index.Posting;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -23,8 +24,66 @@ public class OrQuery implements QueryComponent {
 		
 		// TODO: program the merge for an OrQuery, by gathering the postings of the composed QueryComponents and
 		// unioning the resulting postings.
-		
+
+		List<Posting> resultsI;
+		List<Posting> resultsJ;
+
+		if(mComponents.size()<1){
+			return result;
+		}
+
+		else if(mComponents.size()==1){
+			return mComponents.get(0).getPostings(index);
+
+		}
+
+		//variables for traversing our phrase terms
+		int iResult=0,jResult=0;
+		Posting iPosting,jPosting;
+
+		resultsI =  mComponents.get(0).getPostings(index);
+		for(int i = 1; i<mComponents.size()-1;i++){
+
+			resultsJ = mComponents.get(i).getPostings(index);
+
+			while((iResult < resultsI.size()-1)  && (jResult < resultsJ.size() -1)){
+
+				iPosting = resultsI.get(iResult);
+				jPosting = resultsJ.get(jResult);
+
+
+				if(iPosting.getDocumentId()<jPosting.getDocumentId()){
+					result.add(iPosting);
+					iResult++;
+				}
+				else if(iPosting.getDocumentId()>jPosting.getDocumentId()) {
+					result.add(jPosting);
+					jResult++;
+
+				}
+
+				else{
+
+					result.add(iPosting);
+
+					iResult++;
+					jResult++;
+
+
+				}
+
+			}
+
+
+			resultsI = result;
+
+
+		}
+
+
+
 		return result;
+
 	}
 	
 	@Override

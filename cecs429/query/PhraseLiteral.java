@@ -2,6 +2,7 @@ package cecs429.query;
 
 import cecs429.index.Index;
 import cecs429.index.Posting;
+import javafx.geometry.Pos;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -30,11 +31,97 @@ public class PhraseLiteral implements QueryComponent {
 	
 	@Override
 	public List<Posting> getPostings(Index index) {
-		return null;
+
 		// TODO: program this method. Retrieve the postings for the individual terms in the phrase,
 		// and positional merge them together.
+        List<Posting> results = new ArrayList<>();
+        List<Posting> resultsTemp = new ArrayList<>();
+        if(mTerms.size()<1){
+            return results;
+        }
+
+        else if(mTerms.size()==1){
+		    return index.getPostings(mTerms.get(0));
+
+        }
+
+        //variables for traversing our phrase terms
+        String term1,term2;
+        int iResult=0,jResult=0;
+        Posting iPosting,jPosting;
+
+		term1 = mTerms.get(0);
+		results = index.getPostings(term1);
+
+		for(int i=1;i<mTerms.size()-1;i++){
+
+		    if(mTerms.size() > i){
+		        term2 = mTerms.get(i);
+                resultsTemp = index.getPostings(term2);
+
+
+                while((iResult < results.size()-1)  && (jResult < resultsTemp.size() -1)){
+
+                        iPosting = results.get(iResult);
+                        jPosting = results.get(jResult);
+
+
+                        if(iPosting.getDocumentId()<jPosting.getDocumentId()){
+                            iResult++;
+                        }
+                        else if(iPosting.getDocumentId()>jPosting.getDocumentId())
+                            jResult++;
+                        else{
+
+                            int iPositionIndex=0,jPositionIndex=0;
+
+                            while((iPositionIndex < iPosting.getPositions().size()-1)  && (jPositionIndex < jPosting.getPositions().size()-1)){
+
+                                int iPosition = iPosting.getPositions().get(iPositionIndex);
+                                int jPosition = jPosting.getPositions().get(jPositionIndex);
+
+                                if(iPosition == jPosition - 1){
+
+                                    if(results.size()<0)
+                                    results.add(iPosting);
+                                    else{
+
+                                        if(results.get(results.size()-1).getDocumentId() < iPosting.getDocumentId())
+                                            results.add(iPosting);
+
+                                    }
+                                    break;
+                                }
+
+
+                                iPositionIndex++;
+                                jPositionIndex++;
+
+
+                            }
+
+                            iResult++;
+                            jResult++;
+
+
+                        }
+
+                    }
+
+
+
+
+            }
+        }
+
+        return results;
+
 	}
-	
+
+
+
+
+
 	@Override
 	public String toString() {
 		return "\"" + String.join(" ", mTerms) + "\"";
