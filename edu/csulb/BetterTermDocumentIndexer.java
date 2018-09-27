@@ -35,7 +35,6 @@ public class BetterTermDocumentIndexer {
             BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
             System.out.print("Enter your query: ");
 
-
             try {
                 query = reader.readLine();
             } catch (IOException e) {
