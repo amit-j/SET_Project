@@ -4,6 +4,8 @@ import cecs429.documents.DirectoryCorpus;
 import cecs429.documents.Document;
 import cecs429.documents.DocumentCorpus;
 import cecs429.index.*;
+import cecs429.query.BooleanQueryParser;
+import cecs429.query.QueryComponent;
 import cecs429.text.BasicTokenProcessor;
 import cecs429.text.EnglishTokenStream;
 
@@ -21,7 +23,8 @@ public class InvertedIndexer {
     Index index = indexCorpus(corpus) ;
     // We aren't ready to use a full query parser; for now, we'll only support single-term queries.
     String query = "whale"; // hard-coded search for "whale"
-
+         QueryComponent component ;
+        BooleanQueryParser parser = new BooleanQueryParser();
         while (!query.equalsIgnoreCase("quit")){
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         System.out.print("Enter your query: ");
@@ -34,8 +37,8 @@ public class InvertedIndexer {
         }
         //System.out.println("Your query is: " + query);
 
-
-        for (Posting p : index.getPostings(query)) {
+             component = parser.parseQuery(query);
+        for (Posting p : component.getPostings(index)) {
             System.out.println("Json Document " + corpus.getDocument(p.getDocumentId()).getTitle());
         }
 
