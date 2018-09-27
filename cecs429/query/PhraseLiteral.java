@@ -34,10 +34,10 @@ public class PhraseLiteral implements QueryComponent {
 
 		// TODO: program this method. Retrieve the postings for the individual terms in the phrase,
 		// and positional merge them together.
-        List<Posting> results = new ArrayList<>();
-        List<Posting> resultsTemp = new ArrayList<>();
+        List<Posting> resultsTermOne = new ArrayList<>();
+        List<Posting> resultsTermTwo = new ArrayList<>();
         if(mTerms.size()<1){
-            return results;
+            return resultsTermOne;
         }
 
         else if(mTerms.size()==1){
@@ -49,21 +49,22 @@ public class PhraseLiteral implements QueryComponent {
         String term1,term2;
         int iResult=0,jResult=0;
         Posting iPosting,jPosting;
-
+        List<Posting> results = new ArrayList<>();
 		term1 = mTerms.get(0);
-		results = index.getPostings(term1);
+		resultsTermOne = index.getPostings(term1);
 
-		for(int i=1;i<mTerms.size()-1;i++){
+		for(int i=1;i<mTerms.size();i++){
 
 		    if(mTerms.size() > i){
 		        term2 = mTerms.get(i);
-                resultsTemp = index.getPostings(term2);
+                resultsTermTwo = index.getPostings(term2);
 
+                iResult= 0;
+                jResult = 0;
+                while((iResult < resultsTermOne.size())  && (jResult < resultsTermTwo.size())){
 
-                while((iResult < results.size()-1)  && (jResult < resultsTemp.size() -1)){
-
-                        iPosting = results.get(iResult);
-                        jPosting = results.get(jResult);
+                        iPosting = resultsTermOne.get(iResult);
+                        jPosting = resultsTermTwo.get(jResult);
 
 
                         if(iPosting.getDocumentId()<jPosting.getDocumentId()){
@@ -75,27 +76,31 @@ public class PhraseLiteral implements QueryComponent {
 
                             int iPositionIndex=0,jPositionIndex=0;
 
-                            while((iPositionIndex < iPosting.getPositions().size()-1)  && (jPositionIndex < jPosting.getPositions().size()-1)){
+                            while((iPositionIndex < iPosting.getPositions().size())  && (jPositionIndex < jPosting.getPositions().size())){
 
                                 int iPosition = iPosting.getPositions().get(iPositionIndex);
                                 int jPosition = jPosting.getPositions().get(jPositionIndex);
 
                                 if(iPosition == jPosition - 1){
 
-                                    if(results.size()<0)
-                                    results.add(iPosting);
+                                    if(results.size() == 0 )
+                                    {
+                                        results.add(jPosting);//its important that we add the last posting so we can compare it with the next term going ahead!!
+                                    }
                                     else{
 
                                         if(results.get(results.size()-1).getDocumentId() < iPosting.getDocumentId())
-                                            results.add(iPosting);
+                                            results.add(jPosting); //its important that we add the last posting so we can compare it with the next term going ahead!!
 
                                     }
                                     break;
                                 }
 
 
-                                iPositionIndex++;
-                                jPositionIndex++;
+                                if(iPosition<jPosition)
+                                    iPositionIndex++;
+                                else
+                                    jPositionIndex++;
 
 
                             }
@@ -109,12 +114,13 @@ public class PhraseLiteral implements QueryComponent {
                     }
 
 
-
+                resultsTermOne = results;
+                results = new ArrayList<>();
 
             }
         }
 
-        return results;
+        return resultsTermOne;
 
 	}
 

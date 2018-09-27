@@ -28,8 +28,6 @@ public class InvertedIndexer {
         while (!query.equalsIgnoreCase("quit")){
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         System.out.print("Enter your query: ");
-
-
         try {
             query = reader.readLine();
         } catch (IOException e) {
@@ -55,9 +53,12 @@ public class InvertedIndexer {
 
         int documentCount = 0;
         for(Document document:corpus.getDocuments()){
+
             if(documentCount>300){
                 break;
             }
+
+
             documentCount++;
 
             EnglishTokenStream tokenStream = new EnglishTokenStream(document.getContent());

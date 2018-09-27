@@ -39,13 +39,14 @@ public class AndQuery implements QueryComponent {
         String term1,term2;
         int iResult=0,jResult=0;
         Posting iPosting,jPosting;
-
+        result = new ArrayList<>();
         resultsI =  mComponents.get(0).getPostings(index);
-        for(int i = 1; i<mComponents.size()-1;i++){
+        for(int i = 1; i<mComponents.size();i++){
 
             resultsJ = mComponents.get(i).getPostings(index);
-
-        while((iResult < resultsI.size()-1)  && (jResult < resultsJ.size() -1)){
+            iResult = 0;
+            jResult = 0;
+        while((iResult < resultsI.size())  && (jResult < resultsJ.size())){
 
                     iPosting = resultsI.get(iResult);
                     jPosting = resultsJ.get(jResult);
@@ -70,13 +71,14 @@ public class AndQuery implements QueryComponent {
 
 
         resultsI = result;
+        result = new ArrayList<>();
 
 
         }
 
 
 
-        return result;
+        return resultsI;
 	}
 	
 	@Override

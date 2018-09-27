@@ -162,23 +162,25 @@ public class BooleanQueryParser {
 		else{
 
 			int nextSpace = subquery.indexOf(' ', startIndex);
+			if(nextSpace<0)   //check if we have only one term in the phrase? wierd
+			    nextSpace = endOfPhrase;
 			int PhraseStartIndex = startIndex;
 			List<String> terms =new ArrayList<>();
 			while (nextSpace > 0) {
-				// No more literals in this subquery.
+                // No more literals in this subquery.
 
-				terms.add(subquery.substring(PhraseStartIndex,nextSpace));
+                terms.add(subquery.substring(PhraseStartIndex,nextSpace));
                 PhraseStartIndex = nextSpace;
                 if(nextSpace>=endOfPhrase)
                     break;
 
-				while (subquery.charAt(PhraseStartIndex) == ' ') {
-					++PhraseStartIndex;
-				}
+                while (subquery.charAt(PhraseStartIndex) == ' ') {
+                    ++PhraseStartIndex;
+                }
 
-				//check if we are at the last term of the phrase literal
+                //check if we are at the last term of the phrase literal
                 nextSpace = subquery.indexOf(' ', PhraseStartIndex)<0 ?endOfPhrase:subquery.indexOf(' ', PhraseStartIndex);
-			}
+            }
 
 			return new Literal(
 					new StringBounds(startIndex, endOfPhrase),

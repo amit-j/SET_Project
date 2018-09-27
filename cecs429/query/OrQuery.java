@@ -40,31 +40,53 @@ public class OrQuery implements QueryComponent {
 		//variables for traversing our phrase terms
 		int iResult=0,jResult=0;
 		Posting iPosting,jPosting;
-
+        result = new ArrayList<>();
 		resultsI =  mComponents.get(0).getPostings(index);
-		for(int i = 1; i<mComponents.size()-1;i++){
+		for(int i = 1; i<mComponents.size();i++){
 
 			resultsJ = mComponents.get(i).getPostings(index);
-
-			while((iResult < resultsI.size()-1)  && (jResult < resultsJ.size() -1)){
+            iResult =0;
+            jResult=0;
+			while((iResult < resultsI.size())  && (jResult < resultsJ.size())){
 
 				iPosting = resultsI.get(iResult);
 				jPosting = resultsJ.get(jResult);
 
 
 				if(iPosting.getDocumentId()<jPosting.getDocumentId()){
-					result.add(iPosting);
+					if(result.size() == 0 )
+                        result.add(iPosting);
+				    else
+                    {
+                        if(result.get(result.size()-1).getDocumentId()!=iPosting.getDocumentId())
+                            result.add(iPosting);
+
+                    }
 					iResult++;
 				}
 				else if(iPosting.getDocumentId()>jPosting.getDocumentId()) {
-					result.add(jPosting);
+                    if(result.size() == 0 )
+                        result.add(jPosting);
+                    else
+                    {
+                        if(result.get(result.size()-1).getDocumentId()!=jPosting.getDocumentId())
+                            result.add(jPosting);
+
+                    }
 					jResult++;
 
 				}
 
 				else{
 
-					result.add(iPosting);
+                    if(result.size() == 0 )
+                        result.add(jPosting);
+                    else
+                    {
+                        if(result.get(result.size()-1).getDocumentId()!=jPosting.getDocumentId())
+                            result.add(jPosting);
+
+                    }
 
 					iResult++;
 					jResult++;
@@ -74,15 +96,24 @@ public class OrQuery implements QueryComponent {
 
 			}
 
+			while((iResult < resultsI.size()))
+                result.add(resultsI.get(iResult++));
+
+            while((jResult < resultsJ.size()))
+                result.add(resultsJ.get(jResult++));
+
+
+
 
 			resultsI = result;
+			result = new ArrayList<>();
 
 
 		}
 
 
 
-		return result;
+		return resultsI;
 
 	}
 	
