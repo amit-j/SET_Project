@@ -36,8 +36,9 @@ public class InvertedIndexer {
         //System.out.println("Your query is: " + query);
 
              component = parser.parseQuery(query);
+        System.out.println(component.getPostings(index).size());
         for (Posting p : component.getPostings(index)) {
-            System.out.println("Json Document " + corpus.getDocument(p.getDocumentId()).getTitle());
+            //System.out.println("Json Document " + corpus.getDocument(p.getDocumentId()).getTitle());
         }
 
     }
@@ -62,7 +63,7 @@ public class InvertedIndexer {
             documentCount++;
 
             EnglishTokenStream tokenStream = new EnglishTokenStream(document.getContent());
-            System.out.println("reading document: "+document.getTitle());
+            //System.out.println("reading document: "+document.getTitle());
 
             int position = 0;
             for(String token:tokenStream.getTokens()){

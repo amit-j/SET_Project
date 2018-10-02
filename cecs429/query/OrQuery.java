@@ -124,4 +124,9 @@ public class OrQuery implements QueryComponent {
 		 String.join(" + ", mComponents.stream().map(c -> c.toString()).collect(Collectors.toList()))
 		 + " )";
 	}
+
+	@Override
+	public Boolean isNegative() {
+		return false;
+	}
 }
