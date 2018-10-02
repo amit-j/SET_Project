@@ -59,7 +59,7 @@ public class PositionalInvertedIndex implements Index {
     public List<Posting> getPostings(String term) {
 
         if(mIndex.containsKey(term)) return mIndex.get(term);
-        return new ArrayList<Posting>();
+            return new ArrayList<Posting>();
 
 
     }

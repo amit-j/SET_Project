@@ -43,6 +43,7 @@ return mList;
             mIndex.put(term,mList);
 
         }
+
     }
 
     @Override

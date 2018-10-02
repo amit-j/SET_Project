@@ -50,4 +50,10 @@ public class TextFileDocument implements FileDocument {
 	public static FileDocument loadTextFileDocument(Path absolutePath, int documentId) {
 		return new TextFileDocument(documentId, absolutePath);
 	}
+
+	@Override
+	public String getName(){
+		return "";
+	}
 }
+

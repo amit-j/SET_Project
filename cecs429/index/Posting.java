@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * A Posting encapulates a document ID associated with a search query component.
  */
-public class Posting {
+public class  Posting {
 	private int mDocumentId;
 	private List<Integer> mPositions;
 

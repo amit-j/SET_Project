@@ -1,5 +1,7 @@
 package cecs429.query;
 
+import cecs429.index.Index;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,7 +39,8 @@ public class BooleanQueryParser {
 	/**
 	 * Given a boolean query, parses and returns a tree of QueryComponents representing the query.
 	 */
-	public QueryComponent parseQuery(String query) {
+
+	public QueryComponent parseQuery(String query,Index WildCardIndex) {
 		int start = 0;
 		
 		// General routine: scan the query to identify a literal, and put that literal into a list.
@@ -59,7 +62,7 @@ public class BooleanQueryParser {
 
 			do {
 				// Extract the next literal from the subquery.
-				Literal lit = findNextLiteral(subquery, subStart);
+				Literal lit = findNextLiteral(subquery, subStart,WildCardIndex);
 				
 				// Add the literal component to the conjunctive list.
 				subqueryLiterals.add(lit.literalComponent);
@@ -139,7 +142,7 @@ public class BooleanQueryParser {
 	/**
 	 * Locates and returns the next literal from the given subquery string.
 	 */
-	private Literal findNextLiteral(String subquery, int startIndex) {
+	private Literal findNextLiteral(String subquery, int startIndex,Index wildcardIndex) {
 		int subLength = subquery.length();
 		int lengthOut;
 		
@@ -147,6 +150,7 @@ public class BooleanQueryParser {
 		while (subquery.charAt(startIndex) == ' ') {
 			++startIndex;
 		}
+
 
 
 		//check if this is a phrase literal
@@ -183,13 +187,33 @@ public class BooleanQueryParser {
             }
 
 			return new Literal(
-					new StringBounds(startIndex, endOfPhrase),
+					new StringBounds(startIndex, endOfPhrase-startIndex),
 					new PhraseLiteral(terms));
 
 
 
 		}
 	}
+
+
+	    //check if the term has a wildcard char
+
+        if(subquery.contains("*")){
+            int nextSpace = subquery.indexOf(' ',startIndex);
+            if (nextSpace < 0) {
+                // No more literals in this subquery.
+                lengthOut = subLength - startIndex;
+            }
+            else {
+                lengthOut = nextSpace - startIndex;
+            }
+
+            return new Literal(
+                    new StringBounds(startIndex, lengthOut),
+                    new WildcardLiteral(subquery.substring(startIndex, startIndex + lengthOut),wildcardIndex));
+
+        }
+
 		// Locate the next space to find the end of this literal.
 		int nextSpace = subquery.indexOf(' ', startIndex);
 		if (nextSpace < 0) {

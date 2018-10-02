@@ -14,10 +14,14 @@ public class JsonFileDocument implements FileDocument {
     int mDocumentId;
     Path mFilePath;
 
+    //added only for testing
+    String name;
+
 
     public JsonFileDocument(int id, Path absoluteFilePath) {
         mDocumentId = id;
         mFilePath = absoluteFilePath;
+
     }
 
     @Override
@@ -30,6 +34,10 @@ public class JsonFileDocument implements FileDocument {
         return mDocumentId;
     }
 
+    @Override
+    public String getName(){
+        return name;
+    }
     @Override
     public Reader getContent() {
         try {
@@ -44,6 +52,7 @@ public class JsonFileDocument implements FileDocument {
             StringReader reader = new StringReader(document.getBody());
             title  =  document.getTitle();
             url = document.getUrl();
+            name = mFilePath.getFileName().toString();
 
             //document = null;
 
