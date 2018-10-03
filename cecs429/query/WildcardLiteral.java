@@ -124,6 +124,11 @@ public class WildcardLiteral implements QueryComponent {
 
 
     private boolean verifyWildcardMatch(String query, String term){
+        return false;
+    }
 
+    @Override
+    public Boolean isNegative(){
+        return false;
     }
 }

@@ -11,5 +11,7 @@ public interface QueryComponent {
     /**
      * Retrieves a list of postings for the query component, using an Index as the source.
      */
+
     List<Posting> getPostings(Index index);
+    Boolean isNegative();
 }

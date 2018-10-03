@@ -132,4 +132,9 @@ public class PhraseLiteral implements QueryComponent {
 	public String toString() {
 		return "\"" + String.join(" ", mTerms) + "\"";
 	}
+
+    @Override
+    public Boolean isNegative() {
+        return false;
+    }
 }
