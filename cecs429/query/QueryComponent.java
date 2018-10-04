@@ -1,5 +1,7 @@
 package cecs429.query;
-import cecs429.index.*;
+
+import cecs429.index.Index;
+import cecs429.index.Posting;
 
 import java.util.List;
 
@@ -13,5 +15,6 @@ public interface QueryComponent {
      */
 
     List<Posting> getPostings(Index index);
+
     Boolean isNegative();
 }

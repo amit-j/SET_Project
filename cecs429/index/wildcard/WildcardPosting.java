@@ -7,6 +7,7 @@ import java.util.List;
 public class WildcardPosting extends Posting {
 
     int mVocabIndex;
+
     public WildcardPosting(int documentId) {
         super(documentId);
     }
@@ -15,12 +16,12 @@ public class WildcardPosting extends Posting {
         super(documentId, list);
     }
 
-    public WildcardPosting(Posting posting,int vocabID) {
+    public WildcardPosting(Posting posting, int vocabID) {
         super(posting.getDocumentId(), posting.getPositions());
         mVocabIndex = vocabID;
     }
 
-    public int getVocabID(){
+    public int getVocabID() {
         return mVocabIndex;
     }
 

@@ -2,27 +2,47 @@ package cecs429.text;
 
 import java.io.IOException;
 import java.io.Reader;
-import java.util.*;
+import java.util.Iterator;
+import java.util.Scanner;
 
 /**
  * An EnglishTokenStream creates tokens by splitting on whitespace.
  */
 public class EnglishTokenStream implements TokenStream {
-	private Reader mReader;
-	
-	private class EnglishTokenIterator implements Iterator<String> {
-		private Scanner mScanner;
-		
-		private EnglishTokenIterator() {
-			// A Scanner automatically tokenizes text by splitting on whitespace. By composing a Scanner we don't have to
-			// duplicate that behavior.
-			mScanner = new Scanner(mReader);
-		}
-	
-		@Override
-		public boolean hasNext()  {
+    private Reader mReader;
 
-			if(mScanner.hasNext()== false) {
+    /**
+     * Constructs an EnglishTokenStream to create tokens from the given Reader.
+     */
+    public EnglishTokenStream(Reader inputStream) {
+        mReader = inputStream;
+    }
+
+    @Override
+    public Iterable<String> getTokens() {
+        // Fancy trick to convert an Iterator to an Iterable.
+        return () -> new EnglishTokenIterator();
+    }
+
+    @Override
+    public void close() throws IOException {
+        if (mReader != null)
+            mReader.close();
+    }
+
+    private class EnglishTokenIterator implements Iterator<String> {
+        private Scanner mScanner;
+
+        private EnglishTokenIterator() {
+            // A Scanner automatically tokenizes text by splitting on whitespace. By composing a Scanner we don't have to
+            // duplicate that behavior.
+            mScanner = new Scanner(mReader);
+        }
+
+        @Override
+        public boolean hasNext() {
+
+            if (mScanner.hasNext() == false) {
                 try {
                     close();
                 } catch (IOException e) {
@@ -30,31 +50,12 @@ public class EnglishTokenStream implements TokenStream {
                 }
             }
 
-			   return mScanner.hasNext();
-		}
-		
-		@Override
-		public String next() {
-			return mScanner.next();
-		}
-	}
-	
-	/**
-	 * Constructs an EnglishTokenStream to create tokens from the given Reader.
-	 */
-	public EnglishTokenStream(Reader inputStream) {
-		mReader = inputStream;
-	}
-	
-	@Override
-	public Iterable<String> getTokens() {
-		// Fancy trick to convert an Iterator to an Iterable.
-		return () -> new EnglishTokenIterator();
-	}
+            return mScanner.hasNext();
+        }
 
-	@Override
-	public void close() throws IOException {
-		if(mReader!=null)
-			mReader.close();
-	}
+        @Override
+        public String next() {
+            return mScanner.next();
+        }
+    }
 }

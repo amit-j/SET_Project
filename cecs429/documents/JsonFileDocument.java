@@ -24,6 +24,10 @@ public class JsonFileDocument implements FileDocument {
 
     }
 
+    public static FileDocument loadJsonFileDocument(Path absolutePath, int documentId) {
+        return new JsonFileDocument(documentId, absolutePath);
+    }
+
     @Override
     public Path getFilePath() {
         return mFilePath;
@@ -35,9 +39,10 @@ public class JsonFileDocument implements FileDocument {
     }
 
     @Override
-    public String getName(){
+    public String getName() {
         return name;
     }
+
     @Override
     public Reader getContent() {
         try {
@@ -50,7 +55,7 @@ public class JsonFileDocument implements FileDocument {
             JsonDocument document = gson.fromJson(bufferedReader, JsonDocument.class);
 
             StringReader reader = new StringReader(document.getBody());
-            title  =  document.getTitle();
+            title = document.getTitle();
             url = document.getUrl();
             name = mFilePath.getFileName().toString();
 
@@ -66,9 +71,5 @@ public class JsonFileDocument implements FileDocument {
     @Override
     public String getTitle() {
         return title;
-    }
-
-    public static FileDocument loadJsonFileDocument(Path absolutePath, int documentId) {
-        return new JsonFileDocument(documentId, absolutePath);
     }
 }

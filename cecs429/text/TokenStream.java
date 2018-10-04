@@ -7,6 +7,7 @@ import java.io.IOException;
  * in some way.
  */
 public interface TokenStream {
-	Iterable<String> getTokens();
+    Iterable<String> getTokens();
+
     void close() throws IOException;
 }

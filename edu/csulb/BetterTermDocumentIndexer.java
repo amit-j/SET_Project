@@ -14,9 +14,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 
 
 public class BetterTermDocumentIndexer {
@@ -24,14 +22,14 @@ public class BetterTermDocumentIndexer {
     Gson gson;
 
 
-	public static void main(String[] args) {
+    public static void main(String[] args) {
 
-		DocumentCorpus corpus = DirectoryCorpus.loadJsonDirectory(Paths.get("C://Articles/").toAbsolutePath(), ".json");
-		Index index = indexCorpus(corpus) ;
-		// We aren't ready to use a full query parser; for now, we'll only support single-term queries.
-		String query = "whale"; // hard-coded search for "whale"
+        DocumentCorpus corpus = DirectoryCorpus.loadJsonDirectory(Paths.get("C://Articles/").toAbsolutePath(), ".json");
+        Index index = indexCorpus(corpus);
+        // We aren't ready to use a full query parser; for now, we'll only support single-term queries.
+        String query = "whale"; // hard-coded search for "whale"
 
-        while (!query.equalsIgnoreCase("quit")){
+        while (!query.equalsIgnoreCase("quit")) {
             BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
             System.out.print("Enter your query: ");
 
@@ -51,34 +49,32 @@ public class BetterTermDocumentIndexer {
         }
 
 
-	}
-	
-	private static Index indexCorpus(DocumentCorpus corpus) {
-		HashSet<String> vocabulary = new HashSet<>();
-		BasicTokenProcessor processor = new BasicTokenProcessor();
-		
-		// First, build the vocabulary hash set.
-		
-		// TODO:
-		// Get all the jsonDocuments in the corpus by calling GetDocuments().
-		// Iterate through the jsonDocuments, and:
-		// Tokenize the document's content by constructing an EnglishTokenStream around the document's content.
-		// Iterate through the tokens in the document, processing them using a BasicTokenProcessor,
-		//		and adding them to the HashSet vocabulary.
+    }
+
+    private static Index indexCorpus(DocumentCorpus corpus) {
+        HashSet<String> vocabulary = new HashSet<>();
+        BasicTokenProcessor processor = new BasicTokenProcessor();
+
+        // First, build the vocabulary hash set.
+
+        // TODO:
+        // Get all the jsonDocuments in the corpus by calling GetDocuments().
+        // Iterate through the jsonDocuments, and:
+        // Tokenize the document's content by constructing an EnglishTokenStream around the document's content.
+        // Iterate through the tokens in the document, processing them using a BasicTokenProcessor,
+        //		and adding them to the HashSet vocabulary.
 
 
-
-        for(Document document:corpus.getDocuments()){
+        for (Document document : corpus.getDocuments()) {
 
             EnglishTokenStream tokenStream = new EnglishTokenStream(document.getContent());
 
-            System.out.println("reading document: "+document.getTitle());
-            for(String token:tokenStream.getTokens()){
-                for(String term : processor.processToken(token)) {
+            System.out.println("reading document: " + document.getTitle());
+            for (String token : tokenStream.getTokens()) {
+                for (String term : processor.processToken(token)) {
                     vocabulary.add(term);
                 }
             }
-
 
 
         }
@@ -87,28 +83,26 @@ public class BetterTermDocumentIndexer {
 
 
         // TODO:
-		// Constuct a TermDocumentMatrix once you know the size of the vocabulary.
-		// THEN, do the loop again! But instead of inserting into the HashSet, add terms to the index with addPosting.
+        // Constuct a TermDocumentMatrix once you know the size of the vocabulary.
+        // THEN, do the loop again! But instead of inserting into the HashSet, add terms to the index with addPosting.
 
-        TermDocumentIndex index = new TermDocumentIndex(vocabulary,corpus.getCorpusSize());
+        TermDocumentIndex index = new TermDocumentIndex(vocabulary, corpus.getCorpusSize());
 
-        for(Document document:corpus.getDocuments()){
+        for (Document document : corpus.getDocuments()) {
 
             EnglishTokenStream tokenStream = new EnglishTokenStream(document.getContent());
 
-            for(String token:tokenStream.getTokens()){
-                for(String term : processor.processToken(token)) {
+            for (String token : tokenStream.getTokens()) {
+                for (String term : processor.processToken(token)) {
                     index.addTerm(term, document.getId());
                 }
             }
 
 
-
         }
 
-		return index;
-	}
-
+        return index;
+    }
 
 
 }

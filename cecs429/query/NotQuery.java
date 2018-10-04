@@ -5,7 +5,7 @@ import cecs429.index.Posting;
 
 import java.util.List;
 
-public class NotQuery implements QueryComponent{
+public class NotQuery implements QueryComponent {
 
     private QueryComponent mComponent;
 
