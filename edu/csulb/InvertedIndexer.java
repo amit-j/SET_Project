@@ -79,7 +79,6 @@ public class InvertedIndexer {
                         if(file.isDirectory()){
                             corpus = DirectoryCorpus.loadJsonDirectory(Paths.get(queryLiterals[1]).toAbsolutePath(), ".json");
                             wildcardIndexer = new KGramIndex(index);
-
                             index = indexCorpus(corpus) ;
 
                         } else {
@@ -94,6 +93,7 @@ public class InvertedIndexer {
                             i++;
                             if(i==999) break;
                         }
+                        System.out.println("The count of the total number of vocabulary terms: "+sortedVocabulary.size());
                         break;
                     default:
 

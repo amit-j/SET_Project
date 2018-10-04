@@ -79,7 +79,7 @@ public class WildcardLiteral implements QueryComponent {
                             mPostings.add(jPosting);
                         } else {
 
-                            if (mPostings.get(mPostings.size() - 1).getDocumentId() < iPosting.getDocumentId())
+                         //   if (mPostings.get(mPostings.size() - 1).getDocumentId() < iPosting.getDocumentId())
                                 mPostings.add(jPosting);
 
                         }
@@ -100,8 +100,19 @@ public class WildcardLiteral implements QueryComponent {
                 mPostings = new ArrayList<>();
             }
 
+            List<Posting> verifiedPosting = verifyWildcardMatch(termOnePostings,mTerms);
+            List<Posting> resultPostings = new ArrayList<>();
 
-            return verifyWildcardMatch(termOnePostings,mTerms);
+            for(Posting p:verifiedPosting){
+                if(resultPostings.size()==0)
+                    resultPostings.add(p);
+                else{
+                    if(resultPostings.get(resultPostings.size()-1).getDocumentId()!=p.getDocumentId())
+                        resultPostings.add(p);
+                }
+            }
+
+            return resultPostings;
         }
     }
 

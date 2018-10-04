@@ -70,8 +70,12 @@ public class AndQuery implements QueryComponent {
                     }
                     iResult++;
                 }
-                else if(iPosting.getDocumentId()>jPosting.getDocumentId())
+                else if(iPosting.getDocumentId()>jPosting.getDocumentId()){
+                    if(isNegative){
+                        result.add(iPosting);
+                    }
                     jResult++;
+                }
                 else{
                     if(isNegative){
                         //dont add them

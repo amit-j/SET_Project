@@ -8,7 +8,8 @@ import java.util.List;
 
 public class PositionalInvertedIndex implements Index {
 
-    private HashMap<String, List<Posting>> mIndex;
+    //    private HashMap<String, List<Posting>> mIndex;
+    public HashMap<String, List<Posting>> mIndex;
 
     public PositionalInvertedIndex(){
         mIndex = new HashMap<>();
@@ -30,7 +31,7 @@ public class PositionalInvertedIndex implements Index {
 
         if(mIndex.containsKey(term)){
 
-           List<Posting> mList = mIndex.get(term);
+            List<Posting> mList = mIndex.get(term);
 
             if((mList.get(mList.size()-1).getDocumentId()!=documentId)) {
                 // DocumentId is not present in Positional Posting List,
@@ -59,7 +60,7 @@ public class PositionalInvertedIndex implements Index {
     public List<Posting> getPostings(String term) {
 
         if(mIndex.containsKey(term)) return mIndex.get(term);
-            return new ArrayList<Posting>();
+        return new ArrayList<Posting>();
 
 
     }
