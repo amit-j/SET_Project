@@ -7,15 +7,15 @@ import java.util.List;
 
 public class NotQuery implements QueryComponent{
 
-    private String mTerm;
+    private QueryComponent mComponent;
 
-    public NotQuery(String term) {
-        mTerm = term;
+    public NotQuery(QueryComponent component) {
+        mComponent = component;
     }
 
     @Override
     public List<Posting> getPostings(Index index) {
-        return index.getPostings(mTerm);
+        return mComponent.getPostings(index);
     }
 
     @Override

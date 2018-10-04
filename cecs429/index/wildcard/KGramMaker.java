@@ -1,4 +1,4 @@
-package cecs429.index;
+package cecs429.index.wildcard;
 
 
 import java.util.ArrayList;

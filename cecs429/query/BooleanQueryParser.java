@@ -1,6 +1,7 @@
 package cecs429.query;
 
-import cecs429.index.Index;
+import cecs429.index.wildcard.KGramIndex;
+import cecs429.text.BetterTokenProcessor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,7 +41,7 @@ public class BooleanQueryParser {
      * Given a boolean query, parses and returns a tree of QueryComponents representing the query.
      */
 
-    public QueryComponent parseQuery(String query,Index WildCardIndex) {
+    public QueryComponent parseQuery(String query,KGramIndex WildCardIndex) {
         int start = 0;
 
         // General routine: scan the query to identify a literal, and put that literal into a list.
@@ -142,7 +143,8 @@ public class BooleanQueryParser {
     /**
      * Locates and returns the next literal from the given subquery string.
      */
-    private Literal findNextLiteral(String subquery, int startIndex,Index wildcardIndex) {
+    private Literal findNextLiteral(String subquery, int startIndex,KGramIndex wildcardIndex) {
+        BetterTokenProcessor processor = new BetterTokenProcessor();
         int subLength = subquery.length();
         int lengthOut;
 
@@ -150,7 +152,17 @@ public class BooleanQueryParser {
         while (subquery.charAt(startIndex) == ' ') {
             ++startIndex;
         }
+        //check if subquery has '-'
+        if(subquery.charAt(startIndex) == '-'){
+            while (subquery.charAt(startIndex) == ' ') {
+                ++startIndex;
+            }
 
+                startIndex++;
+                Literal lit= findNextLiteral(processor.processToken(subquery)[0], startIndex, wildcardIndex);
+                Literal notlit=  new Literal( new StringBounds(startIndex-1, lit.bounds.length+1),new NotQuery(lit.literalComponent));
+            return notlit;
+            }
 
 
         //check if this is a phrase literal
@@ -173,7 +185,7 @@ public class BooleanQueryParser {
                 while (nextSpace > 0) {
                     // No more literals in this subquery.
 
-                    terms.add(subquery.substring(PhraseStartIndex,nextSpace));
+                    terms.add(processor.processToken(subquery.substring(PhraseStartIndex,nextSpace))[0]);
                     PhraseStartIndex = nextSpace;
                     if(nextSpace>=endOfPhrase)
                         break;
@@ -187,7 +199,7 @@ public class BooleanQueryParser {
                 }
 
                 return new Literal(
-                        new StringBounds(startIndex, endOfPhrase-startIndex),
+                        new StringBounds(startIndex, endOfPhrase-startIndex+1),
                         new PhraseLiteral(terms));
 
 
@@ -227,7 +239,7 @@ public class BooleanQueryParser {
         // This is a term literal containing a single term.
         return new Literal(
                 new StringBounds(startIndex, lengthOut),
-                new TermLiteral(subquery.substring(startIndex, startIndex + lengthOut)));
+                new TermLiteral(processor.processToken(subquery.substring(startIndex, startIndex + lengthOut))[0]));
 
     }
 }

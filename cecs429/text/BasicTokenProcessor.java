@@ -6,7 +6,8 @@ package cecs429.text;
  */
 public class BasicTokenProcessor implements TokenProcessor {
 	@Override
-	public String processToken(String token) {
-		return token.replaceAll("\\W", "").toLowerCase();
+	public String[] processToken(String token) {
+		String[] output = {token.replaceAll("\\W", "").toLowerCase()};
+		return output;
 	}
 }
