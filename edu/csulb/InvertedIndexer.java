@@ -34,7 +34,6 @@ public class InvertedIndexer {
         QueryComponent component ;
         BooleanQueryParser parser = new BooleanQueryParser();
         KGramIndex wildcardIndexer=null;
-        //Index index = indexCorpus(corpus,wildcardIndexer) ;
 
         BetterTokenProcessor processor = new BetterTokenProcessor();
         // We aren't ready to use a full query parser; for now, we'll only support single-term queries.
@@ -68,6 +67,8 @@ public class InvertedIndexer {
                 String[] queryLiterals = query.split(" ");
                 System.out.println("Your query: "+queryLiterals[0]);
                 switch (queryLiterals[0]) {
+                    case "q":
+                        break;
                     case "stem":
                         snowballStemmer.setCurrent(queryLiterals[1]);
                         snowballStemmer.stem();
@@ -77,8 +78,9 @@ public class InvertedIndexer {
                     case "index":
                         if(file.isDirectory()){
                             corpus = DirectoryCorpus.loadJsonDirectory(Paths.get(queryLiterals[1]).toAbsolutePath(), ".json");
+                            wildcardIndexer = new KGramIndex(index);
+
                             index = indexCorpus(corpus) ;
-                             wildcardIndexer = new KGramIndex(index);
 
                         } else {
                             System.out.println("Enter valid directory path");
@@ -135,9 +137,9 @@ public class InvertedIndexer {
         long start = System.currentTimeMillis();
         int documentCount = 0;
         for(Document document:corpus.getDocuments()){
-            if(documentCount>10){
-                break;
-            }
+//            if(documentCount>10){
+//                break;
+//            }
             documentCount++;
 
             EnglishTokenStream tokenStream = new EnglishTokenStream(document.getContent());
@@ -147,6 +149,8 @@ public class InvertedIndexer {
             for(String token:tokenStream.getTokens()){
                 for(String term : processor.processToken(token)) {
                     index.addTerm(term, document.getId(), position++);
+
+
                 }
             }
         }

@@ -4,6 +4,7 @@
     <CLASSES>
       <root url="jar://$PROJECT_DIR$/lib/gson-2.6.2.jar!/" />
       <root url="jar://$USER_HOME$/Downloads/snowball-stemmer-1.3.0.581.1.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/junit-4.12.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
