@@ -1,11 +1,5 @@
 package homework3;
 
-import cecs429.documents.FileDocument;
-import cecs429.documents.JsonFileDocument;
-import cecs429.documents.TextFileDocument;
-
-import java.nio.file.Path;
-
 public class JsonDocument {
 
     private String title;

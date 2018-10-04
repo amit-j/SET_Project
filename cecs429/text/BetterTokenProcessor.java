@@ -5,6 +5,15 @@ import org.tartarus.snowball.ext.englishStemmer;
 
 public class BetterTokenProcessor implements TokenProcessor{
 
+    public static void main(String arg[]) {
+
+        BetterTokenProcessor processor = new BetterTokenProcessor();
+        String[] temp = processor.processToken("@Namrata'-Lomte10'");
+        for (int i = 0; i < temp.length; i++) {
+            System.out.println(temp[i]);
+        }
+    }
+
     // removed implementation of TokenProcessor
     @Override
     public String[] processToken(String token) {
@@ -12,7 +21,7 @@ public class BetterTokenProcessor implements TokenProcessor{
         SnowballStemmer snowballStemmer = new englishStemmer();
 
         String processedTokens[];
-        token = token.replaceAll("^[^a-zA-Z0-9\\s]+|[^a-zA-Z0-9\\s]+$+|\'+|\"",  "").toLowerCase();
+        token = token.replaceAll("^[^a-zA-Z0-9\\s]+|[^a-zA-Z0-9\\s]+$+|\'+|\"", "").toLowerCase();
 
         if(token.contains("-")){
             String[] temp = token.split("-");
@@ -38,14 +47,5 @@ public class BetterTokenProcessor implements TokenProcessor{
         }
 
         return processedTokens;
-    }
-
-    public static void main(String arg[]){
-
-        BetterTokenProcessor processor = new BetterTokenProcessor();
-        String[] temp = processor.processToken("namrata-here.");
-        for (int i=0; i<temp.length; i++){
-            System.out.println(temp[i]);
-        }
     }
 }

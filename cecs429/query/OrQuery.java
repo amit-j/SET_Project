@@ -11,122 +11,111 @@ import java.util.stream.Collectors;
  * An OrQuery composes other QueryComponents and merges their postings with a union-type operation.
  */
 public class OrQuery implements QueryComponent {
-	// The components of the Or query.
-	private List<QueryComponent> mComponents;
-	
-	public OrQuery(List<QueryComponent> components) {
-		mComponents = components;
-	}
-	
-	@Override
-	public List<Posting> getPostings(Index index) {
-		List<Posting> result = null;
-		
-		// TODO: program the merge for an OrQuery, by gathering the postings of the composed QueryComponents and
-		// unioning the resulting postings.
+    // The components of the Or query.
+    private List<QueryComponent> mComponents;
 
-		List<Posting> resultsI;
-		List<Posting> resultsJ;
+    public OrQuery(List<QueryComponent> components) {
+        mComponents = components;
+    }
 
-		if(mComponents.size()<1){
-			return result;
-		}
+    @Override
+    public List<Posting> getPostings(Index index) {
+        List<Posting> result = null;
 
-		else if(mComponents.size()==1){
-			return mComponents.get(0).getPostings(index);
+        // TODO: program the merge for an OrQuery, by gathering the postings of the composed QueryComponents and
+        // unioning the resulting postings.
 
-		}
+        List<Posting> resultsI;
+        List<Posting> resultsJ;
 
-		//variables for traversing our phrase terms
-		int iResult=0,jResult=0;
-		Posting iPosting,jPosting;
+        if (mComponents.size() < 1) {
+            return result;
+        } else if (mComponents.size() == 1) {
+            return mComponents.get(0).getPostings(index);
+
+        }
+
+        //variables for traversing our phrase terms
+        int iResult = 0, jResult = 0;
+        Posting iPosting, jPosting;
         result = new ArrayList<>();
-		resultsI =  mComponents.get(0).getPostings(index);
-		for(int i = 1; i<mComponents.size();i++){
+        resultsI = mComponents.get(0).getPostings(index);
+        for (int i = 1; i < mComponents.size(); i++) {
 
-			resultsJ = mComponents.get(i).getPostings(index);
-            iResult =0;
-            jResult=0;
-			while((iResult < resultsI.size())  && (jResult < resultsJ.size())){
+            resultsJ = mComponents.get(i).getPostings(index);
+            iResult = 0;
+            jResult = 0;
+            while ((iResult < resultsI.size()) && (jResult < resultsJ.size())) {
 
-				iPosting = resultsI.get(iResult);
-				jPosting = resultsJ.get(jResult);
+                iPosting = resultsI.get(iResult);
+                jPosting = resultsJ.get(jResult);
 
 
-				if(iPosting.getDocumentId()<jPosting.getDocumentId()){
-					if(result.size() == 0 )
+                if (iPosting.getDocumentId() < jPosting.getDocumentId()) {
+                    if (result.size() == 0)
                         result.add(iPosting);
-				    else
-                    {
-                        if(result.get(result.size()-1).getDocumentId()!=iPosting.getDocumentId())
+                    else {
+                        if (result.get(result.size() - 1).getDocumentId() != iPosting.getDocumentId())
                             result.add(iPosting);
 
                     }
-					iResult++;
-				}
-				else if(iPosting.getDocumentId()>jPosting.getDocumentId()) {
-                    if(result.size() == 0 )
+                    iResult++;
+                } else if (iPosting.getDocumentId() > jPosting.getDocumentId()) {
+                    if (result.size() == 0)
                         result.add(jPosting);
-                    else
-                    {
-                        if(result.get(result.size()-1).getDocumentId()!=jPosting.getDocumentId())
+                    else {
+                        if (result.get(result.size() - 1).getDocumentId() != jPosting.getDocumentId())
                             result.add(jPosting);
 
                     }
-					jResult++;
+                    jResult++;
 
-				}
+                } else {
 
-				else{
-
-                    if(result.size() == 0 )
+                    if (result.size() == 0)
                         result.add(jPosting);
-                    else
-                    {
-                        if(result.get(result.size()-1).getDocumentId()!=jPosting.getDocumentId())
+                    else {
+                        if (result.get(result.size() - 1).getDocumentId() != jPosting.getDocumentId())
                             result.add(jPosting);
 
                     }
 
-					iResult++;
-					jResult++;
+                    iResult++;
+                    jResult++;
 
 
-				}
+                }
 
-			}
+            }
 
-			while((iResult < resultsI.size()))
+            while ((iResult < resultsI.size()))
                 result.add(resultsI.get(iResult++));
 
-            while((jResult < resultsJ.size()))
+            while ((jResult < resultsJ.size()))
                 result.add(resultsJ.get(jResult++));
 
 
+            resultsI = result;
+            result = new ArrayList<>();
 
 
-			resultsI = result;
-			result = new ArrayList<>();
+        }
 
 
-		}
+        return resultsI;
 
+    }
 
+    @Override
+    public String toString() {
+        // Returns a string of the form "[SUBQUERY] + [SUBQUERY] + [SUBQUERY]"
+        return "(" +
+                String.join(" + ", mComponents.stream().map(c -> c.toString()).collect(Collectors.toList()))
+                + " )";
+    }
 
-		return resultsI;
-
-	}
-	
-	@Override
-	public String toString() {
-		// Returns a string of the form "[SUBQUERY] + [SUBQUERY] + [SUBQUERY]"
-		return "(" +
-		 String.join(" + ", mComponents.stream().map(c -> c.toString()).collect(Collectors.toList()))
-		 + " )";
-	}
-
-	@Override
-	public Boolean isNegative() {
-		return false;
-	}
+    @Override
+    public Boolean isNegative() {
+        return false;
+    }
 }

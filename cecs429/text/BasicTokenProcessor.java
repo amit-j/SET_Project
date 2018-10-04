@@ -5,9 +5,9 @@ package cecs429.text;
  * converting it to all lowercase.
  */
 public class BasicTokenProcessor implements TokenProcessor {
-	@Override
-	public String[] processToken(String token) {
-		String[] output = {token.replaceAll("\\W", "").toLowerCase()};
-		return output;
-	}
+    @Override
+    public String[] processToken(String token) {
+        String[] output = {token.replaceAll("\\W", "").toLowerCase()};
+        return output;
+    }
 }

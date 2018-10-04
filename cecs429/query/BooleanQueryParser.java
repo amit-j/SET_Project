@@ -12,36 +12,10 @@ import java.util.List;
  */
 public class BooleanQueryParser {
     /**
-     * Identifies a portion of a string with a starting index and a length.
-     */
-    private static class StringBounds {
-        int start;
-        int length;
-
-        StringBounds(int start, int length) {
-            this.start = start;
-            this.length = length;
-        }
-    }
-
-    /**
-     * Encapsulates a QueryComponent and the StringBounds that led to its parsing.
-     */
-    private static class Literal {
-        StringBounds bounds;
-        QueryComponent literalComponent;
-
-        Literal(StringBounds bounds, QueryComponent literalComponent) {
-            this.bounds = bounds;
-            this.literalComponent = literalComponent;
-        }
-    }
-
-    /**
      * Given a boolean query, parses and returns a tree of QueryComponents representing the query.
      */
 
-    public QueryComponent parseQuery(String query,KGramIndex WildCardIndex) {
+    public QueryComponent parseQuery(String query, KGramIndex WildCardIndex) {
         int start = 0;
 
         // General routine: scan the query to identify a literal, and put that literal into a list.
@@ -63,7 +37,7 @@ public class BooleanQueryParser {
 
             do {
                 // Extract the next literal from the subquery.
-                Literal lit = findNextLiteral(subquery, subStart,WildCardIndex);
+                Literal lit = findNextLiteral(subquery, subStart, WildCardIndex);
 
                 // Add the literal component to the conjunctive list.
                 subqueryLiterals.add(lit.literalComponent);
@@ -81,8 +55,7 @@ public class BooleanQueryParser {
             // its component can go straight into the list.
             if (subqueryLiterals.size() == 1) {
                 allSubqueries.add(subqueryLiterals.get(0));
-            }
-            else {
+            } else {
                 // With more than one literal, we must wrap them in an AndQuery component.
                 allSubqueries.add(new AndQuery(subqueryLiterals));
             }
@@ -93,11 +66,9 @@ public class BooleanQueryParser {
         // that must be combined with an OrQuery.
         if (allSubqueries.size() == 1) {
             return allSubqueries.get(0);
-        }
-        else if (allSubqueries.size() > 1) {
+        } else if (allSubqueries.size() > 1) {
             return new OrQuery(allSubqueries);
-        }
-        else {
+        } else {
             return null;
         }
     }
@@ -122,8 +93,7 @@ public class BooleanQueryParser {
             // If there is no other + sign, then this is the final subquery in the
             // query string.
             lengthOut = query.length() - startIndex;
-        }
-        else {
+        } else {
             // If there is another + sign, then the length of this subquery goes up
             // to the next + sign.
 
@@ -143,7 +113,7 @@ public class BooleanQueryParser {
     /**
      * Locates and returns the next literal from the given subquery string.
      */
-    private Literal findNextLiteral(String subquery, int startIndex,KGramIndex wildcardIndex) {
+    private Literal findNextLiteral(String subquery, int startIndex, KGramIndex wildcardIndex) {
         BetterTokenProcessor processor = new BetterTokenProcessor();
         int subLength = subquery.length();
         int lengthOut;
@@ -153,38 +123,36 @@ public class BooleanQueryParser {
             ++startIndex;
         }
         //check if subquery has '-'
-        if(subquery.charAt(startIndex) == '-'){
+        if (subquery.charAt(startIndex) == '-') {
 
 
-                Literal lit= findNextLiteral(subquery, startIndex+1, wildcardIndex);
-                Literal notlit=  new Literal( new StringBounds(startIndex, lit.bounds.length+1),new NotQuery(lit.literalComponent));
+            Literal lit = findNextLiteral(subquery, startIndex + 1, wildcardIndex);
+            Literal notlit = new Literal(new StringBounds(startIndex, lit.bounds.length + 1), new NotQuery(lit.literalComponent));
             return notlit;
-            }
+        }
 
 
         //check if this is a phrase literal
 
-        if (subquery.charAt(startIndex)=='"'){
+        if (subquery.charAt(startIndex) == '"') {
             ++startIndex;
-            int endOfPhrase = subquery.indexOf('"',startIndex);
+            int endOfPhrase = subquery.indexOf('"', startIndex);
             if (endOfPhrase < 0) {
                 // this is an incomplete phrase lit, we will assume it as a term literal containing '"'
                 //do nothing, let the term literal code take over
-            }
-
-            else{
+            } else {
 
                 int nextSpace = subquery.indexOf(' ', startIndex);
-                if(nextSpace<0)   //check if we have only one term in the phrase? wierd
+                if (nextSpace < 0)   //check if we have only one term in the phrase? wierd
                     nextSpace = endOfPhrase;
                 int PhraseStartIndex = startIndex;
-                List<String> terms =new ArrayList<>();
+                List<String> terms = new ArrayList<>();
                 while (nextSpace > 0) {
                     // No more literals in this subquery.
 
-                    terms.add(processor.processToken(subquery.substring(PhraseStartIndex,nextSpace))[0]);
+                    terms.add(processor.processToken(subquery.substring(PhraseStartIndex, nextSpace))[0]);
                     PhraseStartIndex = nextSpace;
-                    if(nextSpace>=endOfPhrase)
+                    if (nextSpace >= endOfPhrase)
                         break;
 
                     while (subquery.charAt(PhraseStartIndex) == ' ') {
@@ -192,13 +160,12 @@ public class BooleanQueryParser {
                     }
 
                     //check if we are at the last term of the phrase literal
-                    nextSpace = subquery.indexOf(' ', PhraseStartIndex)<0 ?endOfPhrase:subquery.indexOf(' ', PhraseStartIndex);
+                    nextSpace = subquery.indexOf(' ', PhraseStartIndex) < 0 ? endOfPhrase : subquery.indexOf(' ', PhraseStartIndex);
                 }
 
                 return new Literal(
-                        new StringBounds(startIndex, endOfPhrase-startIndex+1),
+                        new StringBounds(startIndex, endOfPhrase - startIndex + 1),
                         new PhraseLiteral(terms));
-
 
 
             }
@@ -207,19 +174,18 @@ public class BooleanQueryParser {
 
         //check if the term has a wildcard char
 
-        if(subquery.contains("*")){
-            int nextSpace = subquery.indexOf(' ',startIndex);
+        if (subquery.contains("*")) {
+            int nextSpace = subquery.indexOf(' ', startIndex);
             if (nextSpace < 0) {
                 // No more literals in this subquery.
                 lengthOut = subLength - startIndex;
-            }
-            else {
+            } else {
                 lengthOut = nextSpace - startIndex;
             }
 
             return new Literal(
                     new StringBounds(startIndex, lengthOut),
-                    new WildcardLiteral(subquery.substring(startIndex, startIndex + lengthOut),wildcardIndex));
+                    new WildcardLiteral(subquery.substring(startIndex, startIndex + lengthOut), wildcardIndex));
 
         }
 
@@ -228,8 +194,7 @@ public class BooleanQueryParser {
         if (nextSpace < 0) {
             // No more literals in this subquery.
             lengthOut = subLength - startIndex;
-        }
-        else {
+        } else {
             lengthOut = nextSpace - startIndex;
         }
 
@@ -238,5 +203,31 @@ public class BooleanQueryParser {
                 new StringBounds(startIndex, lengthOut),
                 new TermLiteral(processor.processToken(subquery.substring(startIndex, startIndex + lengthOut))[0]));
 
+    }
+
+    /**
+     * Identifies a portion of a string with a starting index and a length.
+     */
+    private static class StringBounds {
+        int start;
+        int length;
+
+        StringBounds(int start, int length) {
+            this.start = start;
+            this.length = length;
+        }
+    }
+
+    /**
+     * Encapsulates a QueryComponent and the StringBounds that led to its parsing.
+     */
+    private static class Literal {
+        StringBounds bounds;
+        QueryComponent literalComponent;
+
+        Literal(StringBounds bounds, QueryComponent literalComponent) {
+            this.bounds = bounds;
+            this.literalComponent = literalComponent;
+        }
     }
 }

@@ -27,7 +27,7 @@ public class GsonParsing {
         for (JsonDocument document : documents.documents) {
 
             try {
-                FileWriter writer = new FileWriter("C:/Articles_2/article"+index+".json");
+                FileWriter writer = new FileWriter("C:/Articles_2/article" + index + ".json");
                 writer.write(gson.toJson(document));
                 writer.close();
 
@@ -37,16 +37,14 @@ public class GsonParsing {
             index++;
 
 
-
         }
 
     }
 }
 
-class AllDocuments
-{
-    int id;
- String name;
+class AllDocuments {
     public ArrayList<JsonDocument> documents;
+    int id;
+    String name;
 
 }

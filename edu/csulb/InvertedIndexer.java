@@ -86,7 +86,8 @@ public class InvertedIndexer {
                         }
                         break;
                     case "vocab":
-                        List<String> sortedVocabulary = index.getVocabulary().stream().sorted().collect(Collectors.toList());;
+                        List<String> sortedVocabulary = index.getVocabulary().stream().sorted().collect(Collectors.toList());
+                        ;
                         int i = 0;
                         for (String vocab : sortedVocabulary){
                             System.out.println(vocab);
@@ -96,27 +97,27 @@ public class InvertedIndexer {
                         System.out.println("The count of the total number of vocabulary terms: "+sortedVocabulary.size());
                         break;
                     default:
-
-                            component = parser.parseQuery(query, wildcardIndexer);
-                            for (Posting p : component.getPostings(index)) {
-                                System.out.println("Json Document " + corpus.getDocument(p.getDocumentId()).getName());
-                            }
-                            System.out.println("Total number of documents returned from the query: " +
-                                    " " + component.getPostings(index).size());
-                            System.out.print("Would you like to select a document name to view? (Y/N)");
-                            String wantToView = reader.readLine();
-                            if (wantToView.equalsIgnoreCase("y")) {
-                                System.out.print("Enter the document name: ");
-                                String documentName = reader.readLine();
-                                for (Document document : corpus.getDocuments()) {
-                                    if (document.getName().equalsIgnoreCase(documentName)) {
-                                        Scanner scanner = new Scanner(document.getContent()).useDelimiter("\\A");
-                                        String str = scanner.hasNext() ? scanner.next() : "";
-                                        System.out.println(str);
-                                        break;
-                                    }
+                        System.out.println("Your query: " + query);
+                        component = parser.parseQuery(query, wildcardIndexer);
+                        for (Posting p : component.getPostings(index)) {
+                            System.out.println("Json Document " + corpus.getDocument(p.getDocumentId()).getName());
+                        }
+                        System.out.println("Total number of documents returned from the query: " +
+                                " " + component.getPostings(index).size());
+                        System.out.print("Would you like to select a document name to view? (Y/N)");
+                        String wantToView = reader.readLine();
+                        if (wantToView.equalsIgnoreCase("y")) {
+                            System.out.print("Enter the document name: ");
+                            String documentName = reader.readLine();
+                            for (Document document : corpus.getDocuments()) {
+                                if (document.getName().equalsIgnoreCase(documentName.trim())) {
+                                    Scanner scanner = new Scanner(document.getContent()).useDelimiter("\\A");
+                                    String str = scanner.hasNext() ? scanner.next() : "";
+                                    System.out.println(str);
+                                    break;
                                 }
                             }
+                        }
                         break;
                         }
 
