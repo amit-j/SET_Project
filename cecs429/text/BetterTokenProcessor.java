@@ -12,7 +12,7 @@ public class BetterTokenProcessor implements TokenProcessor{
         SnowballStemmer snowballStemmer = new englishStemmer();
 
         String processedTokens[];
-        token = token.replaceAll("^[^a-zA-Z\\s]+|[^a-zA-Z\\s]+$+|\'+|\"", "").toLowerCase();
+        token = token.replaceAll("^[^a-zA-Z0-9\\s]+|[^a-zA-Z0-9\\s]+$+|\'+|\"",  " ").toLowerCase();
 
         if(token.contains("-")){
             String[] temp = token.split("-");
