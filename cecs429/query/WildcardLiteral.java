@@ -113,14 +113,7 @@ public class WildcardLiteral implements QueryComponent {
                 }
             }
 
-
-
-
-
-
             return resultPostings;
-
-
         }
     }
 

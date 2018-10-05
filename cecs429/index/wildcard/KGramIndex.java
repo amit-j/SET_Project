@@ -21,7 +21,6 @@ public class KGramIndex {
         mIndex = index;
         vocab = mIndex.getVocabulary();
         buildKGramIndex();
-
         vocab = mIndex.getVocabulary();
 
     }
