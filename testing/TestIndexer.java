@@ -25,7 +25,7 @@ public class TestIndexer {
 
     void configure(){
         parser = new BooleanQueryParser();
-        corpus = DirectoryCorpus.loadTextDirectory(Paths.get("C://ArticlesTest").toAbsolutePath(), ".txt");
+        corpus = DirectoryCorpus.loadTextDirectory(Paths.get("testcases/").toAbsolutePath(), ".txt");
         index = indexCorpus(corpus);
         wildcardIndexer = new KGramIndex(index);
     }

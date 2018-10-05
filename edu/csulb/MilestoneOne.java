@@ -24,7 +24,7 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 
 
-public class InvertedIndexer {
+public class MilestoneOne {
 
 
     public static void main(String[] args){
@@ -45,19 +45,24 @@ public class InvertedIndexer {
         System.out.print("Name of the directory to index: ");
         String directoryPath = null;
         File file = null;
-        try {
-            directoryPath = reader.readLine();
-            file = new File(directoryPath);
-            if(file.isDirectory() && corpus == null){
-                corpus = DirectoryCorpus.loadJsonDirectory(Paths.get(directoryPath).toAbsolutePath(), ".json");
-                index = indexCorpus(corpus) ;
-                wildcardIndexer = new KGramIndex(index);
-            } else if(!file.isDirectory()){
-                System.out.println("Enter valid directory path");
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
+       while(file == null) {
+           try {
+               directoryPath = reader.readLine();
+               file = new File(directoryPath);
+               if (file.isDirectory() && corpus == null) {
+                   corpus = DirectoryCorpus.loadJsonDirectory(Paths.get(directoryPath).toAbsolutePath(), ".json");
+                   index = indexCorpus(corpus);
+                   wildcardIndexer = new KGramIndex(index);
+               } else if (!file.isDirectory()) {
+                   System.out.println("Enter valid directory path");
+                   file = null;
+               }
+           } catch (IOException e) {
+               e.printStackTrace();
+               file = null;
+           }
+       }
         while (!query.equalsIgnoreCase("q")){
 
             try {
@@ -65,7 +70,6 @@ public class InvertedIndexer {
                 System.out.print("Enter your query: ");
                 query = reader.readLine();
                 String[] queryLiterals = query.split(" ");
-                System.out.println("Your query: "+queryLiterals[0]);
                 switch (queryLiterals[0]) {
                     case "q":
                         break;
@@ -99,11 +103,12 @@ public class InvertedIndexer {
                     default:
                         System.out.println("Your query: " + query);
                         component = parser.parseQuery(query, wildcardIndexer);
-                        for (Posting p : component.getPostings(index)) {
+                        List<Posting> mPostings = component.getPostings(index);
+                        for (Posting p :mPostings ) {
                             System.out.println("Json Document " + corpus.getDocument(p.getDocumentId()).getName());
                         }
                         System.out.println("Total number of documents returned from the query: " +
-                                " " + component.getPostings(index).size());
+                                " " + mPostings.size());
                         System.out.print("Would you like to select a document name to view? (Y/N)");
                         String wantToView = reader.readLine();
                         if (wantToView.equalsIgnoreCase("y")) {

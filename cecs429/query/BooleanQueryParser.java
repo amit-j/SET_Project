@@ -125,8 +125,12 @@ public class BooleanQueryParser {
         //check if subquery has '-'
         if (subquery.charAt(startIndex) == '-') {
 
+            startIndex++;
+            while (subquery.charAt(startIndex) == ' ') {
+                ++startIndex;
+            }
 
-            Literal lit = findNextLiteral(subquery, startIndex + 1, wildcardIndex);
+            Literal lit = findNextLiteral(subquery, startIndex, wildcardIndex);
             Literal notlit = new Literal(new StringBounds(startIndex, lit.bounds.length + 1), new NotQuery(lit.literalComponent));
             return notlit;
         }
