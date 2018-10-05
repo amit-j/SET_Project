@@ -103,6 +103,7 @@ public class WildcardLiteral implements QueryComponent {
             List<Posting> verifiedPosting = verifyWildcardMatch(termOnePostings,mTerms);
             List<Posting> resultPostings = new ArrayList<>();
 
+
             for(Posting p:verifiedPosting){
                 if(resultPostings.size()==0)
                     resultPostings.add(p);
@@ -112,26 +113,14 @@ public class WildcardLiteral implements QueryComponent {
                 }
             }
 
-<<<<<<< HEAD
 
 
-            List<Posting> verifiedPosting = verifyWildcardMatch(termOnePostings, mTerms);
-            List<Posting> resultPostings = new ArrayList<>();
 
-            for (Posting p : verifiedPosting) {
-                if (resultPostings.size() == 0)
-                    resultPostings.add(p);
-                else {
-                    if (resultPostings.get(resultPostings.size() - 1).getDocumentId() != p.getDocumentId())
-                        resultPostings.add(p);
-                }
-            }
+
 
             return resultPostings;
 
-=======
-            return resultPostings;
->>>>>>> e8d0049f778500cadba00a8e9c4758a56c2db2c2
+
         }
     }
 

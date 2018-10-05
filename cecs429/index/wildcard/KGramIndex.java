@@ -21,11 +21,8 @@ public class KGramIndex {
         mIndex = index;
         vocab = mIndex.getVocabulary();
         buildKGramIndex();
-<<<<<<< HEAD
 
-=======
         vocab = mIndex.getVocabulary();
->>>>>>> e8d0049f778500cadba00a8e9c4758a56c2db2c2
 
     }
 
