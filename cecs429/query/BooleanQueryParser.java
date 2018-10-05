@@ -164,7 +164,7 @@ public class BooleanQueryParser {
                 }
 
                 return new Literal(
-                        new StringBounds(startIndex, endOfPhrase - startIndex + 1),
+                        new StringBounds(startIndex, endOfPhrase+1 - startIndex+1),
                         new PhraseLiteral(terms));
 
 

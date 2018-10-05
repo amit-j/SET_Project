@@ -17,6 +17,7 @@ public class PositionalInvertedIndex implements Index {
 
         List<String> mList = new ArrayList<>();
 
+
         for (String s : mIndex.keySet()) {
             mList.add(s);
 

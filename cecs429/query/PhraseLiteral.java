@@ -79,19 +79,22 @@ public class PhraseLiteral implements QueryComponent {
 
                             if (iPosition == jPosition - 1) {
 
-                                if (results.size() == 0) {
-                                    results.add(jPosting);//its important that we add the last posting so we can compare it with the next term going ahead!!
+                                if (results.size() == 0 || results.get(results.size()-1).getDocumentId() < jPosting.getDocumentId()) {
+                                    List<Integer> mPositions = new ArrayList();
+                                    mPositions.add(jPosition);
+                                    results.add(new Posting(jPosting.getDocumentId(),mPositions));//its important that we add the last posting so we can compare it with the next term going ahead!!
                                 } else {
 
-                                    if (results.get(results.size() - 1).getDocumentId() < iPosting.getDocumentId())
-                                        results.add(jPosting); //its important that we add the last posting so we can compare it with the next term going ahead!!
+                                      Posting mPosting = results.get(results.size()-1);
+                                        mPosting.getPositions().add(jPosition);
 
                                 }
-                                break;
+
+                                iPositionIndex++;
+                                jPositionIndex++;
                             }
 
-
-                            if (iPosition < jPosition)
+                            else if(iPosition<jPosition)
                                 iPositionIndex++;
                             else
                                 jPositionIndex++;

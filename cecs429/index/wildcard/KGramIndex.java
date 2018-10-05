@@ -13,12 +13,20 @@ public class KGramIndex {
     private HashMap<String, List<Integer>> kGramIndex; // integer will point to the location in the original vocab;
     private KGramMaker kGramMaker;
     private Index mIndex;
+    private List<String> vocab;
 
     public KGramIndex(Index index) {
         kGramIndex = new HashMap<>();
         kGramMaker = new KGramMaker();
         mIndex = index;
+        vocab = mIndex.getVocabulary();
         buildKGramIndex();
+<<<<<<< HEAD
+
+=======
+        vocab = mIndex.getVocabulary();
+>>>>>>> e8d0049f778500cadba00a8e9c4758a56c2db2c2
+
     }
 
     public static void sortPostings(List<WildcardPosting> list, int from, int to) {  //expensive but needed to use our simple and merge algo
@@ -54,10 +62,10 @@ public class KGramIndex {
                 //for(Posting p:mIndex.getPostings(mIndex.getVocabulary().get(i)))
 
                 if (mPosting.size() == 0) {
-                    mPosting.addAll(wildcardPostingAdapter(mIndex.getPostings(mIndex.getVocabulary().get(i)), i));
+                    mPosting.addAll(wildcardPostingAdapter(mIndex.getPostings(vocab.get(i)), i));
                     //sortPostings(mPosting, 0, mPosting.size() - 1);
                 } else {
-                    List<Posting> tempPosting = (mIndex.getPostings(mIndex.getVocabulary().get(i)));
+                    List<Posting> tempPosting = (mIndex.getPostings(vocab.get(i)));
                     mPosting = combinePosting(mPosting, tempPosting, i);
                 }
 
@@ -113,7 +121,7 @@ public class KGramIndex {
 
     private void buildKGramIndex() {
         int vocabIndex = 0;
-        for (String term : mIndex.getVocabulary()) {
+        for (String term : vocab) {
 
             addTerm(term, vocabIndex++);
         }
@@ -142,6 +150,6 @@ public class KGramIndex {
     }
 
     public String getWordAt(int vocabIndex) {
-        return mIndex.getVocabulary().get(vocabIndex);
+        return vocab.get(vocabIndex);
     }
 }
