@@ -1,8 +1,8 @@
 package cecs429.query;
 
 import cecs429.index.Index;
-import cecs429.index.wildcard.KGramIndex;
 import cecs429.index.Posting;
+import cecs429.index.wildcard.KGramIndex;
 import cecs429.index.wildcard.WildcardPosting;
 
 import java.util.ArrayList;
@@ -30,14 +30,14 @@ public class WildcardLiteral implements QueryComponent {
             mPostings = wildcardIndex.getPostings(breakdowns.get(0));
 
 
-            List<Posting> verifiedPosting = verifyWildcardMatch(mPostings,mTerms);
+            List<Posting> verifiedPosting = verifyWildcardMatch(mPostings, mTerms);
             List<Posting> resultPostings = new ArrayList<>();
 
-            for(Posting p:verifiedPosting){
-                if(resultPostings.size()==0)
+            for (Posting p : verifiedPosting) {
+                if (resultPostings.size() == 0)
                     resultPostings.add(p);
-                else{
-                    if(resultPostings.get(resultPostings.size()-1).getDocumentId()!=p.getDocumentId())
+                else {
+                    if (resultPostings.get(resultPostings.size() - 1).getDocumentId() != p.getDocumentId())
                         resultPostings.add(p);
                 }
             }
@@ -62,7 +62,7 @@ public class WildcardLiteral implements QueryComponent {
                     WildcardPosting iPosting = termOnePostings.get(iResult);
                     WildcardPosting jPosting = termTwoPosting.get(jResult);
                     String wordI = wildcardIndex.getWordAt(iPosting.getVocabID());
-                    String wordJ =wildcardIndex.getWordAt(jPosting.getVocabID());
+                    String wordJ = wildcardIndex.getWordAt(jPosting.getVocabID());
 
                     if (iPosting.getDocumentId() < jPosting.getDocumentId()) {
                         iResult++;
@@ -70,24 +70,22 @@ public class WildcardLiteral implements QueryComponent {
                         jResult++;
                     else {
 
-                        if(iPosting.getVocabID() < jPosting.getVocabID())
+                        if (iPosting.getVocabID() < jPosting.getVocabID())
                             iResult++;
-                        else if(iPosting.getVocabID() > jPosting.getVocabID())
+                        else if (iPosting.getVocabID() > jPosting.getVocabID())
                             jResult++;
-                        else{
-                        if (mPostings.size() == 0) {
-                            mPostings.add(jPosting);
-                        } else {
+                        else {
+                            if (mPostings.size() == 0) {
+                                mPostings.add(jPosting);
+                            } else {
 
-                         //   if (mPostings.get(mPostings.size() - 1).getDocumentId() < iPosting.getDocumentId())
+                                //   if (mPostings.get(mPostings.size() - 1).getDocumentId() < iPosting.getDocumentId())
                                 mPostings.add(jPosting);
 
-                        }
+                            }
                             iResult++;
                             jResult++;
                         }
-
-
 
 
                     }
@@ -100,15 +98,15 @@ public class WildcardLiteral implements QueryComponent {
                 mPostings = new ArrayList<>();
             }
 
-            List<Posting> verifiedPosting = verifyWildcardMatch(termOnePostings,mTerms);
+            List<Posting> verifiedPosting = verifyWildcardMatch(termOnePostings, mTerms);
             List<Posting> resultPostings = new ArrayList<>();
 
 
-            for(Posting p:verifiedPosting){
-                if(resultPostings.size()==0)
+            for (Posting p : verifiedPosting) {
+                if (resultPostings.size() == 0)
                     resultPostings.add(p);
-                else{
-                    if(resultPostings.get(resultPostings.size()-1).getDocumentId()!=p.getDocumentId())
+                else {
+                    if (resultPostings.get(resultPostings.size() - 1).getDocumentId() != p.getDocumentId())
                         resultPostings.add(p);
                 }
             }
@@ -138,11 +136,11 @@ public class WildcardLiteral implements QueryComponent {
     }
 
 
-    private List<Posting> verifyWildcardMatch(List<WildcardPosting> wildcardPostings,String search){
+    private List<Posting> verifyWildcardMatch(List<WildcardPosting> wildcardPostings, String search) {
         List<Posting> mResults = new ArrayList<>();
-        for(WildcardPosting wPosting: wildcardPostings){
+        for (WildcardPosting wPosting : wildcardPostings) {
             String termVocab = wildcardIndex.getWordAt(wPosting.getVocabID());
-            if(matchWildCard(termVocab,search))
+            if (matchWildCard(termVocab, search))
                 mResults.add(wPosting);
 
         }
@@ -150,50 +148,49 @@ public class WildcardLiteral implements QueryComponent {
     }
 
 
-
-    private Boolean matchWildCard(String term, String wildcard){
+    private Boolean matchWildCard(String term, String wildcard) {
         //ref : https://www.geeksforgeeks.org/wildcard-pattern-matching/
-            char[] str = term.toCharArray();
-            char[] pattern = wildcard.toCharArray();
+        char[] str = term.toCharArray();
+        char[] pattern = wildcard.toCharArray();
 
-            int writeIndex = 0;
-            boolean isFirst = true;
-            for ( int i = 0 ; i < pattern.length; i++) {
-                if (pattern[i] == '*') {
-                    if (isFirst) {
-                        pattern[writeIndex++] = pattern[i];
-                        isFirst = false;
-                    }
-                } else {
+        int writeIndex = 0;
+        boolean isFirst = true;
+        for (int i = 0; i < pattern.length; i++) {
+            if (pattern[i] == '*') {
+                if (isFirst) {
                     pattern[writeIndex++] = pattern[i];
-                    isFirst = true;
+                    isFirst = false;
                 }
+            } else {
+                pattern[writeIndex++] = pattern[i];
+                isFirst = true;
             }
-
-            boolean T[][] = new boolean[str.length + 1][writeIndex + 1];
-
-            if (writeIndex > 0 && pattern[0] == '*') {
-                T[0][1] = true;
-            }
-
-            T[0][0] = true;
-
-            for (int i = 1; i < T.length; i++) {
-                for (int j = 1; j < T[0].length; j++) {
-                    if (pattern[j-1] == '?' || str[i-1] == pattern[j-1]) {
-                        T[i][j] = T[i-1][j-1];
-                    } else if (pattern[j-1] == '*'){
-                        T[i][j] = T[i-1][j] || T[i][j-1];
-                    }
-                }
-            }
-
-            return T[str.length][writeIndex];
         }
+
+        boolean T[][] = new boolean[str.length + 1][writeIndex + 1];
+
+        if (writeIndex > 0 && pattern[0] == '*') {
+            T[0][1] = true;
+        }
+
+        T[0][0] = true;
+
+        for (int i = 1; i < T.length; i++) {
+            for (int j = 1; j < T[0].length; j++) {
+                if (pattern[j - 1] == '?' || str[i - 1] == pattern[j - 1]) {
+                    T[i][j] = T[i - 1][j - 1];
+                } else if (pattern[j - 1] == '*') {
+                    T[i][j] = T[i - 1][j] || T[i][j - 1];
+                }
+            }
+        }
+
+        return T[str.length][writeIndex];
+    }
 
 
     @Override
-    public Boolean isNegative(){
+    public Boolean isNegative() {
         return false;
     }
 

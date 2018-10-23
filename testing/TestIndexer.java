@@ -13,7 +13,10 @@ import cecs429.text.BetterTokenProcessor;
 import cecs429.text.EnglishTokenStream;
 
 import java.nio.file.Paths;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
 
 public class TestIndexer {
 
@@ -25,7 +28,7 @@ public class TestIndexer {
 
     void configure(){
         parser = new BooleanQueryParser();
-        corpus = DirectoryCorpus.loadTextDirectory(Paths.get("testcases/").toAbsolutePath(), ".txt");
+        corpus = DirectoryCorpus.loadTextDirectory(Paths.get("testcases").toAbsolutePath(), ".txt");
         index = indexCorpus(corpus);
         wildcardIndexer = new KGramIndex(index);
     }
