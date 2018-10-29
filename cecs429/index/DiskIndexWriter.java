@@ -2,6 +2,7 @@ package cecs429.index;
 
 import java.io.*;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -25,9 +26,12 @@ public class DiskIndexWriter {
 
 
     private HashMap<String,Long> writePostings(Index index,Path path) throws IOException,FileNotFoundException {
+        int maxDocumentId = 0; //we will keep a track of maximum document id encountered to write the Ld for each document sequentially at the end
         HashMap<String,Long> postingFileLocations = new HashMap<>();
         FileOutputStream fos = new FileOutputStream(path.toAbsolutePath().toString()+"\\postings.bin");
         DataOutputStream stream = new DataOutputStream(fos);
+
+        HashMap<Integer,List<Integer>> documentWeights = new HashMap<>(); //maps document id to list of tfd's.
 
         vocabualary = index.getVocabulary().stream().sorted().collect(Collectors.toList());
         for(String term: vocabualary){
@@ -41,8 +45,27 @@ public class DiskIndexWriter {
             int documentIDGap = 0;
             for(Posting posting:postings){
 
-                //write document id
+                //check if this is the highest doc id encountered
+                if(posting.getDocumentId() > maxDocumentId)
+                    maxDocumentId=posting.getDocumentId();
+
+
+                //write document id with gaps
                 stream.writeInt(posting.getDocumentId()-documentIDGap);
+
+                //check if the term exists in the document id already exists in the document weight hashmap and handle adding to its list
+                if(documentWeights.containsKey(posting.getDocumentId())){
+                    List<Integer> weightList =  documentWeights.get(posting.getDocumentId());
+                    weightList.add(posting.getPositions().size());
+
+
+                }
+                else{
+                    List<Integer> weightList = new ArrayList<>();
+                    weightList.add(posting.getPositions().size());
+                    documentWeights.put(posting.getDocumentId(),weightList);
+
+                }
 
                 documentIDGap = posting.getDocumentId();
 
@@ -62,6 +85,40 @@ public class DiskIndexWriter {
 
         }
         stream.close();
+
+
+        //all the tfds have been found out, calculate and store Ld
+
+         fos = new FileOutputStream(path.toAbsolutePath().toString()+"\\docWeights.bin");
+         stream = new DataOutputStream(fos);
+
+        for(int i=0;i<=maxDocumentId;i++){
+
+            if(documentWeights.containsKey(i)) {
+                List<Integer> documentTermFreqeuncyList = documentWeights.get(i);
+                Double ld = new Double(0);
+
+                for (Integer freq : documentTermFreqeuncyList) {
+
+                    Double log = 1 + Math.log(freq);
+                    ld += log * log;
+
+
+                }
+                Double ldsqrt = Math.sqrt(ld);
+                stream.writeDouble(ld);
+            }
+            else{
+
+                stream.writeDouble(0);
+            }
+
+
+
+        }
+        stream.close();
+
+
     return postingFileLocations;
 
     }
@@ -89,4 +146,6 @@ public class DiskIndexWriter {
         stream.close();
 
     }
+
+
 }
