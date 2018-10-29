@@ -3,6 +3,7 @@ package edu.csulb;
 import cecs429.documents.DirectoryCorpus;
 import cecs429.documents.Document;
 import cecs429.documents.DocumentCorpus;
+import cecs429.index.DiskIndexWriter;
 import cecs429.index.Index;
 import cecs429.index.PositionalInvertedIndex;
 import cecs429.index.Posting;
@@ -51,9 +52,11 @@ public class MilestoneOne {
                 directoryPath = reader.readLine();
                 file = new File(directoryPath);
                 if (file.isDirectory() && corpus == null) {
-                    corpus = DirectoryCorpus.loadJsonDirectory(Paths.get(directoryPath).toAbsolutePath(), ".json");
+                    corpus = DirectoryCorpus.loadTextDirectory(Paths.get(directoryPath).toAbsolutePath(), ".txt");
                     index = indexCorpus(corpus);
                     wildcardIndexer = new KGramIndex(index);
+                    DiskIndexWriter indexWriter = new DiskIndexWriter();
+                    indexWriter.writeIndex(index,Paths.get(directoryPath+"\\index").toAbsolutePath());
                 } else if (!file.isDirectory()) {
                     System.out.println("Enter valid directory path");
                     file = null;

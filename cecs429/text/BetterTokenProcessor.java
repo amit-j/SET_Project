@@ -8,7 +8,7 @@ public class BetterTokenProcessor implements TokenProcessor {
     public static void main(String arg[]) {
 
         BetterTokenProcessor processor = new BetterTokenProcessor();
-        String[] temp = processor.processToken("@Namrata'-Lomte10'");
+        String[] temp = processor.processToken("wrapper--(he");
         for (int i = 0; i < temp.length; i++) {
             System.out.println(temp[i]);
         }
