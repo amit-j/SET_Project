@@ -1,6 +1,7 @@
 package cecs429.index;
 
 import java.io.*;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,7 +15,7 @@ public class DiskIndexWriter {
     public void writeIndex(Index index, Path path){
 
         try {
-
+            createDirectoryStructre(path);
             writeVocabTable(writePostings(index,path),writeVocab(path),path);
         }
         catch (Exception e){
@@ -24,7 +25,14 @@ public class DiskIndexWriter {
 
     }
 
+    private void createDirectoryStructre(Path path) throws IOException{
+        File directory = new File(path.toAbsolutePath().toString());
+        if (! directory.exists()) {
+            Files.createDirectories(path);
 
+        }
+
+    }
     private HashMap<String,Long> writePostings(Index index,Path path) throws IOException,FileNotFoundException {
         int maxDocumentId = 0; //we will keep a track of maximum document id encountered to write the Ld for each document sequentially at the end
         HashMap<String,Long> postingFileLocations = new HashMap<>();
@@ -106,7 +114,7 @@ public class DiskIndexWriter {
 
                 }
                 Double ldsqrt = Math.sqrt(ld);
-                stream.writeDouble(ld);
+                stream.writeDouble(ldsqrt);
             }
             else{
 

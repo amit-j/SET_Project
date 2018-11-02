@@ -3,10 +3,7 @@ package edu.csulb;
 import cecs429.documents.DirectoryCorpus;
 import cecs429.documents.Document;
 import cecs429.documents.DocumentCorpus;
-import cecs429.index.DiskIndexWriter;
-import cecs429.index.Index;
-import cecs429.index.PositionalInvertedIndex;
-import cecs429.index.Posting;
+import cecs429.index.*;
 import cecs429.index.wildcard.KGramIndex;
 import cecs429.query.BooleanQueryParser;
 import cecs429.query.QueryComponent;
@@ -53,10 +50,12 @@ public class MilestoneOne {
                 file = new File(directoryPath);
                 if (file.isDirectory() && corpus == null) {
                     corpus = DirectoryCorpus.loadTextDirectory(Paths.get(directoryPath).toAbsolutePath(), ".txt");
-                    index = indexCorpus(corpus);
-                    wildcardIndexer = new KGramIndex(index);
-                    DiskIndexWriter indexWriter = new DiskIndexWriter();
-                    indexWriter.writeIndex(index,Paths.get(directoryPath+"\\index").toAbsolutePath());
+//                    index = indexCorpus(corpus);
+//                    wildcardIndexer = new KGramIndex(index);
+//                    DiskIndexWriter indexWriter = new DiskIndexWriter();
+//                    indexWriter.writeIndex(index,Paths.get(directoryPath+"\\index").toAbsolutePath());
+                    SinglePassInMemoryIndexWriter indexWriter = new SinglePassInMemoryIndexWriter();
+                    indexWriter.indexCorpus(corpus,new BetterTokenProcessor(),Paths.get(directoryPath).toAbsolutePath());
                 } else if (!file.isDirectory()) {
                     System.out.println("Enter valid directory path");
                     file = null;
