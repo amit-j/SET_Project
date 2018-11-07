@@ -4,6 +4,7 @@ import cecs429.documents.DirectoryCorpus;
 import cecs429.documents.Document;
 import cecs429.documents.DocumentCorpus;
 import cecs429.index.*;
+import cecs429.index.IndexWriter.SinglePassInMemoryIndexWriter;
 import cecs429.index.wildcard.KGramIndex;
 import cecs429.query.BooleanQueryParser;
 import cecs429.query.QueryComponent;
@@ -16,14 +17,13 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 import java.util.stream.Collectors;
 
 
 public class MilestoneOne {
-
 
     public static void main(String[] args) {
 
@@ -34,138 +34,161 @@ public class MilestoneOne {
         KGramIndex wildcardIndexer = null;
 
         BetterTokenProcessor processor = new BetterTokenProcessor();
-        // We aren't ready to use a full query parser; for now, we'll only support single-term queries.
 
         SnowballStemmer snowballStemmer = new englishStemmer();
         String query = "whale"; // hard-coded search for "whale"
 
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        System.out.print("Name of the directory to index: ");
-        String directoryPath = null;
-        File file = null;
 
-        while (file == null) {
+
+
+        String choice = "";
+        while(!choice.equals("3"))
             try {
-                directoryPath = reader.readLine();
-                file = new File(directoryPath);
-                if (file.isDirectory() && corpus == null) {
-                    corpus = DirectoryCorpus.loadTextDirectory(Paths.get(directoryPath).toAbsolutePath(), ".txt");
-//                    index = indexCorpus(corpus);
-//                    wildcardIndexer = new KGramIndex(index);
-//                    DiskIndexWriter indexWriter = new DiskIndexWriter();
-//                    indexWriter.writeIndex(index,Paths.get(directoryPath+"\\index").toAbsolutePath());
-                    SinglePassInMemoryIndexWriter indexWriter = new SinglePassInMemoryIndexWriter();
-                    indexWriter.indexCorpus(corpus,new BetterTokenProcessor(),Paths.get(directoryPath).toAbsolutePath());
-                } else if (!file.isDirectory()) {
-                    System.out.println("Enter valid directory path");
-                    file = null;
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-                file = null;
-            }
-        }
-        while (!query.equalsIgnoreCase("q")) {
+                System.out.println("What would you like to do ?");
+                System.out.println("1. Build & Query Index");
+                System.out.println("2. Query Index");
+                System.out.println("3. Quit");
+                System.out.print(">> ");
 
-            try {
+                choice = reader.readLine();
+                String corpusPath = null;
+                switch (choice){
 
-                System.out.print("Enter your query: ");
-                query = reader.readLine();
-                String[] queryLiterals = query.split(" ");
-                switch (queryLiterals[0]) {
-                    case "q":
-                        break;
-                    case "stem":
-                        snowballStemmer.setCurrent(queryLiterals[1]);
-                        snowballStemmer.stem();
-                        String stemmedToken = snowballStemmer.getCurrent();
-                        System.out.println("The stemmed term: " + stemmedToken);
-                        break;
-                    case "index":
-                        if (file.isDirectory()) {
-                            corpus = DirectoryCorpus.loadJsonDirectory(Paths.get(queryLiterals[1]).toAbsolutePath(), ".json");
-                            wildcardIndexer = new KGramIndex(index);
-                            index = indexCorpus(corpus);
 
-                        } else {
-                            System.out.println("Enter valid directory path");
-                        }
-                        break;
-                    case "vocab":
-                        List<String> sortedVocabulary = index.getVocabulary().stream().sorted().collect(Collectors.toList());
-                        ;
-                        int i = 0;
-                        for (String vocab : sortedVocabulary) {
-                            System.out.println(vocab);
-                            i++;
-                            if (i == 999) break;
-                        }
-                        System.out.println("The count of the total number of vocabulary terms: " + sortedVocabulary.size());
-                        break;
-                    default:
-                        System.out.println("Your query: " + query);
-                        component = parser.parseQuery(query, wildcardIndexer);
-                        List<Posting> mPostings = component.getPostings(index);
-                        for (Posting p : mPostings) {
-                            System.out.println("Json Document " + corpus.getDocument(p.getDocumentId()).getName());
-                        }
-                        System.out.println("Total number of documents returned from the query: " +
-                                " " + mPostings.size());
-                        System.out.print("Would you like to select a document name to view? (Y/N)");
-                        String wantToView = reader.readLine();
-                        if (wantToView.equalsIgnoreCase("y")) {
-                            System.out.print("Enter the document name: ");
-                            String documentName = reader.readLine();
-                            for (Document document : corpus.getDocuments()) {
-                                if (document.getName().equalsIgnoreCase(documentName.trim())) {
-                                    Scanner scanner = new Scanner(document.getContent()).useDelimiter("\\A");
-                                    String str = scanner.hasNext() ? scanner.next() : "";
-                                    System.out.println(str);
-                                    break;
-                                }
+                    case "1":
+                        File file = null;
+                        //build index
+                        while(file == null) {
+
+                            System.out.print("Enter the corpus path : ");
+                            corpusPath = reader.readLine();
+                            file = new File(corpusPath);
+                            if (file.isDirectory() && corpus == null){
+
+                                corpus = DirectoryCorpus.loadJsonDirectory(Paths.get(corpusPath).toAbsolutePath(), ".json");
+                                SinglePassInMemoryIndexWriter indexWriter = new SinglePassInMemoryIndexWriter();
+                                indexWriter.indexCorpus(corpus,new BetterTokenProcessor(),Paths.get(corpusPath).toAbsolutePath());
+
+                            }
+
+                            else {
+                                System.out.println("Invalid corpus path. Please enter a valid path : ");
+                                file = null;
                             }
                         }
+
+
+                    case "2":
+                       // file = null;
+                        //query index
+                        if(corpusPath == null) {
+                            System.out.print("Enter the corpus path : ");
+                            corpusPath = reader.readLine();
+                            file = new File(corpusPath);
+                        }
+                        file = new File(corpusPath);
+                            boolean success =false;
+                            while(!success) {
+
+                                    try {
+                                        corpus = DirectoryCorpus.loadJsonDirectory(Paths.get(corpusPath).toAbsolutePath(), ".json");
+                                        corpus.getDocuments();
+                                        index =   new DiskPositionalIndex(Paths.get(file.toPath().toAbsolutePath() + "\\index"));
+                                        wildcardIndexer = new KGramIndex(index);
+                                        System.out.println("Index read completed.");
+                                        success = true;
+                                    } catch (Exception e) {
+                                        System.out.println("Error reading the index from " + file.getAbsolutePath());
+                                       // System.out.println("Please enter a valid path to continue reading index :");
+                                        break;
+
+                                    }
+
+                            }
+                            if(!success)
+                            {
+                                choice="3";
+                                break;
+                            }
+
+                             query = "";
+
+                            while(!query.equalsIgnoreCase("quit")){
+                                try {
+
+                                    System.out.print("Enter your query: ");
+                                    query = reader.readLine();
+                                    String[] queryLiterals = query.split(" ");
+                                    switch (queryLiterals[0].toLowerCase()) {
+                                        case "q":
+                                            break;
+                                        case "stem":
+                                            snowballStemmer.setCurrent(queryLiterals[1]);
+                                            snowballStemmer.stem();
+                                            String stemmedToken = snowballStemmer.getCurrent();
+                                            System.out.println("The stemmed term: " + stemmedToken);
+                                            break;
+                                        case "vocab":
+                                            List<String> sortedVocabulary = index.getVocabulary().stream().sorted().collect(Collectors.toList());
+                                            int i = 0;
+                                            for (String vocab : sortedVocabulary) {
+                                                System.out.println(vocab);
+                                                i++;
+                                                if (i == 999) break;
+                                            }
+                                            System.out.println("The count of the total number of vocabulary terms: " + sortedVocabulary.size());
+                                            break;
+                                        default:
+                                            component = parser.parseQuery(query, wildcardIndexer);
+                                            List<Posting> mPostings = component.getPostings(index);
+                                            for (Posting p : mPostings) {
+                                                System.out.println("Json Document " + corpus.getDocument(p.getDocumentId()).getName());
+                                            }
+                                            System.out.println("Total number of documents returned from the query: " +
+                                                    " " + mPostings.size());
+                                            System.out.print("Would you like to select a document name to view? (Y/N)");
+                                            String wantToView = reader.readLine();
+                                            if (wantToView.equalsIgnoreCase("y")) {
+                                                System.out.print("Enter the document name: ");
+                                                String documentName = reader.readLine();
+                                                for (Document document : corpus.getDocuments()) {
+                                                    if (document.getName().equalsIgnoreCase(documentName.trim())) {
+                                                        Scanner scanner = new Scanner(document.getContent()).useDelimiter("\\A");
+                                                        String str = scanner.hasNext() ? scanner.next() : "";
+                                                        System.out.println(str);
+                                                        break;
+                                                    }
+                                                }
+                                            }
+                                            break;
+                                    }
+
+
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+
+                            }
                         break;
-                }
 
+                    case "3":
+                        break;
+                        }
 
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-        }
-    }
-
-    private static Index indexCorpus(DocumentCorpus corpus) {
-        BetterTokenProcessor processor = new BetterTokenProcessor();
-
-        PositionalInvertedIndex index = new PositionalInvertedIndex();
-
-        System.out.println("started reading document:");
-        long start = System.currentTimeMillis();
-        int documentCount = 0;
-        for (Document document : corpus.getDocuments()) {
-//            if(documentCount>10){
-//                break;
-//            }
-            documentCount++;
-
-            EnglishTokenStream tokenStream = new EnglishTokenStream(document.getContent());
-            //System.out.println("reading document: "+document.getTitle());
-
-            int position = 0;
-            for (String token : tokenStream.getTokens()) {
-                for (String term : processor.processToken(token)) {
-                    index.addTerm(term, document.getId(), position++);
 
 
                 }
-            }
-        }
-        long end = System.currentTimeMillis();
-        System.out.println("Indexing process took: " + ((end - start) / 1000) + " seconds");
-        return index;
+                catch (Exception e){
+                    System.out.println("Something went wrong.."+e.getMessage());
+                }
+
+
+
+
+
     }
+
 
 
 }

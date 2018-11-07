@@ -7,6 +7,7 @@ import java.util.List;
 public class PositionalInvertedIndex implements Index {
 
     private HashMap<String, List<Posting>> mIndex;
+    private List<String> mVocab;
 
     public PositionalInvertedIndex() {
         mIndex = new HashMap<>();
@@ -14,6 +15,7 @@ public class PositionalInvertedIndex implements Index {
     @Override
     public List<String> getVocabulary() {
 
+        if(mVocab==null){
         List<String> mList = new ArrayList<>();
 
 
@@ -21,7 +23,10 @@ public class PositionalInvertedIndex implements Index {
             mList.add(s);
 
         }
-        return mList;
+        mVocab = mList;
+        }
+
+        return mVocab;
     }
 
     public void addTerm(String term, int documentId, int position) {
@@ -43,7 +48,7 @@ public class PositionalInvertedIndex implements Index {
 
             }
         } else {
-            List<Posting> mList = new ArrayList<Posting>();
+            List<Posting> mList = new ArrayList<>();
             List<Integer> positions = new ArrayList<>();
             positions.add(position);
             mList.add(new Posting(documentId, positions));
@@ -56,8 +61,13 @@ public class PositionalInvertedIndex implements Index {
     public List<Posting> getPostings(String term) {
 
         if (mIndex.containsKey(term)) return mIndex.get(term);
-        return new ArrayList<Posting>();
+        return new ArrayList<>();
 
 
+    }
+
+    @Override
+    public List<Posting> getPostingsWithPositions(String term) {
+        return getPostings(term);
     }
 }

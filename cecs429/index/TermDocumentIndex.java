@@ -61,6 +61,11 @@ public class TermDocumentIndex implements Index {
         return results;
     }
 
+    @Override
+    public List<Posting> getPostingsWithPositions(String term) {
+        return getPostings(term);
+    }
+
     public List<String> getVocabulary() {
         return Collections.unmodifiableList(mVocabulary);
     }

@@ -25,6 +25,11 @@ public class InvertedIndex implements Index {
         return mList;
     }
 
+    @Override
+    public List<Posting> getPostingsWithPositions(String term) {
+        return getPostings(term);
+    }
+
     public void addTerm(String term, int documentId) {
 
         if (mIndex.containsKey(term)) {

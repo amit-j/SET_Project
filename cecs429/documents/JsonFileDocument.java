@@ -21,6 +21,7 @@ public class JsonFileDocument implements FileDocument {
     public JsonFileDocument(int id, Path absoluteFilePath) {
         mDocumentId = id;
         mFilePath = absoluteFilePath;
+        name = mFilePath.getFileName().toString();
 
     }
 
@@ -57,7 +58,7 @@ public class JsonFileDocument implements FileDocument {
             StringReader reader = new StringReader(document.getBody());
             title = document.getTitle();
             url = document.getUrl();
-            name = mFilePath.getFileName().toString();
+
 
             //document = null;
 

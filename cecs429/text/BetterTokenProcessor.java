@@ -32,8 +32,6 @@ public class BetterTokenProcessor implements TokenProcessor {
                 snowballStemmer.setCurrent(temp[i - 1]);
                 snowballStemmer.stem();
                 String result = snowballStemmer.getCurrent();
-
-
                 processedTokens[i] = result;
             }
 

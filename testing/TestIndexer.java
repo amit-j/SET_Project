@@ -30,7 +30,7 @@ public class TestIndexer {
         parser = new BooleanQueryParser();
         corpus = DirectoryCorpus.loadTextDirectory(Paths.get("testcases").toAbsolutePath(), ".txt");
         index = indexCorpus(corpus);
-        wildcardIndexer = new KGramIndex(index);
+       // wildcardIndexer = new KGramIndex(index);
     }
 
     int executeQuery(String query){

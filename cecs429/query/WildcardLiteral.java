@@ -4,9 +4,13 @@ import cecs429.index.Index;
 import cecs429.index.Posting;
 import cecs429.index.wildcard.KGramIndex;
 import cecs429.index.wildcard.WildcardPosting;
+import cecs429.text.TokenProcessor;
+import jdk.nashorn.internal.parser.Token;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class WildcardLiteral implements QueryComponent {
 
@@ -16,103 +20,7 @@ public class WildcardLiteral implements QueryComponent {
     public WildcardLiteral(String term, KGramIndex wIndex) {
         mTerms = term;
         wildcardIndex = wIndex;
-    }
 
-
-    @Override
-    public List<Posting> getPostings(Index index) {
-
-        List<WildcardPosting> mPostings = new ArrayList<>();
-        List<String> breakdowns = breakMaxKGram(mTerms);
-
-        if (breakdowns.size() == 1) {
-
-            mPostings = wildcardIndex.getPostings(breakdowns.get(0));
-
-
-            List<Posting> verifiedPosting = verifyWildcardMatch(mPostings, mTerms);
-            List<Posting> resultPostings = new ArrayList<>();
-
-            for (Posting p : verifiedPosting) {
-                if (resultPostings.size() == 0)
-                    resultPostings.add(p);
-                else {
-                    if (resultPostings.get(resultPostings.size() - 1).getDocumentId() != p.getDocumentId())
-                        resultPostings.add(p);
-                }
-            }
-
-            return resultPostings;
-        } else {
-
-            List<WildcardPosting> termOnePostings = wildcardIndex.getPostings(breakdowns.get(0));
-
-            int currentPosting = 1;
-
-            while (currentPosting < breakdowns.size()) {
-                List<WildcardPosting> termTwoPosting = wildcardIndex.getPostings(breakdowns.get(currentPosting));
-
-                //intersect the postings
-                //copying the same merge as AND Query
-                int iResult = 0;
-                int jResult = 0;
-
-                while ((iResult < termOnePostings.size()) && (jResult < termTwoPosting.size())) {
-
-                    WildcardPosting iPosting = termOnePostings.get(iResult);
-                    WildcardPosting jPosting = termTwoPosting.get(jResult);
-                    String wordI = wildcardIndex.getWordAt(iPosting.getVocabID());
-                    String wordJ = wildcardIndex.getWordAt(jPosting.getVocabID());
-
-                    if (iPosting.getDocumentId() < jPosting.getDocumentId()) {
-                        iResult++;
-                    } else if (iPosting.getDocumentId() > jPosting.getDocumentId())
-                        jResult++;
-                    else {
-
-                        if (iPosting.getVocabID() < jPosting.getVocabID())
-                            iResult++;
-                        else if (iPosting.getVocabID() > jPosting.getVocabID())
-                            jResult++;
-                        else {
-                            if (mPostings.size() == 0) {
-                                mPostings.add(jPosting);
-                            } else {
-
-                                //   if (mPostings.get(mPostings.size() - 1).getDocumentId() < iPosting.getDocumentId())
-                                mPostings.add(jPosting);
-
-                            }
-                            iResult++;
-                            jResult++;
-                        }
-
-
-                    }
-
-                }
-
-
-                termOnePostings = mPostings;
-                currentPosting++;
-                mPostings = new ArrayList<>();
-            }
-
-            List<Posting> verifiedPosting = verifyWildcardMatch(termOnePostings, mTerms);
-            List<Posting> resultPostings = new ArrayList<>();
-
-
-            for (Posting p : verifiedPosting) {
-                if (resultPostings.size() == 0)
-                    resultPostings.add(p);
-                else {
-                    if (resultPostings.get(resultPostings.size() - 1).getDocumentId() != p.getDocumentId())
-                        resultPostings.add(p);
-                }
-            }
-
-            return resultPostings;
-        }
     }
 
 
@@ -136,16 +44,6 @@ public class WildcardLiteral implements QueryComponent {
     }
 
 
-    private List<Posting> verifyWildcardMatch(List<WildcardPosting> wildcardPostings, String search) {
-        List<Posting> mResults = new ArrayList<>();
-        for (WildcardPosting wPosting : wildcardPostings) {
-            String termVocab = wildcardIndex.getWordAt(wPosting.getVocabID());
-            if (matchWildCard(termVocab, search))
-                mResults.add(wPosting);
-
-        }
-        return mResults;
-    }
 
 
     private Boolean matchWildCard(String term, String wildcard) {
@@ -188,6 +86,68 @@ public class WildcardLiteral implements QueryComponent {
         return T[str.length][writeIndex];
     }
 
+
+    @Override
+    public List<Posting> getPostings(Index index) {
+
+        List<String> breakdowns = breakMaxKGram(mTerms);
+        Set<Integer> possibleVocabs = new TreeSet<>();
+        List<Integer> matchedVocabs = new ArrayList<>();
+
+        if (breakdowns.size() == 1) { //only one term
+
+
+            for (int vocab :  wildcardIndex.getVocabIndexforTerm(breakdowns.get(0))) {
+                if (matchWildCard(wildcardIndex.getWordAt(vocab), mTerms)) {
+                    matchedVocabs.add(vocab);
+                }
+            }
+
+            List<QueryComponent> terms = new ArrayList<>();
+
+            for (int vocab : matchedVocabs) {
+                //now we just create an or component for the possible vocabs and display the postings returned by that
+                terms.add(new TermLiteral(wildcardIndex.getWordAt(vocab)));
+            }
+
+            OrQuery query = new OrQuery(terms);
+
+            return query.getPostings(index);
+
+
+        }
+
+        else {
+
+            for (String term : breakdowns) {
+                possibleVocabs.addAll(wildcardIndex.getVocabIndexforTerm(term));
+            }
+
+            System.out.println("matched with words:");
+            for (int vocab : possibleVocabs) {
+                if (matchWildCard(wildcardIndex.getWordAt(vocab), mTerms)) {
+                    matchedVocabs.add(vocab);
+                    System.out.print(wildcardIndex.getWordAt(vocab)+" , ");
+
+                }
+            }
+
+
+
+            List<QueryComponent> terms = new ArrayList<>();
+            //now we just create an or component for the possible vocabs and display the postings returned by that
+
+            for (int vocab : matchedVocabs) {
+                    terms.add(new TermLiteral(wildcardIndex.getWordAt(vocab)));
+            }
+
+            OrQuery query = new OrQuery(terms);
+
+            return query.getPostings(index);
+
+        }
+
+    }
 
     @Override
     public Boolean isNegative() {

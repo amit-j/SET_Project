@@ -196,7 +196,7 @@ public class BooleanQueryParser {
         // Locate the next space to find the end of this literal.
         int nextSpace = subquery.indexOf(' ', startIndex);
         if (nextSpace < 0) {
-            // No more literals in this subquery.
+            // No  more literals in this subquery.
             lengthOut = subLength - startIndex;
         } else {
             lengthOut = nextSpace - startIndex;
