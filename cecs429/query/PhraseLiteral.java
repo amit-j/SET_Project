@@ -48,13 +48,13 @@ public class PhraseLiteral implements QueryComponent {
         Posting iPosting, jPosting;
         List<Posting> results = new ArrayList<>();
         term1 = mTerms.get(0);
-        resultsTermOne = index.getPostings(term1);
+        resultsTermOne = index.getPostingsWithPositions(term1);
 
         for (int i = 1; i < mTerms.size(); i++) {
 
             if (mTerms.size() > i) {
                 term2 = mTerms.get(i);
-                resultsTermTwo = index.getPostings(term2);
+                resultsTermTwo = index.getPostingsWithPositions(term2);
 
                 iResult = 0;
                 jResult = 0;

@@ -80,7 +80,6 @@ public class DiskPositionalIndex implements Index{
                 }
                 positionInFile = positionInFile + 4*tf;
                 Posting posting = new Posting(currentDocId, positions);
-                System.out.println(posting.getPositions());
                 postings.add(posting);
             }
         } catch (IOException e) {

@@ -112,17 +112,16 @@ public class DiskIndexWriter {
         stream.close();
 
 
-
-    return postingFileLocations;
+        return postingFileLocations;
 
     }
-    private HashMap<String,Long> writeVocab(Path path) throws FileNotFoundException,IOException{
+    private HashMap<String,Long> writeVocab(Path path) throws IOException{
         FileOutputStream fos = new FileOutputStream(path.toAbsolutePath().toString()+"\\vocabs.bin");
         DataOutputStream stream = new DataOutputStream(fos);
        HashMap<String,Long> vocabMap = new HashMap();
         for(String term:vocabualary){
             vocabMap.put(term,fos.getChannel().position());
-            stream.writeBytes(term);
+            stream.writeUTF(term);
         }
         stream.close();
         return vocabMap;

@@ -17,7 +17,7 @@ import java.util.stream.Stream;
 public class SinglePassInMemoryIndexWriter {
 
 
-    private final int MAX_ALLOWED_MEMORY =65536;
+    private final int MAX_ALLOWED_MEMORY =524288;
     private final String BUCKET_PATH ="\\buckets\\bucket_";
 
     private PositionalInvertedIndex index;
@@ -36,9 +36,9 @@ public class SinglePassInMemoryIndexWriter {
 
         int iAllowedMemeory = 0;
         int iBucketNum = 0;
-        for(Document document:corpus.getDocuments()) {
+      /*  for(Document document:corpus.getDocuments()) {
             int position = 0;
-            EnglishTokenStream tokenStream = new EnglishTokenStream(document.getContent());
+           EnglishTokenStream tokenStream = new EnglishTokenStream(document.getContent());
 
 
                     for(String token : tokenStream.getTokens()){
@@ -68,15 +68,16 @@ public class SinglePassInMemoryIndexWriter {
         if(iAllowedMemeory!=0) // we still have terms left to put in the buckets
             indexWriter.writeIndex(index, Paths.get(path.toAbsolutePath()+BUCKET_PATH+iBucketNum++).toAbsolutePath());
 
+*/
 
-
-        mergeBucketsVocab(path,iBucketNum);
-        mergeBucketsPostings(path,iBucketNum);
+        mergeBucketsVocab(path,27);
+        mergeBucketsPostings(path,27);
 
     }
 
     //combine the whole vocab by unioning vocabs in each bucket
     private void mergeBucketsVocab(Path path,int numBuckets) throws IOException {
+
 
 
         int currentBucket =0;
@@ -101,7 +102,7 @@ public class SinglePassInMemoryIndexWriter {
     private void mergeBucketsPostings (Path path,int numBuckets) throws IOException{
 
 
-        int currentBucket = 0;
+         int currentBucket = 0;
 
         List<List<String>> bucketTerms = new ArrayList<>();
 
@@ -148,59 +149,61 @@ public class SinglePassInMemoryIndexWriter {
             int iBucketCnt = 0;
 
             while(iBucketCnt<numBuckets){
-                if(term.equals(bucketTerms.get(iBucketCnt).get(0))){
-                    //copy all the postings for this location from the bucket to our main file.
+                if(bucketTerms.get(iBucketCnt).size()>0){
+                    if (term.equals(bucketTerms.get(iBucketCnt).get(0))) {
+                        //copy all the postings for this location from the bucket to our main file.
 
-                    DataInputStream streamIn = bucketPostingsStreams.get(iBucketCnt);
-                    //streamIn.skip(postingsPositions.get(currentBucket).get(0));
-                    int documentFreq = streamIn.readInt();
-                    int currentDoc= 0;
-                    while(currentDoc<documentFreq){
+                        DataInputStream streamIn = bucketPostingsStreams.get(iBucketCnt);
+                        //streamIn.skip(postingsPositions.get(currentBucket).get(0));
+                        int documentFreq = streamIn.readInt();
+                        int currentDoc = 0;
+                        while (currentDoc < documentFreq) {
 
 
-                        int docID = streamIn.readInt();
-                        if(mergedDocumentIds.size()==0)
-                            mergedDocumentIds.add(docID);
-                        else if(mergedDocumentIds.get(mergedDocumentIds.size()-1) != docID)
-                            mergedDocumentIds.add(docID);
+                            int docID = streamIn.readInt();
+                            if (mergedDocumentIds.size() == 0)
+                                mergedDocumentIds.add(docID);
+                            else if (mergedDocumentIds.get(mergedDocumentIds.size() - 1) != docID)
+                                mergedDocumentIds.add(docID);
 
-                        int currentPos = 0;
-                        int termFreq = streamIn.readInt();
+                            int currentPos = 0;
+                            int termFreq = streamIn.readInt();
 
-                        while(currentPos<termFreq){
+                            while (currentPos < termFreq) {
 
-                            if(mergedPositions.containsKey(docID)){
-                                mergedPositions.get(docID).add(streamIn.readInt());
+                                if (mergedPositions.containsKey(docID)) {
+                                    mergedPositions.get(docID).add(streamIn.readInt());
+                                } else {
+                                    List<Integer> posList = new ArrayList<>();
+                                    posList.add(streamIn.readInt());
+                                    mergedPositions.put(docID, posList);
+                                }
+                                currentPos++;
                             }
-                            else{
-                                List<Integer> posList = new ArrayList<>();
-                                posList.add(streamIn.readInt());
-                                mergedPositions.put(docID,posList);
-                            }
-                            currentPos++;
+                            currentDoc++;
+
                         }
-                        currentDoc++;
-
-                    }
 
 
-                    bucketTerms.get(iBucketCnt).remove(0);
-                    postingsPositions.get(iBucketCnt).remove(0);
+                        bucketTerms.get(iBucketCnt).remove(0);
+                        postingsPositions.get(iBucketCnt).remove(0);
 
-                    if(bucketTerms.get(iBucketCnt).size() == 0){
+                        if (bucketTerms.get(iBucketCnt).size() == 0) {
                             //handle the case when no more terms are left to be read in a bucket
-                         bucketTerms.set(iBucketCnt, readNTermsFromBucket(bucketVocabStreams,bucketVocabTableStreams,postingsPositions,iBucketCnt,lastEndPositions,5));
+                            bucketTerms.set(iBucketCnt, readNTermsFromBucket(bucketVocabStreams, bucketVocabTableStreams, postingsPositions, iBucketCnt, lastEndPositions, 5));
+                        }
+
+
                     }
-
-
                 }
                 iBucketCnt++;
             }
 
 
-            indexWriter.writeMergedVocab(term);
-            indexWriter.writeMergedPostings(mergedDocumentIds,mergedPositions);
-
+            if(mergedDocumentIds.size()>0) {
+                indexWriter.writeMergedVocab(term);
+                indexWriter.writeMergedPostings(mergedDocumentIds, mergedPositions);
+            }
 
             //check if the term exists in the document id already exists in the document weight hashmap and handle adding to its list
             for(int docID : mergedDocumentIds) {
@@ -304,12 +307,17 @@ public class SinglePassInMemoryIndexWriter {
 
 
             String term = "";
-
-            while (start < end && bucketVocabStreams.get(currentBucket).available()>0) {
+            //read utf here
+          /*  while (start < end && bucketVocabStreams.get(currentBucket).available()>0) {
 
                 term+=(char)bucketVocabStreams.get(currentBucket).readByte();
                 start++;
-            }
+            }*/
+
+          if(bucketVocabStreams.get(currentBucket).available()>0)
+          term = bucketVocabStreams.get(currentBucket).readUTF();
+          else
+              break;
 
             if (currentTermCount == 0) {
 //                List<Long> list = new ArrayList<>();
@@ -351,10 +359,10 @@ public class SinglePassInMemoryIndexWriter {
         List<String> bucketVocab = new ArrayList<>();
         long start=0;
         long end=-1;
-        while(streamVocabTable.available()>0){
+        while(streamVocab.available()>0){
 
 
-            if(end ==-1)
+          /* if(end ==-1)
             {
                 start = streamVocabTable.readLong();
                 streamVocabTable.readLong();
@@ -362,6 +370,8 @@ public class SinglePassInMemoryIndexWriter {
 
             if(streamVocabTable.available()>0) {
                 end = streamVocabTable.readLong();
+                if(end == 5219)
+                    System.out.print("fishy");
                 streamVocabTable.readLong();
             }
             else
@@ -369,22 +379,26 @@ public class SinglePassInMemoryIndexWriter {
 
 
             String term = "";
-            while(start<end  && streamVocab.available()>0){
-                term+= (char)streamVocab.readByte();
+            /*while(start<end  && streamVocab.available()>0){
+                term+= (char)streamVocab.readUTF();
                 start++;
             }
+
+            String term =streamVocab.readUTF();
+
             bucketVocab.add(term);
             term="";
-            start = end;
+            start = end;*/
+          bucketVocab.add(streamVocab.readUTF());
         }
 
-        String term = "";
+        /*String term = "";
         //read the last remaining word
         while(streamVocab.available()>0){
             term+= (char)streamVocab.readByte();
 
-        }
-        bucketVocab.add(term);
+        }*/
+       // bucketVocab.add(term);
         streamVocab.close();
         streamVocabTable.close();
         return bucketVocab;
