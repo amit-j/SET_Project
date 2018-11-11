@@ -17,7 +17,7 @@ import java.util.stream.Stream;
 public class SinglePassInMemoryIndexWriter {
 
 
-    private final int MAX_ALLOWED_MEMORY =524288;
+    private final int MAX_ALLOWED_MEMORY =4194304;
     private final String BUCKET_PATH ="\\buckets\\bucket_";
 
     private PositionalInvertedIndex index;
@@ -34,15 +34,16 @@ public class SinglePassInMemoryIndexWriter {
 
     public void indexCorpus(DocumentCorpus corpus, TokenProcessor tokenProcessor,Path path) throws IOException{
 
-        int iAllowedMemeory = 0;
+        int iAllowedMemeory =0;
         int iBucketNum = 0;
-      /*  for(Document document:corpus.getDocuments()) {
+          for(Document document:corpus.getDocuments()) {
             int position = 0;
            EnglishTokenStream tokenStream = new EnglishTokenStream(document.getContent());
 
 
                     for(String token : tokenStream.getTokens()){
                         for(String term: tokenProcessor.processToken(token)){
+
                             if(term.equals(""))
                             {
                                 continue;
@@ -68,10 +69,9 @@ public class SinglePassInMemoryIndexWriter {
         if(iAllowedMemeory!=0) // we still have terms left to put in the buckets
             indexWriter.writeIndex(index, Paths.get(path.toAbsolutePath()+BUCKET_PATH+iBucketNum++).toAbsolutePath());
 
-*/
 
-        mergeBucketsVocab(path,27);
-        mergeBucketsPostings(path,27);
+        mergeBucketsVocab(path,iBucketNum);
+        mergeBucketsPostings(path,iBucketNum);
 
     }
 

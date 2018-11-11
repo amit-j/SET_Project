@@ -20,14 +20,14 @@ public class GsonParsing {
         GsonBuilder builder = new GsonBuilder();
         Gson gson = builder.create();
         BufferedReader bufferedReader = new BufferedReader(
-                new FileReader("all-nps-sites.json"));
+                new FileReader("C:\\mlball\\all-mlb-2005-2016.json"));
 
         AllDocuments documents = gson.fromJson(bufferedReader, AllDocuments.class);
         int index = 0;
-        for (JsonDocument document : documents.documents) {
+        for (MlbJsonArticle document : documents.documents) {
 
             try {
-                FileWriter writer = new FileWriter("C:/Articles_2/article" + index + ".json");
+                FileWriter writer = new FileWriter("C:/largemlb/article" + index + ".json");
                 writer.write(gson.toJson(document));
                 writer.close();
 
@@ -43,7 +43,7 @@ public class GsonParsing {
 }
 
 class AllDocuments {
-    public ArrayList<JsonDocument> documents;
+    public ArrayList<MlbJsonArticle> documents;
     int id;
     String name;
 

@@ -66,7 +66,7 @@ public class MilestoneOne {
                             file = new File(corpusPath);
                             if (file.isDirectory() && corpus == null){
 
-                                corpus = DirectoryCorpus.loadJsonDirectory(Paths.get(corpusPath).toAbsolutePath(), ".json");
+                                corpus = DirectoryCorpus.loadTextDirectory(Paths.get(corpusPath).toAbsolutePath(), ".txt");
                                 SinglePassInMemoryIndexWriter indexWriter = new SinglePassInMemoryIndexWriter();
                                 indexWriter.indexCorpus(corpus,new BetterTokenProcessor(),Paths.get(corpusPath).toAbsolutePath());
 
@@ -92,7 +92,7 @@ public class MilestoneOne {
                             while(!success) {
 
                                     try {
-                                        corpus = DirectoryCorpus.loadJsonDirectory(Paths.get(corpusPath).toAbsolutePath(), ".json");
+                                        corpus = DirectoryCorpus.loadTextDirectory(Paths.get(corpusPath).toAbsolutePath(), ".txt");
                                         corpus.getDocuments();
                                         index =   new DiskPositionalIndex(Paths.get(file.toPath().toAbsolutePath() + "\\index"));
                                         wildcardIndexer = new KGramIndex(index);
