@@ -144,7 +144,14 @@ public class DiskIndexWriter {
 
     public void initDBStore(Path path){
         //TODO: Delete already existing database if any
-            db = DBMaker.fileDB(path.toAbsolutePath() + "\\index\\database.db").make();
+
+        File file = new File(path.toAbsolutePath() + "\\index\\database.db");
+        if (file.exists()){
+            file.delete();
+        }
+
+
+        db = DBMaker.fileDB(path.toAbsolutePath() + "\\index\\database.db").make();
             map = db.treeMap("map.db").
                     keySerializer(Serializer.STRING).
                     valueSerializer(Serializer.LONG).
