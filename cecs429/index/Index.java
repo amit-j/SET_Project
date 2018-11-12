@@ -18,4 +18,6 @@ public interface Index {
     List<String> getVocabulary();
 
     List<Posting> getPostingsWithPositions(String term);
+
+
 }

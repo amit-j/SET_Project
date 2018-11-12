@@ -17,6 +17,7 @@ public class WildcardLiteral implements QueryComponent {
     private String mTerms;
     private KGramIndex wildcardIndex;
 
+
     public WildcardLiteral(String term, KGramIndex wIndex) {
         mTerms = term;
         wildcardIndex = wIndex;
@@ -96,10 +97,11 @@ public class WildcardLiteral implements QueryComponent {
 
         if (breakdowns.size() == 1) { //only one term
 
-
+            System.out.println("matched with words:");
             for (int vocab :  wildcardIndex.getVocabIndexforTerm(breakdowns.get(0))) {
                 if (matchWildCard(wildcardIndex.getWordAt(vocab), mTerms)) {
                     matchedVocabs.add(vocab);
+                    System.out.print(wildcardIndex.getWordAt(vocab)+" , ");
                 }
             }
 
@@ -107,7 +109,8 @@ public class WildcardLiteral implements QueryComponent {
 
             for (int vocab : matchedVocabs) {
                 //now we just create an or component for the possible vocabs and display the postings returned by that
-                terms.add(new TermLiteral(wildcardIndex.getWordAt(vocab)));
+                for(String term:wildcardIndex.getTokenProcessor().processToken(wildcardIndex.getWordAt(vocab)))
+                         terms.add(new TermLiteral(term));
             }
 
             OrQuery query = new OrQuery(terms);
@@ -138,7 +141,8 @@ public class WildcardLiteral implements QueryComponent {
             //now we just create an or component for the possible vocabs and display the postings returned by that
 
             for (int vocab : matchedVocabs) {
-                    terms.add(new TermLiteral(wildcardIndex.getWordAt(vocab)));
+                for(String term:wildcardIndex.getTokenProcessor().processToken(wildcardIndex.getWordAt(vocab)))
+                    terms.add(new TermLiteral(term));
             }
 
             OrQuery query = new OrQuery(terms);

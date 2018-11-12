@@ -2,6 +2,8 @@ package cecs429.index.wildcard;
 
 import cecs429.index.Index;
 import cecs429.index.Posting;
+import cecs429.text.TokenProcessor;
+import jdk.nashorn.internal.parser.Token;
 
 import java.util.*;
 
@@ -11,13 +13,15 @@ public class KGramIndex {
     private KGramMaker kGramMaker;
     private Index mIndex;
     private List<String> vocab; //this will be storing the unprocessed terms, as kgrams for processed words might provide incorrect results.
+    private TokenProcessor tokenProcessor;
 
-    public KGramIndex(Index index) {
+    public KGramIndex(Index index,List<String> vocabs,TokenProcessor tp) {
         kGramIndex = new HashMap<>();
         kGramMaker = new KGramMaker();
         mIndex = index;
-        vocab = mIndex.getVocabulary();
+        vocab =vocabs;
         buildKGramIndex();
+        tokenProcessor = tp;
 
     }
 
@@ -67,4 +71,6 @@ public class KGramIndex {
     public String getWordAt(int vocabIndex) {
         return vocab.get(vocabIndex);
     }
+
+    public TokenProcessor getTokenProcessor(){return tokenProcessor;}
 }

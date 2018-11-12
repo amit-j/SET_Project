@@ -8,9 +8,7 @@ import cecs429.text.TokenProcessor;
 import java.io.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -25,6 +23,7 @@ public class SinglePassInMemoryIndexWriter {
     private DiskIndexWriter indexWriter;
 
 
+
     public SinglePassInMemoryIndexWriter(){
         index = new PositionalInvertedIndex();
         vocabulary = new ArrayList<>();
@@ -33,10 +32,11 @@ public class SinglePassInMemoryIndexWriter {
 
 
     public void indexCorpus(DocumentCorpus corpus, TokenProcessor tokenProcessor,Path path) throws IOException{
-
+        //we also need to write pre-stemmed vocabs on to the disk so we can process them for K-Gram
+        Set<String> unStemmedVocabs  = new TreeSet<>();
         int iAllowedMemeory =0;
         int iBucketNum = 0;
-          for(Document document:corpus.getDocuments()) {
+         for(Document document:corpus.getDocuments()) {
             int position = 0;
            EnglishTokenStream tokenStream = new EnglishTokenStream(document.getContent());
 
@@ -66,12 +66,14 @@ public class SinglePassInMemoryIndexWriter {
                     }
             }
         }
-        if(iAllowedMemeory!=0) // we still have terms left to put in the buckets
-            indexWriter.writeIndex(index, Paths.get(path.toAbsolutePath()+BUCKET_PATH+iBucketNum++).toAbsolutePath());
+        if(iAllowedMemeory!=0) // check if we still have terms left to put in the buckets
+           indexWriter.writeIndex(index, Paths.get(path.toAbsolutePath()+BUCKET_PATH+iBucketNum++).toAbsolutePath());
 
 
         mergeBucketsVocab(path,iBucketNum);
-        mergeBucketsPostings(path,iBucketNum);
+        mergeBucketsPostings(path,corpus,iBucketNum);
+
+        indexWriter.writeUnprocessedVocabs(path,tokenProcessor.getUnStemmedVocabs());
 
     }
 
@@ -99,7 +101,7 @@ public class SinglePassInMemoryIndexWriter {
 
 
     //create mereged postings list
-    private void mergeBucketsPostings (Path path,int numBuckets) throws IOException{
+    private void mergeBucketsPostings (Path path,DocumentCorpus corpus,int numBuckets) throws IOException{
 
 
          int currentBucket = 0;
@@ -107,7 +109,6 @@ public class SinglePassInMemoryIndexWriter {
         List<List<String>> bucketTerms = new ArrayList<>();
 
         //we also remember the last ending position, postings positions to avoid going back to read it in the vocab table;
-        //check if this can cause memory overflow!!
 
         List<DataInputStream> bucketVocabStreams = new ArrayList<>();
         List<DataInputStream> bucketPostingsStreams = new ArrayList<>();
@@ -189,7 +190,6 @@ public class SinglePassInMemoryIndexWriter {
                         postingsPositions.get(iBucketCnt).remove(0);
 
                         if (bucketTerms.get(iBucketCnt).size() == 0) {
-                            //handle the case when no more terms are left to be read in a bucket
                             bucketTerms.set(iBucketCnt, readNTermsFromBucket(bucketVocabStreams, bucketVocabTableStreams, postingsPositions, iBucketCnt, lastEndPositions, 5));
                         }
 
@@ -238,7 +238,7 @@ public class SinglePassInMemoryIndexWriter {
         }
         indexWriter.closeDBStore();
 
-        writeDocumentWeights(documentWeights,path);
+        writeDocumentWeights(documentWeights,corpus,path);
 
 
         for(DataInputStream stream : bucketVocabStreams)
@@ -252,13 +252,13 @@ public class SinglePassInMemoryIndexWriter {
     }
 
 
-    private void writeDocumentWeights(HashMap<Integer,List<Integer>> documentWeights,Path path) throws IOException{
+    private void writeDocumentWeights(HashMap<Integer,List<Integer>> documentWeights,DocumentCorpus corpus, Path path) throws IOException{
         FileOutputStream fos = new FileOutputStream(path.toAbsolutePath().toString()+"\\index\\docWeights.bin");
         DataOutputStream stream = new DataOutputStream(fos);
-        for(int docID:documentWeights.keySet()){
+        for(int i=0;i<corpus.getCorpusSize();i++){
 
-            if(documentWeights.containsKey(docID)) {
-                List<Integer> documentTermFreqeuncyList = documentWeights.get(docID);
+            if(documentWeights.containsKey(i)) {
+                List<Integer> documentTermFreqeuncyList = documentWeights.get(i);
                 Double ld = new Double(0);
 
                 for (Integer freq : documentTermFreqeuncyList) {

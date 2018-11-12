@@ -13,6 +13,7 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class DiskIndexWriter {
@@ -143,7 +144,6 @@ public class DiskIndexWriter {
 
 
     public void initDBStore(Path path){
-        //TODO: Delete already existing database if any
 
         File file = new File(path.toAbsolutePath() + "\\index\\database.db");
         if (file.exists()){
@@ -157,6 +157,21 @@ public class DiskIndexWriter {
                     valueSerializer(Serializer.LONG).
                     create();
 
+
+
+    }
+
+
+    //we write unstemmed vocabs to disk so we can create K grams next we read the index from disk
+    public void writeUnprocessedVocabs(Path path, Set<String> vocabs) throws IOException{
+        FileOutputStream fos = new FileOutputStream(path.toAbsolutePath().toString()+"\\index\\unstemmedVocabs.bin");
+        DataOutputStream stream = new DataOutputStream(fos);
+
+        for(String term:vocabs){
+            stream.writeUTF(term);
+        }
+
+        stream.close();
 
 
     }

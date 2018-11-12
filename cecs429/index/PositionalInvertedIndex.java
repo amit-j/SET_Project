@@ -12,6 +12,7 @@ public class PositionalInvertedIndex implements Index {
     public PositionalInvertedIndex() {
         mIndex = new HashMap<>();
     }
+
     @Override
     public List<String> getVocabulary() {
 
@@ -70,4 +71,5 @@ public class PositionalInvertedIndex implements Index {
     public List<Posting> getPostingsWithPositions(String term) {
         return getPostings(term);
     }
+
 }

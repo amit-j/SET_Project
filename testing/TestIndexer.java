@@ -35,7 +35,7 @@ public class TestIndexer {
 
     int executeQuery(String query){
 
-        component = parser.parseQuery(query, wildcardIndexer);
+        component = parser.parseQuery(query,new BetterTokenProcessor(), wildcardIndexer);
        // System.out.println(component.getPostings(index).size());
         for (Posting p : component.getPostings(index)) {
             // System.out.println("Json Document " + corpus.getDocument(p.getDocumentId()).getTitle());
