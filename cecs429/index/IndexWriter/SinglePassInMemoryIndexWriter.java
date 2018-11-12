@@ -33,7 +33,6 @@ public class SinglePassInMemoryIndexWriter {
 
     public void indexCorpus(DocumentCorpus corpus, TokenProcessor tokenProcessor,Path path) throws IOException{
         //we also need to write pre-stemmed vocabs on to the disk so we can process them for K-Gram
-        Set<String> unStemmedVocabs  = new TreeSet<>();
         int iAllowedMemeory =0;
         int iBucketNum = 0;
          for(Document document:corpus.getDocuments()) {

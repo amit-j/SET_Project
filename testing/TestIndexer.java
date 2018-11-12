@@ -30,16 +30,16 @@ public class TestIndexer {
         parser = new BooleanQueryParser();
         corpus = DirectoryCorpus.loadTextDirectory(Paths.get("testcases").toAbsolutePath(), ".txt");
         index = indexCorpus(corpus);
-       // wildcardIndexer = new KGramIndex(index);
+        // wildcardIndexer = new KGramIndex(index);
     }
 
     int executeQuery(String query){
 
         component = parser.parseQuery(query,new BetterTokenProcessor(), wildcardIndexer);
-       // System.out.println(component.getPostings(index).size());
-        for (Posting p : component.getPostings(index)) {
-            // System.out.println("Json Document " + corpus.getDocument(p.getDocumentId()).getTitle());
-        }
+        // System.out.println(component.getPostings(index).size());
+        //for (Posting p : component.getPostings(index)) {
+        //System.out.println("Json Document " + corpus.getDocument(p.getDocumentId()).getTitle());
+        //}
         return component.getPostings(index).size();
     }
 
@@ -183,13 +183,13 @@ public class TestIndexer {
         mIndex.put("fish",postingList10);
 
 
-         postingList = new ArrayList<>();
+        postingList = new ArrayList<>();
         List<Integer> listPet = new ArrayList<>(Arrays.asList(0,15));
         Posting postingPet = new Posting(0,listPet);
         postingList.add(postingPet);
         mIndex.put("pet",postingList);
 
-         postingList = new ArrayList<>();
+        postingList = new ArrayList<>();
         List<Integer> listWild = new ArrayList<>(Arrays.asList(0));
         Posting postingWild = new Posting(2,listWild);
         mIndex.put("wild",postingList);
@@ -307,7 +307,7 @@ public class TestIndexer {
             if(!l2.contains(i))
                 return false;
 
-            return true;
+        return true;
     }
 
     public List<Posting> getPostings(String term) {

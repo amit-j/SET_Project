@@ -51,7 +51,7 @@ public class TextFileDocument implements FileDocument {
 
     @Override
     public String getName() {
-        return mFilePath.getFileName().toString();
+        return getTitle();
     }
 }
 
