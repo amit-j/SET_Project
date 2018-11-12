@@ -15,13 +15,15 @@ public class DiskPositionalIndex implements Index{
 
 
     RandomAccessFile randomAccessPostings;
+    //RandomAccessFile randomAccessDocWeight;
     DB db;
     private BTreeMap<String, Long> map;
 
     public DiskPositionalIndex(Path path){
         try {
              randomAccessPostings = new RandomAccessFile(path.toAbsolutePath().toString()+"\\postings.bin", "r");
-            db = DBMaker.fileDB(path.toAbsolutePath() + "\\database.db").make();
+             //randomAccessDocWeight = new RandomAccessFile(path.toAbsolutePath().toString()+"\\docWeights.bin", "r");
+             db = DBMaker.fileDB(path.toAbsolutePath() + "\\database.db").make();
             map = db.treeMap("map.db").
                     keySerializer(Serializer.STRING).
                     valueSerializer(Serializer.LONG).
@@ -117,7 +119,7 @@ public class DiskPositionalIndex implements Index{
                     positionInFile = positionInFile + 4;
 
                     positionInFile = positionInFile + 4 * tf;
-                    Posting posting = new Posting(currentDocId);
+                    Posting posting = new Posting(currentDocId, tf);
                     postings.add(posting);
                 }
             } catch (IOException e) {
@@ -136,7 +138,7 @@ public class DiskPositionalIndex implements Index{
     }
 
     public static void main(String[] arg) throws IOException {
-        DiskPositionalIndex test =  new DiskPositionalIndex(Paths.get("C:\\mlb\\1\\index").toAbsolutePath());
+        DiskPositionalIndex test =  new DiskPositionalIndex(Paths.get("C:\\ArticlesTest\\index").toAbsolutePath());
 
         System.out.println("\n*****************************************");
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));

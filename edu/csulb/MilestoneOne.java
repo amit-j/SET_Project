@@ -92,7 +92,7 @@ public class MilestoneOne {
                             while(!success) {
 
                                     try {
-                                        corpus = DirectoryCorpus.loadTextDirectory(Paths.get(corpusPath).toAbsolutePath(), ".txt");
+                                        corpus = DirectoryCorpus.loadJsonDirectory(Paths.get(corpusPath).toAbsolutePath(), ".json");
                                         corpus.getDocuments();
                                         index =   new DiskPositionalIndex(Paths.get(file.toPath().toAbsolutePath() + "\\index"));
                                         wildcardIndexer = new KGramIndex(index);
@@ -141,6 +141,7 @@ public class MilestoneOne {
                                             break;
                                         default:
                                             component = parser.parseQuery(query, wildcardIndexer);
+
                                             List<Posting> mPostings = component.getPostings(index);
                                             for (Posting p : mPostings) {
                                                 System.out.println("Json Document " + corpus.getDocument(p.getDocumentId()).getName());

@@ -8,14 +8,24 @@ import java.util.List;
 public class Posting {
     private int mDocumentId;
     private List<Integer> mPositions;
+    private long termFrequency;
+
+    public long getTermFrequency() {
+        return termFrequency;
+    }
 
     public Posting(int documentId) {
-        mDocumentId = documentId;
+        this.mDocumentId = documentId;
+    }
+
+    public Posting(int documentId, long termFrequency) {
+        this.mDocumentId = documentId;
+        this.termFrequency = termFrequency;
     }
 
     public Posting(int documentId, List<Integer> list) {
-        mDocumentId = documentId;
-        mPositions = list;
+        this.mDocumentId = documentId;
+        this.mPositions = list;
     }
 
 
