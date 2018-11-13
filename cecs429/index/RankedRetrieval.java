@@ -1,7 +1,9 @@
 package cecs429.index;
 
 import cecs429.documents.DirectoryCorpus;
+import cecs429.documents.Document;
 import cecs429.documents.DocumentCorpus;
+import cecs429.documents.FileDocument;
 import cecs429.query.RankedRetrievalParser;
 import cecs429.text.BetterTokenProcessor;
 import cecs429.text.TokenProcessor;
@@ -44,13 +46,13 @@ public class RankedRetrieval {
         for(String term : terms){
             List<Posting> postings = index.getPostings(term);
             if(postings.size()>0)
-            wqt = Math.log(1 + corpus.getCorpusSize()/ postings.size());
+                wqt = Math.log(1 + corpus.getCorpusSize()/ postings.size());
             else
                 wqt = 0;
 
             for (Posting posting : postings) {
 
-                 wdt = 1 + Math.log(posting.getTermFrequency());
+                wdt = 1 + Math.log(posting.getTermFrequency());
                 int docId = posting.getDocumentId();
                 double accumulator = 0;
 
@@ -61,7 +63,7 @@ public class RankedRetrieval {
                     accumulator += wdt*wqt;
                 }
                 docAccumulatorMap.put(docId, accumulator);
-               // System.out.println(corpus.getDocument(docId).getName()+" wdt:"+wdt+" ld:"+getDoucumentWeight(docId));
+                // System.out.println(corpus.getDocument(docId).getName()+" wdt:"+wdt+" ld:"+getDoucumentWeight(docId));
             }
         }
 
@@ -79,8 +81,8 @@ public class RankedRetrieval {
                 (w1, w2) -> docAccumulatorMap.get(w1).compareTo(docAccumulatorMap.get(w2)));
 
         for (int docId: docAccumulatorMap.keySet()) {
-           // if(docAccumulatorMap.get(docId)>1)
-               // System.out.println(corpus.getDocument(docId).getName()+" acc:"+docAccumulatorMap.get(docId));
+            // if(docAccumulatorMap.get(docId)>1)
+            // System.out.println(corpus.getDocument(docId).getName()+" acc:"+docAccumulatorMap.get(docId));
             priorityQueue.offer(docId);
             if (priorityQueue.size() > 10) priorityQueue.poll();
         }
@@ -90,9 +92,12 @@ public class RankedRetrieval {
             rankedRetrievalPosting.add(priorityQueue.poll());
         }
         Collections.reverse(rankedRetrievalPosting);
-        for(Integer docId : rankedRetrievalPosting)
-            System.out.println(corpus.getDocument(docId).getName()+" : "+docAccumulatorMap.get(docId));
 
+        for(Integer docId : rankedRetrievalPosting) {
+            Document document = corpus.getDocument(docId);
+            document.getContent();
+            System.out.println("Document \""+document.getTitle()+"\" File Name"+corpus.getDocument(docId).getName() + " : " + docAccumulatorMap.get(docId));
+        }
         return rankedRetrievalPosting;
     }
 
@@ -110,16 +115,12 @@ public class RankedRetrieval {
 
     public static void main(String[] args){
         BetterTokenProcessor processor = new BetterTokenProcessor();
-       DocumentCorpus corpus = DirectoryCorpus.loadJsonDirectory(Paths.get("C:\\Articles_full\\Articles").toAbsolutePath(), ".json");
-       corpus.getDocuments();
-       Index index =   new DiskPositionalIndex(Paths.get(Paths.get("C:\\Articles_full\\Articles").toAbsolutePath() + "\\index"));
+        DocumentCorpus corpus = DirectoryCorpus.loadJsonDirectory(Paths.get("C:\\Articles_full\\Articles").toAbsolutePath(), ".json");
+        corpus.getDocuments();
+        Index index =   new DiskPositionalIndex(Paths.get(Paths.get("C:\\Articles_full\\Articles").toAbsolutePath() + "\\index"));
         RankedRetrieval rankedRetrieval = new RankedRetrieval(Paths.get("C:\\Articles_full\\Articles\\index").toAbsolutePath());
-//
-      List<Integer> postings = rankedRetrieval.doRankedRetrieval("crater lake", corpus, index, processor);
 
-//        for (int i=0;i<36803;i++){
-//            System.out.println(" "+i+"   weight   "+rankedRetrieval.getDoucumentWeight(i));
-//        }
+        List<Integer> postings = rankedRetrieval.doRankedRetrieval("crater lake", corpus, index, processor);
     }
 
 }
