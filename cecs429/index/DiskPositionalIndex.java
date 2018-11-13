@@ -40,6 +40,56 @@ public class DiskPositionalIndex implements Index{
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        /**We wont be using binary search anymore as we now have B*Tree which is better performance.
+         *
+         * try {
+         long vocabTableLength = randomAccessVocabTable.length()/16;
+         long i=0, j= vocabTableLength-1;
+
+         while(i <= j){
+         long mid = (i+j)/2;
+         randomAccessVocabTable.seek(mid*16);
+         long start = randomAccessVocabTable.readLong();
+         long end = 0;
+
+         if(i != j){
+         randomAccessVocabTable.seek(mid*16+16);
+         end = randomAccessVocabTable.readLong();
+
+         } else {
+         end = randomAccessVocab.getChannel().size();
+         }
+         long length = end - start;
+         randomAccessVocab.seek(start);
+
+         String word = "";
+         long temp = 0;
+         while(temp < length){
+         word = word + (char) randomAccessVocab.readByte();
+         temp++;
+         }
+
+         int comparison = term.compareTo(word);
+
+         if(comparison == 0){
+         randomAccessVocabTable.seek(mid*16+8);
+         return randomAccessVocabTable.readLong();
+
+         } else if(comparison < 0){
+         if(i == j) break;
+         // term is less than mid
+         j = mid;
+         } else {
+         // term is greater than mid
+         i = mid+1;
+         }
+         }
+         } catch (IOException e) {
+         e.printStackTrace();
+         }
+         return -1;
+         */
         return -1;
     }
 

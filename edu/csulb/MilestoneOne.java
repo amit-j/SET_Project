@@ -51,7 +51,6 @@ public class MilestoneOne {
         mileStoneChoice = reader.readLine();
         switch (mileStoneChoice) {
             case "1":
-                //copy code for milestone 1 main here..
                 System.out.print("Enter the corpus path : ");
                 String corpusPath = reader.readLine();
                 corpus = DirectoryCorpus.loadTextDirectory(Paths.get(corpusPath).toAbsolutePath(), ".txt");
