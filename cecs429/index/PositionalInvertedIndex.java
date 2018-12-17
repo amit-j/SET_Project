@@ -16,15 +16,15 @@ public class PositionalInvertedIndex implements Index {
     @Override
     public List<String> getVocabulary() {
 
-        if(mVocab==null){
-        List<String> mList = new ArrayList<>();
+        if (mVocab == null) {
+            List<String> mList = new ArrayList<>();
 
 
-        for (String s : mIndex.keySet()) {
-            mList.add(s);
+            for (String s : mIndex.keySet()) {
+                mList.add(s);
 
-        }
-        mVocab = mList;
+            }
+            mVocab = mList;
         }
 
         return mVocab;

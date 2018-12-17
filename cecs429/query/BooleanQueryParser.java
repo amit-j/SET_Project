@@ -1,7 +1,6 @@
 package cecs429.query;
 
 import cecs429.index.wildcard.KGramIndex;
-import cecs429.text.BetterTokenProcessor;
 import cecs429.text.TokenProcessor;
 
 import java.util.ArrayList;
@@ -16,7 +15,7 @@ public class BooleanQueryParser {
      * Given a boolean query, parses and returns a tree of QueryComponents representing the query.
      */
 
-    public QueryComponent parseQuery(String query,TokenProcessor processor, KGramIndex WildCardIndex) {
+    public QueryComponent parseQuery(String query, TokenProcessor processor, KGramIndex WildCardIndex) {
         int start = 0;
 
         // General routine: scan the query to identify a literal, and put that literal into a list.
@@ -38,7 +37,7 @@ public class BooleanQueryParser {
 
             do {
                 // Extract the next literal from the subquery.
-                Literal lit = findNextLiteral(subquery, subStart, WildCardIndex,processor);
+                Literal lit = findNextLiteral(subquery, subStart, WildCardIndex, processor);
 
                 // Add the literal component to the conjunctive list.
                 subqueryLiterals.add(lit.literalComponent);
@@ -114,7 +113,7 @@ public class BooleanQueryParser {
     /**
      * Locates and returns the next literal from the given subquery string.
      */
-    private Literal findNextLiteral(String subquery, int startIndex, KGramIndex wildcardIndex,TokenProcessor processor) {
+    private Literal findNextLiteral(String subquery, int startIndex, KGramIndex wildcardIndex, TokenProcessor processor) {
         int subLength = subquery.length();
         int lengthOut;
 
@@ -130,7 +129,7 @@ public class BooleanQueryParser {
                 ++startIndex;
             }
 
-            Literal lit = findNextLiteral(subquery, startIndex, wildcardIndex,processor);
+            Literal lit = findNextLiteral(subquery, startIndex, wildcardIndex, processor);
             Literal notlit = new Literal(new StringBounds(startIndex, lit.bounds.length + 1), new NotQuery(lit.literalComponent));
             return notlit;
         }

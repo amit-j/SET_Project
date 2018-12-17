@@ -1,11 +1,11 @@
 package cecs429.index.wildcard;
 
 import cecs429.index.Index;
-import cecs429.index.Posting;
 import cecs429.text.TokenProcessor;
-import jdk.nashorn.internal.parser.Token;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class KGramIndex {
 
@@ -15,22 +15,20 @@ public class KGramIndex {
     private List<String> vocab; //this will be storing the unprocessed terms, as kgrams for processed words might provide incorrect results.
     private TokenProcessor tokenProcessor;
 
-    public KGramIndex(Index index,List<String> vocabs,TokenProcessor tp) {
+    public KGramIndex(Index index, List<String> vocabs, TokenProcessor tp) {
         kGramIndex = new HashMap<>();
         kGramMaker = new KGramMaker();
         mIndex = index;
-        vocab =vocabs;
+        vocab = vocabs;
         buildKGramIndex();
         tokenProcessor = tp;
 
     }
 
 
+    public List<Integer> getVocabIndexforTerm(String term) {
 
-
-    public List<Integer> getVocabIndexforTerm(String term){
-
-        if(kGramIndex.containsKey(term)){
+        if (kGramIndex.containsKey(term)) {
             return kGramIndex.get(term);
         }
         return new ArrayList<>();
@@ -50,27 +48,29 @@ public class KGramIndex {
 
     private void addTerm(String term, int vocabIndex) {
 
-            for (String kgram : kGramMaker.makeKgrams(term)) {
+        for (String kgram : kGramMaker.makeKgrams(term)) {
 
-                if (!kgram.equals(" ") && !kgram.equals("$")) {
+            if (!kgram.equals(" ") && !kgram.equals("$")) {
 
-                    if (kGramIndex.containsKey(kgram)) {
+                if (kGramIndex.containsKey(kgram)) {
 
-                        List<Integer> mList = kGramIndex.get(kgram);
-                        if (mList.get(mList.size() - 1) != vocabIndex)
-                            mList.add(vocabIndex);
-                    } else {
-                        List<Integer> mList = new ArrayList<>();
+                    List<Integer> mList = kGramIndex.get(kgram);
+                    if (mList.get(mList.size() - 1) != vocabIndex)
                         mList.add(vocabIndex);
-                        kGramIndex.put(kgram, mList);
-                    }
+                } else {
+                    List<Integer> mList = new ArrayList<>();
+                    mList.add(vocabIndex);
+                    kGramIndex.put(kgram, mList);
                 }
             }
+        }
     }
 
     public String getWordAt(int vocabIndex) {
         return vocab.get(vocabIndex);
     }
 
-    public TokenProcessor getTokenProcessor(){return tokenProcessor;}
+    public TokenProcessor getTokenProcessor() {
+        return tokenProcessor;
+    }
 }

@@ -10,10 +10,6 @@ public class Posting {
     private List<Integer> mPositions;
     private long termFrequency;
 
-    public long getTermFrequency() {
-        return termFrequency;
-    }
-
     public Posting(int documentId) {
         mDocumentId = documentId;
     }
@@ -28,6 +24,9 @@ public class Posting {
         mPositions = list;
     }
 
+    public long getTermFrequency() {
+        return termFrequency;
+    }
 
     public void addPostingPosition(int position) {
         mPositions.add(position);

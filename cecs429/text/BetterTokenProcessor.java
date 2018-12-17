@@ -3,7 +3,6 @@ package cecs429.text;
 import org.tartarus.snowball.SnowballStemmer;
 import org.tartarus.snowball.ext.englishStemmer;
 
-import javax.print.DocFlavor;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -11,9 +10,10 @@ public class BetterTokenProcessor implements TokenProcessor {
 
     Set<String> unStemmedVocabs;
 
-    public  BetterTokenProcessor(){
+    public BetterTokenProcessor() {
         unStemmedVocabs = new TreeSet<>();
     }
+
     public static void main(String arg[]) {
 
         BetterTokenProcessor processor = new BetterTokenProcessor();
@@ -39,7 +39,7 @@ public class BetterTokenProcessor implements TokenProcessor {
             for (int i = 1; i < temp.length + 1; i++) {
 
                 snowballStemmer.setCurrent(temp[i - 1]);
-                unStemmedVocabs.add(temp[i-1]);
+                unStemmedVocabs.add(temp[i - 1]);
                 snowballStemmer.stem();
                 String result = snowballStemmer.getCurrent();
                 processedTokens[i] = result;
@@ -58,5 +58,7 @@ public class BetterTokenProcessor implements TokenProcessor {
         return processedTokens;
     }
 
-    public Set<String> getUnStemmedVocabs(){return unStemmedVocabs;}
+    public Set<String> getUnStemmedVocabs() {
+        return unStemmedVocabs;
+    }
 }

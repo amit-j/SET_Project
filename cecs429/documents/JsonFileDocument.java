@@ -3,7 +3,6 @@ package cecs429.documents;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import homework3.JsonDocument;
-import homework3.MlbJsonArticle;
 
 import java.io.*;
 import java.nio.file.Path;

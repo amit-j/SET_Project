@@ -8,7 +8,15 @@ public class MlbJsonArticle {
     private String url;
 
 
-    public String getTitle(){return headline;}
-    public String getUrl(){return url;}
-    public String getBody(){return fulltext;}
+    public String getTitle() {
+        return headline;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public String getBody() {
+        return fulltext;
+    }
 }

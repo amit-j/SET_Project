@@ -1,37 +1,30 @@
 package cecs429.index;
 
-import cecs429.documents.DirectoryCorpus;
 import cecs429.documents.Document;
 import cecs429.documents.DocumentCorpus;
-import cecs429.documents.FileDocument;
 import cecs429.query.RankedRetrievalParser;
-import cecs429.text.BetterTokenProcessor;
 import cecs429.text.TokenProcessor;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.*;
 
 public class RankedRetrieval {
 
-    //Modify DiskPositionalIndex
-    //so it knows how to open this le and skip to an appropriate location to read a 8-byte double for Ld.
-
     RandomAccessFile randomAccessDocWeight;
 
-    public RankedRetrieval(Path path){
+    public RankedRetrieval(Path path) {
 
         try {
-            randomAccessDocWeight = new RandomAccessFile(path.toAbsolutePath().toString()+"\\docWeights.bin", "r");
+            randomAccessDocWeight = new RandomAccessFile(path.toAbsolutePath().toString() + "\\docWeights.bin", "r");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
     }
 
-    public List<Integer> doRankedRetrieval(String query, DocumentCorpus corpus, Index index, TokenProcessor tokenProcessor){
+    public List<Integer> doRankedRetrieval(String query, DocumentCorpus corpus, Index index, TokenProcessor tokenProcessor) {
 
         RankedRetrievalParser parser = new RankedRetrievalParser();
 
@@ -43,36 +36,39 @@ public class RankedRetrieval {
         double wdt = 0.0;
         double wqt = 0.0;
 
-        for(String term : terms){
+        /*Term at a time*/
+        for (String term : terms) {
             List<Posting> postings = index.getPostings(term);
-            if(postings.size()>0)
-                wqt = Math.log(1 + corpus.getCorpusSize()/ postings.size());
+            if (postings.size() > 0)
+                wqt = Math.log(1 + corpus.getCorpusSize() / postings.size());
             else
                 wqt = 0;
 
+            /*For each document from posting for a term calculating wdt and accumulator*/
             for (Posting posting : postings) {
 
                 wdt = 1 + Math.log(posting.getTermFrequency());
+
                 int docId = posting.getDocumentId();
                 double accumulator = 0;
 
-                if(docAccumulatorMap.get(docId) == null){
-                    accumulator = wdt*wqt;
+                if (docAccumulatorMap.get(docId) == null) {
+                    accumulator = wdt * wqt;
                 } else {
                     accumulator = docAccumulatorMap.get(docId);
-                    accumulator += wdt*wqt;
+                    accumulator += wdt * wqt;
                 }
                 docAccumulatorMap.put(docId, accumulator);
                 // System.out.println(corpus.getDocument(docId).getName()+" wdt:"+wdt+" ld:"+getDoucumentWeight(docId));
             }
         }
 
-        for (int docId: docAccumulatorMap.keySet()){
+        for (int docId : docAccumulatorMap.keySet()) {
 
             double accumulator = docAccumulatorMap.get(docId);
-            if(accumulator != 0.0){
+            if (accumulator != 0.0) {
                 double docWeight = getDoucumentWeight(docId);
-                docAccumulatorMap.put(docId, accumulator/docWeight);
+                docAccumulatorMap.put(docId, accumulator / docWeight);
             }
 
         }
@@ -80,7 +76,7 @@ public class RankedRetrieval {
         PriorityQueue<Integer> priorityQueue = new PriorityQueue<>(10,
                 (w1, w2) -> docAccumulatorMap.get(w1).compareTo(docAccumulatorMap.get(w2)));
 
-        for (int docId: docAccumulatorMap.keySet()) {
+        for (int docId : docAccumulatorMap.keySet()) {
             // if(docAccumulatorMap.get(docId)>1)
             // System.out.println(corpus.getDocument(docId).getName()+" acc:"+docAccumulatorMap.get(docId));
             priorityQueue.offer(docId);
@@ -93,19 +89,22 @@ public class RankedRetrieval {
         }
         Collections.reverse(rankedRetrievalPosting);
 
-        for(Integer docId : rankedRetrievalPosting) {
+        for (Integer docId : rankedRetrievalPosting) {
             Document document = corpus.getDocument(docId);
             document.getContent();
-            System.out.println("Title \""+document.getTitle()+"\" File Name: "+corpus.getDocument(docId).getName() + " : " + docAccumulatorMap.get(docId));
+            System.out.println("Title \"" + document.getTitle() + "\" File Name: " + corpus.getDocument(docId).getName() + " : " + docAccumulatorMap.get(docId));
         }
         return rankedRetrievalPosting;
     }
 
-    public double getDoucumentWeight(int docId){
+    /*
+     * Using document Id and docweight.bin fetch the document weight
+     * */
+    public double getDoucumentWeight(int docId) {
 
         double ld = -1;
         try {
-            randomAccessDocWeight.seek(docId*8);
+            randomAccessDocWeight.seek(docId * 8);
             ld = randomAccessDocWeight.readDouble();
         } catch (IOException e) {
             e.printStackTrace();
@@ -113,14 +112,14 @@ public class RankedRetrieval {
         return ld;
     }
 
-    public static void main(String[] args){
-        BetterTokenProcessor processor = new BetterTokenProcessor();
-        DocumentCorpus corpus = DirectoryCorpus.loadJsonDirectory(Paths.get("C:\\Articles_full\\Articles").toAbsolutePath(), ".json");
-        corpus.getDocuments();
-        Index index =   new DiskPositionalIndex(Paths.get(Paths.get("C:\\Articles_full\\Articles").toAbsolutePath() + "\\index"));
-        RankedRetrieval rankedRetrieval = new RankedRetrieval(Paths.get("C:\\Articles_full\\Articles\\index").toAbsolutePath());
-
-        List<Integer> postings = rankedRetrieval.doRankedRetrieval("crater lake", corpus, index, processor);
-    }
+//    public static void main(String[] args){
+//        BetterTokenProcessor processor = new BetterTokenProcessor();
+//        DocumentCorpus corpus = DirectoryCorpus.loadJsonDirectory(Paths.get("C:\\Articles_full\\Articles").toAbsolutePath(), ".json");
+//        corpus.getDocuments();
+//        Index index =   new DiskPositionalIndex(Paths.get(Paths.get("C:\\Articles_full\\Articles").toAbsolutePath() + "\\index"));
+//        RankedRetrieval rankedRetrieval = new RankedRetrieval(Paths.get("C:\\Articles_full\\Articles\\index").toAbsolutePath());
+//
+//        List<Integer> postings = rankedRetrieval.doRankedRetrieval("crater lake", corpus, index, processor);
+//    }
 
 }

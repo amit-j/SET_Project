@@ -3,9 +3,6 @@ package cecs429.query;
 import cecs429.index.Index;
 import cecs429.index.Posting;
 import cecs429.index.wildcard.KGramIndex;
-import cecs429.index.wildcard.WildcardPosting;
-import cecs429.text.TokenProcessor;
-import jdk.nashorn.internal.parser.Token;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,8 +40,6 @@ public class WildcardLiteral implements QueryComponent {
         }
         return kgrams;
     }
-
-
 
 
     private Boolean matchWildCard(String term, String wildcard) {
@@ -98,10 +93,10 @@ public class WildcardLiteral implements QueryComponent {
         if (breakdowns.size() == 1) { //only one term
 
             System.out.println("matched with words:");
-            for (int vocab :  wildcardIndex.getVocabIndexforTerm(breakdowns.get(0))) {
+            for (int vocab : wildcardIndex.getVocabIndexforTerm(breakdowns.get(0))) {
                 if (matchWildCard(wildcardIndex.getWordAt(vocab), mTerms)) {
                     matchedVocabs.add(vocab);
-                    System.out.print(wildcardIndex.getWordAt(vocab)+" , ");
+                    System.out.print(wildcardIndex.getWordAt(vocab) + " , ");
                 }
             }
 
@@ -109,8 +104,8 @@ public class WildcardLiteral implements QueryComponent {
 
             for (int vocab : matchedVocabs) {
                 //now we just create an or component for the possible vocabs and display the postings returned by that
-                for(String term:wildcardIndex.getTokenProcessor().processToken(wildcardIndex.getWordAt(vocab)))
-                         terms.add(new TermLiteral(term));
+                for (String term : wildcardIndex.getTokenProcessor().processToken(wildcardIndex.getWordAt(vocab)))
+                    terms.add(new TermLiteral(term));
             }
 
             OrQuery query = new OrQuery(terms);
@@ -118,9 +113,7 @@ public class WildcardLiteral implements QueryComponent {
             return query.getPostings(index);
 
 
-        }
-
-        else {
+        } else {
 
             for (String term : breakdowns) {
                 possibleVocabs.addAll(wildcardIndex.getVocabIndexforTerm(term));
@@ -130,18 +123,17 @@ public class WildcardLiteral implements QueryComponent {
             for (int vocab : possibleVocabs) {
                 if (matchWildCard(wildcardIndex.getWordAt(vocab), mTerms)) {
                     matchedVocabs.add(vocab);
-                    System.out.print(wildcardIndex.getWordAt(vocab)+" , ");
+                    System.out.print(wildcardIndex.getWordAt(vocab) + " , ");
 
                 }
             }
-
 
 
             List<QueryComponent> terms = new ArrayList<>();
             //now we just create an or component for the possible vocabs and display the postings returned by that
 
             for (int vocab : matchedVocabs) {
-                for(String term:wildcardIndex.getTokenProcessor().processToken(wildcardIndex.getWordAt(vocab)))
+                for (String term : wildcardIndex.getTokenProcessor().processToken(wildcardIndex.getWordAt(vocab)))
                     terms.add(new TermLiteral(term));
             }
 

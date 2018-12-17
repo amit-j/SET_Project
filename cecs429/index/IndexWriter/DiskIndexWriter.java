@@ -18,74 +18,73 @@ import java.util.stream.Collectors;
 
 public class DiskIndexWriter {
 
+    DB db;
     private List<String> vocabualary;
     private BTreeMap<String, Long> map;
-    DB db;
     private DataOutputStream stream;
 
-    public void writeIndex(Index index, Path path){
+    public void writeIndex(Index index, Path path) {
 
         try {
             createDirectoryStructre(path);
-            writeVocabTable(writePostings(index,path),writeVocab(path),path);
-        }
-        catch (Exception e){
-            System.out.println("Something went wrong.."+e.getMessage());
+            writeVocabTable(writePostings(index, path), writeVocab(path), path);
+        } catch (Exception e) {
+            System.out.println("Something went wrong.." + e.getMessage());
         }
 
 
     }
 
-    private void createDirectoryStructre(Path path) throws IOException{
+    private void createDirectoryStructre(Path path) throws IOException {
         File directory = new File(path.toAbsolutePath().toString());
-        if (! directory.exists()) {
+        if (!directory.exists()) {
             Files.createDirectories(path);
 
         }
 
     }
-    private HashMap<String,Long> writePostings(Index index,Path path) throws IOException {
+
+    private HashMap<String, Long> writePostings(Index index, Path path) throws IOException {
         int maxDocumentId = 0; //we will keep a track of maximum document id encountered to write the Ld for each document sequentially at the end
-        HashMap<String,Long> postingFileLocations = new HashMap<>();
-        FileOutputStream fos = new FileOutputStream(path.toAbsolutePath().toString()+"\\postings.bin");
+        HashMap<String, Long> postingFileLocations = new HashMap<>();
+        FileOutputStream fos = new FileOutputStream(path.toAbsolutePath().toString() + "\\postings.bin");
         DataOutputStream stream = new DataOutputStream(fos);
 
-        HashMap<Integer,List<Integer>> documentWeights = new HashMap<>(); //maps document id to list of tfd's.
+        HashMap<Integer, List<Integer>> documentWeights = new HashMap<>(); //maps document id to list of tfd's.
 
         vocabualary = index.getVocabulary().stream().sorted().collect(Collectors.toList());
-        for(String term: vocabualary){
+        for (String term : vocabualary) {
 
-            postingFileLocations.put(term,fos.getChannel().position());
+            postingFileLocations.put(term, fos.getChannel().position());
             List<Posting> postings = index.getPostings(term);
             //gaps start
             stream.writeInt(postings.size());
 
 
             int documentIDGap = 0;
-            for(Posting posting:postings){
+            for (Posting posting : postings) {
 
                 //check if this is the highest doc id encountered
-                if(posting.getDocumentId() > maxDocumentId)
-                    maxDocumentId=posting.getDocumentId();
+                if (posting.getDocumentId() > maxDocumentId)
+                    maxDocumentId = posting.getDocumentId();
 
 
                 //write document id with gaps
-               // stream.writeInt(posting.getDocumentId()-documentIDGap);
+                // stream.writeInt(posting.getDocumentId()-documentIDGap);
                 //we dont write gaps since we will be creating buckets
                 //merging the buckets will take care of gaps
                 stream.writeInt(posting.getDocumentId());
 
                 //check if the term exists in the document id already exists in the document weight hashmap and handle adding to its list
-                if(documentWeights.containsKey(posting.getDocumentId())){
-                    List<Integer> weightList =  documentWeights.get(posting.getDocumentId());
+                if (documentWeights.containsKey(posting.getDocumentId())) {
+                    List<Integer> weightList = documentWeights.get(posting.getDocumentId());
                     weightList.add(posting.getPositions().size());
 
 
-                }
-                else{
+                } else {
                     List<Integer> weightList = new ArrayList<>();
                     weightList.add(posting.getPositions().size());
-                    documentWeights.put(posting.getDocumentId(),weightList);
+                    documentWeights.put(posting.getDocumentId(), weightList);
 
                 }
 
@@ -97,7 +96,7 @@ public class DiskIndexWriter {
 
                 //write term positions
                 int positionGap = 0;
-                for(Integer position:posting.getPositions()){
+                for (Integer position : posting.getPositions()) {
 
                     //stream.writeInt(position-positionGap);
                     //we dont write gaps since we will be creating buckets
@@ -116,23 +115,25 @@ public class DiskIndexWriter {
         return postingFileLocations;
 
     }
-    private HashMap<String,Long> writeVocab(Path path) throws IOException{
-        FileOutputStream fos = new FileOutputStream(path.toAbsolutePath().toString()+"\\vocabs.bin");
+
+    private HashMap<String, Long> writeVocab(Path path) throws IOException {
+        FileOutputStream fos = new FileOutputStream(path.toAbsolutePath().toString() + "\\vocabs.bin");
         DataOutputStream stream = new DataOutputStream(fos);
-       HashMap<String,Long> vocabMap = new HashMap();
-        for(String term:vocabualary){
-            vocabMap.put(term,fos.getChannel().position());
+        HashMap<String, Long> vocabMap = new HashMap();
+        for (String term : vocabualary) {
+            vocabMap.put(term, fos.getChannel().position());
             stream.writeUTF(term);
         }
         stream.close();
         return vocabMap;
 
     }
-    private void writeVocabTable(HashMap<String,Long> postings,HashMap<String,Long> vocab,Path path) throws FileNotFoundException,IOException {
 
-        DataOutputStream stream = new DataOutputStream(new FileOutputStream(path.toAbsolutePath().toString()+"\\vocabTable.bin"));
+    private void writeVocabTable(HashMap<String, Long> postings, HashMap<String, Long> vocab, Path path) throws FileNotFoundException, IOException {
 
-        for(String term:vocabualary){
+        DataOutputStream stream = new DataOutputStream(new FileOutputStream(path.toAbsolutePath().toString() + "\\vocabTable.bin"));
+
+        for (String term : vocabualary) {
             stream.writeLong(vocab.get(term));
             stream.writeLong(postings.get(term));
 
@@ -142,32 +143,30 @@ public class DiskIndexWriter {
     }
 
 
-
-    public void initDBStore(Path path){
+    public void initDBStore(Path path) {
 
         File file = new File(path.toAbsolutePath() + "\\index\\database.db");
-        if (file.exists()){
+        if (file.exists()) {
             file.delete();
         }
 
 
         db = DBMaker.fileDB(path.toAbsolutePath() + "\\index\\database.db").make();
-            map = db.treeMap("map.db").
-                    keySerializer(Serializer.STRING).
-                    valueSerializer(Serializer.LONG).
-                    create();
-
+        map = db.treeMap("map.db").
+                keySerializer(Serializer.STRING).
+                valueSerializer(Serializer.LONG).
+                create();
 
 
     }
 
 
     //we write unstemmed vocabs to disk so we can create K grams next we read the index from disk
-    public void writeUnprocessedVocabs(Path path, Set<String> vocabs) throws IOException{
-        FileOutputStream fos = new FileOutputStream(path.toAbsolutePath().toString()+"\\index\\unstemmedVocabs.bin");
+    public void writeUnprocessedVocabs(Path path, Set<String> vocabs) throws IOException {
+        FileOutputStream fos = new FileOutputStream(path.toAbsolutePath().toString() + "\\index\\unstemmedVocabs.bin");
         DataOutputStream stream = new DataOutputStream(fos);
 
-        for(String term:vocabs){
+        for (String term : vocabs) {
             stream.writeUTF(term);
         }
 
@@ -178,33 +177,34 @@ public class DiskIndexWriter {
 
 
     //we use this method for writing the vocab to BTree
-    public void writeMergedVocab(String term){
+    public void writeMergedVocab(String term) {
 
-        map.put(term,new Long(stream.size()));
+        map.put(term, new Long(stream.size()));
 
     }
 
-    public void closeDBStore(){
-       db.commit();
+    public void closeDBStore() {
+        db.commit();
         db.close();
 
     }
 
 
-    public void initMergedPostingsStream(Path path) throws IOException{
+    public void initMergedPostingsStream(Path path) throws IOException {
 
-        stream = new DataOutputStream(new FileOutputStream(path.toAbsolutePath()+"\\index\\postings.bin"));
+        stream = new DataOutputStream(new FileOutputStream(path.toAbsolutePath() + "\\index\\postings.bin"));
 
 
     }
-    public void writeMergedPostings(List<Integer> documentIDs,HashMap<Integer,List<Integer>> positions) throws IOException{
+
+    public void writeMergedPostings(List<Integer> documentIDs, HashMap<Integer, List<Integer>> positions) throws IOException {
         int documentGap = 0;
         stream.writeInt(documentIDs.size());
-        for(int docID : documentIDs){
-            stream.writeInt(docID-documentGap);
+        for (int docID : documentIDs) {
+            stream.writeInt(docID - documentGap);
             stream.writeInt(positions.get(docID).size());
             int positionsGap = 0;
-            for(int pos:positions.get(docID)) {
+            for (int pos : positions.get(docID)) {
                 stream.writeInt(pos - positionsGap);
                 positionsGap = pos;
             }
@@ -212,9 +212,6 @@ public class DiskIndexWriter {
         }
 
     }
-
-
-
 
 
 }
