@@ -73,14 +73,14 @@ public class RankedRetrieval {
 
         }
 
-        PriorityQueue<Integer> priorityQueue = new PriorityQueue<>(10,
+        PriorityQueue<Integer> priorityQueue = new PriorityQueue<>(50,
                 (w1, w2) -> docAccumulatorMap.get(w1).compareTo(docAccumulatorMap.get(w2)));
 
         for (int docId : docAccumulatorMap.keySet()) {
             // if(docAccumulatorMap.get(docId)>1)
             // System.out.println(corpus.getDocument(docId).getName()+" acc:"+docAccumulatorMap.get(docId));
             priorityQueue.offer(docId);
-            if (priorityQueue.size() > 10) priorityQueue.poll();
+            if (priorityQueue.size() > 50) priorityQueue.poll();
         }
 
         ArrayList<Integer> rankedRetrievalPosting = new ArrayList<>();
@@ -92,7 +92,7 @@ public class RankedRetrieval {
         for (Integer docId : rankedRetrievalPosting) {
             Document document = corpus.getDocument(docId);
             document.getContent();
-            System.out.println("Title \"" + document.getTitle() + "\" File Name: " + corpus.getDocument(docId).getName() + " : " + docAccumulatorMap.get(docId));
+           // System.out.println("Title \"" + document.getTitle() + "\" File Name: " + corpus.getDocument(docId).getName() + " : " + docAccumulatorMap.get(docId));
         }
         return rankedRetrievalPosting;
     }

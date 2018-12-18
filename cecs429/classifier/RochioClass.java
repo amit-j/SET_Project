@@ -58,7 +58,7 @@ public class RochioClass {
                     DocumentVector vector = documentVectors.get(docId);
                     vector.addWdt(wdt, termID);
                 } else {
-                    DocumentVector vector = new DocumentVector(vocabList, docId);
+                    DocumentVector vector = new DocumentVector( docId);
                     vector.addWdt(wdt, termID);
                     documentVectors.put(docId, vector);
 
@@ -89,7 +89,7 @@ public class RochioClass {
 
         }
 
-        centroid = new DocumentVector(vocabList, -1); //centroid wont have any document ID
+        centroid = new DocumentVector( -1); //centroid wont have any document ID
         for (Document document : corpus.getDocuments()) {
 
             centroid.addVector(documentVectors.get(document.getId()), corpus.getCorpusSize(), docuementWeights.get(document.getId()));
@@ -108,7 +108,7 @@ public class RochioClass {
 
     private DocumentVector createVectorForClass(Document document, HashMap<String,Double> docWeights,Double ld) {
 
-        DocumentVector documentVector = new DocumentVector(vocabList, -1);
+        DocumentVector documentVector = new DocumentVector( -1);
       int termID = 0;
         for(String term:vocabList){
             if(docWeights.containsKey(term)){

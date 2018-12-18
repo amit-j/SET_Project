@@ -2,91 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f5e58e88-6926-4c1b-b1e5-19b9f9acfae4" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/cecs429/classifier/BayesianClass.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/cecs429/classifier/ClassifyDocuemnts.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/cecs429/classifier/DocumentVector.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/cecs429/classifier/RochioClass.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/cecs429/classifier/RochioClassifier.java" />
-      <change beforePath="$PROJECT_DIR$/.gitignore.txt" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/.idea.zip" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/cecs429/classifier/BayesianClassifier.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/cecs429/clustering/ClusertMain.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/cecs429/clustering/Cluster.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/cecs429/clustering/ClusterPruningIndex.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/cecs429/clustering/RandomLeaderGenerator.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/edu/csulb/Milestone3.java" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/MobyDickChapters/all-nps-sites.json" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/cecs429/documents/JsonFileDocument.java" afterPath="$PROJECT_DIR$/cecs429/documents/JsonFileDocument.java" />
+      <change beforePath="$PROJECT_DIR$/cecs429/classifier/BayesianClass.java" afterPath="$PROJECT_DIR$/cecs429/classifier/BayesianClass.java" />
+      <change beforePath="$PROJECT_DIR$/cecs429/classifier/ClassifyDocuemnts.java" afterPath="$PROJECT_DIR$/cecs429/classifier/ClassifyDocuemnts.java" />
+      <change beforePath="$PROJECT_DIR$/cecs429/classifier/DocumentVector.java" afterPath="$PROJECT_DIR$/cecs429/classifier/DocumentVector.java" />
+      <change beforePath="$PROJECT_DIR$/cecs429/classifier/RochioClass.java" afterPath="$PROJECT_DIR$/cecs429/classifier/RochioClass.java" />
       <change beforePath="$PROJECT_DIR$/cecs429/index/DiskPositionalIndex.java" afterPath="$PROJECT_DIR$/cecs429/index/DiskPositionalIndex.java" />
-      <change beforePath="$PROJECT_DIR$/cecs429/index/IndexWriter/DiskIndexWriter.java" afterPath="$PROJECT_DIR$/cecs429/index/IndexWriter/DiskIndexWriter.java" />
-      <change beforePath="$PROJECT_DIR$/cecs429/index/IndexWriter/SinglePassInMemoryIndexWriter.java" afterPath="$PROJECT_DIR$/cecs429/index/IndexWriter/SinglePassInMemoryIndexWriter.java" />
-      <change beforePath="$PROJECT_DIR$/cecs429/index/PositionalInvertedIndex.java" afterPath="$PROJECT_DIR$/cecs429/index/PositionalInvertedIndex.java" />
-      <change beforePath="$PROJECT_DIR$/cecs429/index/Posting.java" afterPath="$PROJECT_DIR$/cecs429/index/Posting.java" />
       <change beforePath="$PROJECT_DIR$/cecs429/index/RankedRetrieval.java" afterPath="$PROJECT_DIR$/cecs429/index/RankedRetrieval.java" />
-      <change beforePath="$PROJECT_DIR$/cecs429/index/wildcard/KGramIndex.java" afterPath="$PROJECT_DIR$/cecs429/index/wildcard/KGramIndex.java" />
-      <change beforePath="$PROJECT_DIR$/cecs429/query/BooleanQueryParser.java" afterPath="$PROJECT_DIR$/cecs429/query/BooleanQueryParser.java" />
-      <change beforePath="$PROJECT_DIR$/cecs429/query/RankedRetrievalParser.java" afterPath="$PROJECT_DIR$/cecs429/query/RankedRetrievalParser.java" />
-      <change beforePath="$PROJECT_DIR$/cecs429/query/WildcardLiteral.java" afterPath="$PROJECT_DIR$/cecs429/query/WildcardLiteral.java" />
-      <change beforePath="$PROJECT_DIR$/cecs429/text/BasicTokenProcessor.java" afterPath="$PROJECT_DIR$/cecs429/text/BasicTokenProcessor.java" />
-      <change beforePath="$PROJECT_DIR$/cecs429/text/BetterTokenProcessor.java" afterPath="$PROJECT_DIR$/cecs429/text/BetterTokenProcessor.java" />
       <change beforePath="$PROJECT_DIR$/edu/csulb/MilestoneOne.java" afterPath="$PROJECT_DIR$/edu/csulb/MilestoneOne.java" />
-      <change beforePath="$PROJECT_DIR$/homework1.iml" afterPath="$PROJECT_DIR$/MileStone2.iml" />
-      <change beforePath="$PROJECT_DIR$/homework3/MlbJsonArticle.java" afterPath="$PROJECT_DIR$/homework3/MlbJsonArticle.java" />
-      <change beforePath="$PROJECT_DIR$/out/production/homework1/.gitignore.txt" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/homework1/.idea.zip" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/homework1/.idea/homework1.iml" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/homework1/.idea/libraries/com_google_code_gson_gson_2_6_2.xml" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/homework1/.idea/misc.xml" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/homework1/.idea/modules.xml" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/homework1/.idea/uiDesigner.xml" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/homework1/.idea/vcs.xml" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/homework1/.idea/workspace.xml" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/homework1/MobyDickChapters/all-nps-sites.json" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/homework1/cecs429/documents/DirectoryCorpus$1.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/homework1/cecs429/documents/DirectoryCorpus.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/homework1/cecs429/documents/Document.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/homework1/cecs429/documents/DocumentCorpus.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/homework1/cecs429/documents/FileDocument.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/homework1/cecs429/documents/FileDocumentFactory.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/homework1/cecs429/documents/JsonFileDocument.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/homework1/cecs429/documents/TextFileDocument.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/homework1/cecs429/index/Index.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/homework1/cecs429/index/InvertedIndex.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/homework1/cecs429/index/PositionalInvertedIndex.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/homework1/cecs429/index/Posting.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/homework1/cecs429/index/TermDocumentIndex.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/homework1/cecs429/index/wildcard/KGramIndex.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/homework1/cecs429/index/wildcard/KGramMaker.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/homework1/cecs429/index/wildcard/WildcardPosting.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/homework1/cecs429/query/AndQuery.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/homework1/cecs429/query/BooleanQueryParser$Literal.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/homework1/cecs429/query/BooleanQueryParser$StringBounds.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/homework1/cecs429/query/BooleanQueryParser.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/homework1/cecs429/query/NotQuery.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/homework1/cecs429/query/OrQuery.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/homework1/cecs429/query/PhraseLiteral.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/homework1/cecs429/query/QueryComponent.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/homework1/cecs429/query/TermLiteral.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/homework1/cecs429/query/WildcardLiteral.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/homework1/cecs429/text/BasicTokenProcessor.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/homework1/cecs429/text/BetterTokenProcessor.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/homework1/cecs429/text/EnglishTokenStream$1.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/homework1/cecs429/text/EnglishTokenStream$EnglishTokenIterator.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/homework1/cecs429/text/EnglishTokenStream.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/homework1/cecs429/text/TokenProcessor.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/homework1/cecs429/text/TokenStream.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/homework1/edu/csulb/BetterTermDocumentIndexer.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/homework1/edu/csulb/TermDocumentIndexer$1.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/homework1/edu/csulb/TermDocumentIndexer$2.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/homework1/edu/csulb/TermDocumentIndexer.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/homework1/homework1.iml" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/homework1/homework3/AllDocuments.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/homework1/homework3/GsonParsing.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/homework1/homework3/JsonDocument.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/homework1/lib/gson-2.6.2.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/homework1/testing/SampleTest$Math.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/homework1/testing/SampleTest.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/homework1/testing/Test.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/homework1/testing/TestIndexer.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/testing/SampleTest.java" afterPath="$PROJECT_DIR$/testing/SampleTest.java" />
-      <change beforePath="$PROJECT_DIR$/testing/Test.java" afterPath="$PROJECT_DIR$/testing/Test.java" />
-      <change beforePath="$PROJECT_DIR$/testing/TestIndexer.java" afterPath="$PROJECT_DIR$/testing/TestIndexer.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -135,37 +64,24 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="DocumentVector.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/cecs429/classifier/DocumentVector.java">
+      <file leaf-file-name="MilestoneOne.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/edu/csulb/MilestoneOne.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="517">
-              <caret line="60" column="0" lean-forward="false" selection-start-line="60" selection-start-column="0" selection-end-line="60" selection-end-column="0" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="194">
+              <caret line="345" column="92" lean-forward="true" selection-start-line="345" selection-start-column="8" selection-end-line="345" selection-end-column="92" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RochioClassifier.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/cecs429/classifier/RochioClassifier.java">
+      <file leaf-file-name="Milestone3.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/edu/csulb/Milestone3.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="192">
-              <caret line="29" column="0" lean-forward="false" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
+            <state relative-caret-position="231">
+              <caret line="95" column="48" lean-forward="true" selection-start-line="95" selection-start-column="48" selection-end-line="95" selection-end-column="48" />
               <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ClassifyDocuemnts.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/cecs429/classifier/ClassifyDocuemnts.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="76" column="107" lean-forward="false" selection-start-line="76" selection-start-column="107" selection-end-line="76" selection-end-column="107" />
-              <folding>
-                <element signature="imports" expanded="true" />
+                <element signature="e#477#478#0" expanded="true" />
+                <element signature="e#521#522#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -174,8 +90,24 @@
       <file leaf-file-name="BayesianClass.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/cecs429/classifier/BayesianClass.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="299">
-              <caret line="63" column="0" lean-forward="false" selection-start-line="63" selection-start-column="0" selection-end-line="63" selection-end-column="0" />
+            <state relative-caret-position="442">
+              <caret line="58" column="29" lean-forward="true" selection-start-line="58" selection-start-column="29" selection-end-line="58" selection-end-column="29" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#637#638#0" expanded="true" />
+                <element signature="e#675#676#0" expanded="true" />
+                <element signature="e#747#748#0" expanded="true" />
+                <element signature="e#784#785#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ClassifyDocuemnts.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/cecs429/classifier/ClassifyDocuemnts.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="103">
+              <caret line="39" column="23" lean-forward="true" selection-start-line="39" selection-start-column="23" selection-end-line="39" selection-end-column="23" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -183,16 +115,75 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RochioClass.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/cecs429/classifier/RochioClass.java">
+      <file leaf-file-name="RankedRetrieval.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/cecs429/index/RankedRetrieval.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="192">
-              <caret line="91" column="0" lean-forward="false" selection-start-line="91" selection-start-column="0" selection-end-line="91" selection-end-column="0" />
+            <state relative-caret-position="1419">
+              <caret line="76" column="51" lean-forward="false" selection-start-line="76" selection-start-column="51" selection-end-line="76" selection-end-column="51" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BetterTokenProcessor.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/cecs429/text/BetterTokenProcessor.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="144">
+              <caret line="19" column="49" lean-forward="false" selection-start-line="19" selection-start-column="49" selection-end-line="19" selection-end-column="49" />
+              <folding>
+                <element signature="e#299#300#0" expanded="true" />
+                <element signature="e#348#349#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Cluster.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/cecs429/clustering/Cluster.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-1456">
+              <caret line="157" column="35" lean-forward="true" selection-start-line="157" selection-start-column="35" selection-end-line="157" selection-end-column="35" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#3731#3732#0" expanded="true" />
-                <element signature="e#3763#3764#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ClusterPruningIndex.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/cecs429/clustering/ClusterPruningIndex.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-76">
+              <caret line="31" column="21" lean-forward="false" selection-start-line="31" selection-start-column="21" selection-end-line="31" selection-end-column="21" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#927#928#0" expanded="true" />
+                <element signature="e#954#955#0" expanded="true" />
+                <element signature="e#1011#1012#0" expanded="true" />
+                <element signature="e#1055#1056#0" expanded="true" />
+                <element signature="e#1135#1136#0" expanded="true" />
+                <element signature="e#1162#1163#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DocumentVector.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/cecs429/classifier/DocumentVector.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="50">
+              <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DiskPositionalIndex.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/cecs429/index/DiskPositionalIndex.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="144">
+              <caret line="185" column="14" lean-forward="false" selection-start-line="185" selection-start-column="14" selection-end-line="185" selection-end-column="14" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -208,10 +199,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>wildcardIndexer</find>
-      <find>orq</find>
-      <find>unpr</find>
-      <find>buffered</find>
       <find>todo</find>
       <find>indexwriter.</find>
       <find>write</find>
@@ -220,7 +207,6 @@
       <find>main</find>
       <find>r</find>
       <find>readDocuments</find>
-      <find>read</find>
       <find>initd</find>
       <find>writeDocumentWeights</find>
       <find>new bett</find>
@@ -238,6 +224,11 @@
       <find>getpostings</find>
       <find>getDoucumentWeight</find>
       <find>here</find>
+      <find>12729</find>
+      <find>json</find>
+      <find>read</find>
+      <find>word not</find>
+      <find>long</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -281,21 +272,28 @@
         <option value="$PROJECT_DIR$/cecs429/query/BooleanQueryParser.java" />
         <option value="$PROJECT_DIR$/testing/TestIndexer.java" />
         <option value="$PROJECT_DIR$/.idea/workspace.xml" />
-        <option value="$PROJECT_DIR$/cecs429/index/DiskPositionalIndex.java" />
         <option value="$PROJECT_DIR$/cecs429/index/IndexWriter/SinglePassInMemoryIndexWriter.java" />
-        <option value="$PROJECT_DIR$/edu/csulb/MilestoneOne.java" />
         <option value="$PROJECT_DIR$/cecs429/index/IndexWriter/DiskIndexWriter.java" />
+        <option value="$PROJECT_DIR$/cecs429/classifier/RochioClassifier.java" />
+        <option value="$PROJECT_DIR$/cecs429/classifier/BayesianClassifier.java" />
+        <option value="$PROJECT_DIR$/cecs429/classifier/ClassifyDocuemnts.java" />
+        <option value="$PROJECT_DIR$/cecs429/classifier/BayesianClass.java" />
+        <option value="$PROJECT_DIR$/cecs429/classifier/RochioClass.java" />
+        <option value="$PROJECT_DIR$/cecs429/clustering/ClusterPruning.java" />
+        <option value="$PROJECT_DIR$/cecs429/clustering/RandomLeaderGenerator.java" />
+        <option value="$PROJECT_DIR$/cecs429/clustering/ClusertMain.java" />
+        <option value="$PROJECT_DIR$/cecs429/clustering/Cluster.java" />
+        <option value="$PROJECT_DIR$/edu/csulb/MilestoneOne.java" />
         <option value="$PROJECT_DIR$/cecs429/index/RankedRetrieval.java" />
         <option value="$PROJECT_DIR$/cecs429/classifier/DocumentVector.java" />
-        <option value="$PROJECT_DIR$/cecs429/classifier/RochioClassifier.java" />
-        <option value="$PROJECT_DIR$/cecs429/classifier/RochioClass.java" />
-        <option value="$PROJECT_DIR$/cecs429/classifier/BayesianClass.java" />
-        <option value="$PROJECT_DIR$/cecs429/classifier/ClassifyDocuemnts.java" />
+        <option value="$PROJECT_DIR$/cecs429/clustering/ClusterPruningIndex.java" />
+        <option value="$PROJECT_DIR$/edu/csulb/Milestone3.java" />
+        <option value="$PROJECT_DIR$/cecs429/index/DiskPositionalIndex.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-9" />
+    <option name="x" value="671" />
     <option name="y" value="-9" />
     <option name="width" value="976" />
     <option name="height" value="1038" />
@@ -333,7 +331,7 @@
               <item name="Milestone2" type="b2602c69:ProjectViewProjectNode" />
               <item name="Milestone2" type="462c0819:PsiDirectoryNode" />
               <item name="cecs429" type="462c0819:PsiDirectoryNode" />
-              <item name="classifier" type="462c0819:PsiDirectoryNode" />
+              <item name="clustering" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Milestone2" type="b2602c69:ProjectViewProjectNode" />
@@ -353,13 +351,6 @@
               <item name="cecs429" type="462c0819:PsiDirectoryNode" />
               <item name="index" type="462c0819:PsiDirectoryNode" />
               <item name="IndexWriter" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Milestone2" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Milestone2" type="462c0819:PsiDirectoryNode" />
-              <item name="cecs429" type="462c0819:PsiDirectoryNode" />
-              <item name="index" type="462c0819:PsiDirectoryNode" />
-              <item name="wildcard" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Milestone2" type="b2602c69:ProjectViewProjectNode" />
@@ -407,15 +398,16 @@
     <key name="CreateTestDialog.RecentsKey">
       <recent name="testing" />
     </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\Acer\OneDrive - CSULB - Student\MySync\Documents\SET\homework1\cecs429\index" />
-      <recent name="C:\Users\Acer\OneDrive - CSULB - Student\MySync\Documents\SET\homework1\cecs429\query" />
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Acer\OneDrive - CSULB - Student\MySync\Documents\SET\homework1\testing\testcases" />
     </key>
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="groovy.util.GroovyTestCase" />
     </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\Acer\OneDrive - CSULB - Student\MySync\Documents\SET\homework1\testing\testcases" />
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Acer\OneDrive - CSULB - Student\MySync\Documents\SET\Milestone2\edu\csulb" />
+      <recent name="C:\Users\Acer\OneDrive - CSULB - Student\MySync\Documents\SET\homework1\cecs429\index" />
+      <recent name="C:\Users\Acer\OneDrive - CSULB - Student\MySync\Documents\SET\homework1\cecs429\query" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -430,7 +422,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.Classifier">
+  <component name="RunManager" selected="Application.Milestone2">
     <configuration default="true" type="Applet" factoryName="Applet">
       <option name="HTML_USED" value="false" />
       <option name="WIDTH" value="400" />
@@ -452,9 +444,9 @@
       <envs />
     </configuration>
     <configuration name="Classifier" type="Application" factoryName="Application">
-      <option name="MAIN_CLASS_NAME" value="cecs429.classifier.ClassifyDocuemnts" />
+      <option name="MAIN_CLASS_NAME" value="cecs429.clustering.ClusertMain" />
       <option name="VM_PARAMETERS" value="" />
-      <option name="PROGRAM_PARAMETERS" value="C:\Articles_test\bay\class_c C:\Articles_test\bay\class_c_ C:\Articles_test\bay\disputed" />
+      <option name="PROGRAM_PARAMETERS" value="C:\rel" />
       <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
@@ -622,7 +614,7 @@
       <workItem from="1542340437460" duration="5031000" />
       <workItem from="1542347828865" duration="245000" />
       <workItem from="1542350948089" duration="272000" />
-      <workItem from="1544995977325" duration="36323000" />
+      <workItem from="1544995977325" duration="81576000" />
     </task>
     <servers />
   </component>
@@ -632,7 +624,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="236480000" />
+    <option name="totallyTimeSpent" value="281733000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -652,22 +644,22 @@
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.53021663" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.39338654" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295325" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295325" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14876477" sideWeight="0.48" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14876477" sideWeight="0.4810298" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295325" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23033068" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14876477" sideWeight="0.52" order="3" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4777651" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.14876477" sideWeight="0.5189702" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295325" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295325" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -679,18 +671,18 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.11516534" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23945267" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295325" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295325" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14876477" sideWeight="0.4857685" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.14876477" sideWeight="0.4810298" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295325" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3990878" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.21482277" sideWeight="0.5142315" order="3" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32383123" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.14876477" sideWeight="0.5189702" order="3" side_tool="true" content_ui="tabs" />
     </layout-to-restore>
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -750,12 +742,6 @@
           <option name="timeStamp" value="227" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/cecs429/classifier/DocumentVector.java</url>
-          <line>60</line>
-          <properties />
-          <option name="timeStamp" value="229" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/cecs429/classifier/RochioClass.java</url>
           <line>45</line>
           <properties />
@@ -774,22 +760,34 @@
           <option name="timeStamp" value="242" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/cecs429/classifier/BayesianClass.java</url>
-          <line>28</line>
+          <url>file://$PROJECT_DIR$/cecs429/classifier/ClassifyDocuemnts.java</url>
+          <line>124</line>
           <properties />
-          <option name="timeStamp" value="250" />
+          <option name="timeStamp" value="257" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/cecs429/classifier/BayesianClass.java</url>
-          <line>24</line>
+          <url>file://$PROJECT_DIR$/cecs429/clustering/Cluster.java</url>
+          <line>125</line>
           <properties />
-          <option name="timeStamp" value="253" />
+          <option name="timeStamp" value="298" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/cecs429/classifier/BayesianClass.java</url>
-          <line>63</line>
+          <url>file://$PROJECT_DIR$/cecs429/clustering/Cluster.java</url>
+          <line>136</line>
           <properties />
-          <option name="timeStamp" value="255" />
+          <option name="timeStamp" value="300" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/cecs429/clustering/Cluster.java</url>
+          <line>156</line>
+          <properties />
+          <option name="timeStamp" value="302" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/edu/csulb/MilestoneOne.java</url>
+          <line>216</line>
+          <properties />
+          <option name="timeStamp" value="304" />
         </line-breakpoint>
         <breakpoint type="java-exception">
           <properties class="java.io.IOException" package="java.io" />
@@ -804,14 +802,6 @@
           <option name="timeStamp" value="218" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/cecs429/classifier/DocumentVector.java</url>
-          <line>46</line>
-          <properties class="cecs429.classifier.DocumentVector" method="calculateDistance">
-            <option name="EMULATED" value="true" />
-          </properties>
-          <option name="timeStamp" value="228" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/cecs429/classifier/RochioClassifier.java</url>
           <line>28</line>
           <properties class="cecs429.classifier.RochioClassifier" method="trainClassifier">
@@ -823,54 +813,54 @@
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="256" />
+      <option name="time" value="305" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="evaluateCodeFragment">
       <expression>
-        <expression-string>Math.log(num/denom)</expression-string>
+        <expression-string>logBase2((N*NOneOne)/((NOneZero+NOneOne) * (NZeroOne+NOneOne)))</expression-string>
         <language-id>JAVA</language-id>
         <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>(1 + freq) / (totalClassTerms + totalVocabCount)</expression-string>
+        <expression-string>(N*NZeroOne)/((NZeroOne+NZeroZero)*(NOneOne+NZeroOne))</expression-string>
         <language-id>JAVA</language-id>
         <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>(1 + freq)</expression-string>
+        <expression-string>((NZeroOne+NZeroZero)*(NOneZero+NZeroZero)</expression-string>
         <language-id>JAVA</language-id>
         <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>(totalClassTerms + totalVocabCount)</expression-string>
+        <expression-string>(N*NOneZero)</expression-string>
         <language-id>JAVA</language-id>
         <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>( docVector.get(termID) - (v2.getVector().containsKey(termID)?v2.getVector().get(termID):0))</expression-string>
+        <expression-string>(N*NOneZero)/((NZeroOne+NZeroZero)*(NOneZero+NZeroZero))</expression-string>
         <language-id>JAVA</language-id>
         <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>( docVector.get(termID) - (v2.getVector().containsKey(termID)?v2.getVector().get(termID):0)) * (docVector.get(termID) - (v2.getVector().containsKey(termID)?v2.getVector().get(termID):0))</expression-string>
+        <expression-string>logBase2((N*NOneZero)/((NZeroOne+NZeroZero)*(NOneZero+NZeroZero)))</expression-string>
         <language-id>JAVA</language-id>
         <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>(v2.getVector().containsKey(termID)?v2.getVector().get(termID):0)</expression-string>
+        <expression-string>(NOneZero/N)</expression-string>
         <language-id>JAVA</language-id>
         <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>docVector.get(termID)</expression-string>
+        <expression-string>(NOneZero+NOneOne) * (NZeroOne+NOneOne)</expression-string>
         <language-id>JAVA</language-id>
         <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>docVector.get(termID) - (v2.getVector().containsKey(termID)?v2.getVector().get(termID):0)</expression-string>
+        <expression-string>(N*NOneOne)/(NOneZero+NOneOne) * (NZeroOne+NOneOne)</expression-string>
         <language-id>JAVA</language-id>
         <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
       </expression>
@@ -932,55 +922,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_144/jre/lib/rt.jar!/sun/nio/fs/WindowsException.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="222">
-          <caret line="25" column="131" lean-forward="false" selection-start-line="25" selection-start-column="131" selection-end-line="25" selection-end-column="131" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_144/jre/lib/rt.jar!/sun/nio/fs/WindowsFileAttributes.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="346">
-          <caret line="104" column="0" lean-forward="false" selection-start-line="104" selection-start-column="0" selection-end-line="104" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_144/jre/lib/rt.jar!/sun/nio/fs/WindowsNativeDispatcher.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="145">
-          <caret line="209" column="0" lean-forward="false" selection-start-line="209" selection-start-column="0" selection-end-line="209" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_144/src.zip!/java/lang/CharacterData.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="77" column="0" lean-forward="false" selection-start-line="77" selection-start-column="0" selection-end-line="77" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_144/src.zip!/java/nio/Buffer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="200" column="19" lean-forward="true" selection-start-line="200" selection-start-column="19" selection-end-line="200" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_144/src.zip!/java/io/FileOutputStream.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6375">
-          <caret line="279" column="24" lean-forward="false" selection-start-line="279" selection-start-column="24" selection-end-line="279" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_144/src.zip!/java/io/RandomAccessFile.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="7875">
-          <caret line="339" column="23" lean-forward="false" selection-start-line="339" selection-start-column="23" selection-end-line="339" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_144/src.zip!/java/io/DataInputStream.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="7850">
@@ -1174,14 +1115,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/cecs429/index/DiskPositionalIndex.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="25">
-          <caret line="33" column="0" lean-forward="false" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/cecs429/query/RankedRetrievalParser.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
@@ -1227,40 +1160,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/edu/csulb/MilestoneOne.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="25">
-          <caret line="86" column="124" lean-forward="false" selection-start-line="86" selection-start-column="124" selection-end-line="86" selection-end-column="124" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/cecs429/index/IndexWriter/DiskIndexWriter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="296">
-          <caret line="81" column="0" lean-forward="true" selection-start-line="81" selection-start-column="0" selection-end-line="81" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/cecs429/index/RankedRetrieval.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="399">
-          <caret line="50" column="0" lean-forward="false" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/cecs429/text/BetterTokenProcessor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="206">
-          <caret line="14" column="0" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
-          <folding>
-            <element signature="e#299#300#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/cecs429/documents/DirectoryCorpus.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="331">
@@ -1274,37 +1173,71 @@
         <state relative-caret-position="132">
           <caret line="34" column="0" lean-forward="false" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
           <folding>
-            <element signature="e#927#928#0" expanded="true" />
+            <element signature="e#927#928#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/cecs429/classifier/DocumentVector.java">
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_144/src.zip!/java/util/Comparator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="517">
-          <caret line="60" column="0" lean-forward="false" selection-start-line="60" selection-start-column="0" selection-end-line="60" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/cecs429/classifier/RochioClass.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="192">
-          <caret line="91" column="0" lean-forward="false" selection-start-line="91" selection-start-column="0" selection-end-line="91" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#3731#3732#0" expanded="true" />
-            <element signature="e#3763#3764#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="213">
+          <caret line="149" column="8" lean-forward="false" selection-start-line="149" selection-start-column="8" selection-end-line="149" selection-end-column="8" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/cecs429/classifier/RochioClassifier.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="192">
-          <caret line="29" column="0" lean-forward="false" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
+        <state relative-caret-position="165">
+          <caret line="91" column="0" lean-forward="false" selection-start-line="91" selection-start-column="0" selection-end-line="91" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cecs429/classifier/BayesianClassifier.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="9" column="0" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cecs429/classifier/RochioClass.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="476">
+          <caret line="63" column="0" lean-forward="true" selection-start-line="63" selection-start-column="0" selection-end-line="63" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#3701#3702#0" expanded="true" />
+            <element signature="e#3733#3734#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cecs429/clustering/RandomLeaderGenerator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="319">
+          <caret line="15" column="49" lean-forward="false" selection-start-line="15" selection-start-column="49" selection-end-line="15" selection-end-column="49" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cecs429/index/IndexWriter/DiskIndexWriter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="175">
+          <caret line="49" column="73" lean-forward="false" selection-start-line="49" selection-start-column="73" selection-end-line="49" selection-end-column="73" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cecs429/clustering/ClusertMain.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="51" column="95" lean-forward="true" selection-start-line="51" selection-start-column="7" selection-end-line="51" selection-end-column="95" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1313,21 +1246,105 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/cecs429/classifier/BayesianClass.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="299">
-          <caret line="63" column="0" lean-forward="false" selection-start-line="63" selection-start-column="0" selection-end-line="63" selection-end-column="0" />
+        <state relative-caret-position="442">
+          <caret line="58" column="29" lean-forward="true" selection-start-line="58" selection-start-column="29" selection-end-line="58" selection-end-column="29" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#637#638#0" expanded="true" />
+            <element signature="e#675#676#0" expanded="true" />
+            <element signature="e#747#748#0" expanded="true" />
+            <element signature="e#784#785#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cecs429/classifier/DocumentVector.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="50">
+          <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cecs429/clustering/Cluster.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1456">
+          <caret line="157" column="35" lean-forward="true" selection-start-line="157" selection-start-column="35" selection-end-line="157" selection-end-column="35" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/cecs429/clustering/ClusterPruningIndex.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-76">
+          <caret line="31" column="21" lean-forward="false" selection-start-line="31" selection-start-column="21" selection-end-line="31" selection-end-column="21" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#927#928#0" expanded="true" />
+            <element signature="e#954#955#0" expanded="true" />
+            <element signature="e#1011#1012#0" expanded="true" />
+            <element signature="e#1055#1056#0" expanded="true" />
+            <element signature="e#1135#1136#0" expanded="true" />
+            <element signature="e#1162#1163#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/edu/csulb/MilestoneOne.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="194">
+          <caret line="345" column="92" lean-forward="true" selection-start-line="345" selection-start-column="8" selection-end-line="345" selection-end-column="92" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cecs429/index/RankedRetrieval.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1419">
+          <caret line="76" column="51" lean-forward="false" selection-start-line="76" selection-start-column="51" selection-end-line="76" selection-end-column="51" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cecs429/text/BetterTokenProcessor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="19" column="49" lean-forward="false" selection-start-line="19" selection-start-column="49" selection-end-line="19" selection-end-column="49" />
+          <folding>
+            <element signature="e#299#300#0" expanded="true" />
+            <element signature="e#348#349#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/cecs429/classifier/ClassifyDocuemnts.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="76" column="107" lean-forward="false" selection-start-line="76" selection-start-column="107" selection-end-line="76" selection-end-column="107" />
+        <state relative-caret-position="103">
+          <caret line="39" column="23" lean-forward="true" selection-start-line="39" selection-start-column="23" selection-end-line="39" selection-end-column="23" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/edu/csulb/Milestone3.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="231">
+          <caret line="95" column="48" lean-forward="true" selection-start-line="95" selection-start-column="48" selection-end-line="95" selection-end-column="48" />
+          <folding>
+            <element signature="e#477#478#0" expanded="true" />
+            <element signature="e#521#522#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cecs429/index/DiskPositionalIndex.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="185" column="14" lean-forward="false" selection-start-line="185" selection-start-column="14" selection-end-line="185" selection-end-column="14" />
+          <folding />
         </state>
       </provider>
     </entry>

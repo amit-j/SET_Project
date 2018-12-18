@@ -1,5 +1,6 @@
 package edu.csulb;
 
+import cecs429.clustering.ClusterPruningIndex;
 import cecs429.documents.DirectoryCorpus;
 import cecs429.documents.Document;
 import cecs429.documents.DocumentCorpus;
@@ -51,7 +52,7 @@ public class MilestoneOne {
             case "1":
                 System.out.print("Enter the corpus path : ");
                 String corpusPath = reader.readLine();
-                corpus = DirectoryCorpus.loadTextDirectory(Paths.get(corpusPath).toAbsolutePath(), ".txt");
+                corpus = DirectoryCorpus.loadJsonDirectory(Paths.get(corpusPath).toAbsolutePath(), ".json");
                 corpus.getDocuments();
                 TokenProcessor processor = new BetterTokenProcessor();
                 index = indexCorpus(corpus, processor);
@@ -84,7 +85,7 @@ public class MilestoneOne {
                                 file = new File(corpusPath);
                                 if (file.isDirectory() && corpus == null) {
 
-                                    corpus = DirectoryCorpus.loadTextDirectory(Paths.get(corpusPath).toAbsolutePath(), ".txt");
+                                    corpus = DirectoryCorpus.loadJsonDirectory(Paths.get(corpusPath).toAbsolutePath(), ".json");
                                     SinglePassInMemoryIndexWriter indexWriter = new SinglePassInMemoryIndexWriter();
                                     tokenProcessor = new BetterTokenProcessor();
                                     indexWriter.indexCorpus(corpus, tokenProcessor, Paths.get(corpusPath).toAbsolutePath());
@@ -157,7 +158,67 @@ public class MilestoneOne {
 
                 break;
             case "3":
-                System.exit(0);
+
+                System.out.println("1.Build Cluster Index.");
+                System.out.println("2.Compare Query Cluster Index");
+                queryMode = reader.readLine();
+
+                switch (queryMode) {
+                    case "1":
+
+                        System.out.println("Enter the corpus path: ");
+
+                        String path = reader.readLine();
+                        boolean success = false;
+                        while (!success) {
+
+                            try {
+                                corpus = DirectoryCorpus.loadJsonDirectory(Paths.get(path).toAbsolutePath(), ".json");
+                                corpus.getDocuments();
+                                index = new DiskPositionalIndex(Paths.get(Paths.get(path).toAbsolutePath() + "\\index"));
+                                success = true;
+                            } catch (Exception e) {
+                                System.out.println("Error reading the index !");
+                                System.out.println("Please enter a valid path to continue reading index :");
+                                path = reader.readLine();
+
+                            }
+                        }
+                        ClusterPruningIndex clusterPruningIndex = new ClusterPruningIndex();
+                        clusterPruningIndex.buildIndex(corpus, index);
+                        clusterPruningIndex.writeToDisk(Paths.get(path).toAbsolutePath());
+                        break;
+
+                    case "2":
+                        System.out.println("Enter the corpus path: ");
+                        corpusPath = reader.readLine();
+
+                        success = false;
+                        while (!success) {
+
+                            try {
+
+                                corpus = DirectoryCorpus.loadJsonDirectory(Paths.get(corpusPath).toAbsolutePath(), ".json");
+                                success = true;
+                                index = new DiskPositionalIndex(Paths.get(Paths.get(corpusPath).toAbsolutePath() + "\\index"));
+
+                            } catch (Exception e) {
+                                System.out.println("Error reading the index !");
+                                System.out.println("Please enter a valid path to continue reading index :");
+                                corpusPath = reader.readLine();
+
+                            }
+                        }
+
+                        clusterPruningIndex = new ClusterPruningIndex();
+                        clusterPruningIndex.readFromDisk(Paths.get(corpusPath).toAbsolutePath(), index);
+
+                        Milestone3 milestone3 = new Milestone3(corpusPath);
+                        milestone3.compareMAP(corpus, index, new BetterTokenProcessor(), clusterPruningIndex);
+                        break;
+
+                }
+
                 break;
         }
 

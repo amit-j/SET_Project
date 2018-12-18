@@ -183,7 +183,7 @@ public class DiskPositionalIndex implements Index {
                 e.printStackTrace();
             }
         } else {
-            System.out.println("word not found:" + term);
+            //System.out.println("word not found:" + term);
         }
         return postings;
     }

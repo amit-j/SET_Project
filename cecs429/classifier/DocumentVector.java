@@ -6,19 +6,22 @@ import java.util.HashMap;
 import java.util.List;
 
 public class DocumentVector {
-        //TODO: remove vocab and docid
+
 
     private HashMap<Integer,Double> docVector;
     private List<String> classVocab ;
     private int documentID;
 
-    public DocumentVector (List<String> _classVocab,int documentID){
-        this.classVocab = _classVocab;
+    public DocumentVector (int documentID){
+        //this.classVocab = _classVocab;
         docVector  = new HashMap<>();
         this.documentID = documentID;
     }
 
     public void addWdt(double wdt,int termID){
+        if(termID == -1)
+            return;
+
         if(docVector.containsKey(termID)){
             double w = docVector.get(termID);
             w+=wdt;
@@ -44,6 +47,34 @@ public class DocumentVector {
 
 
 
+    public void normalize(Double d){
+        for(Integer termID:docVector.keySet()){
+
+            double vec1 = docVector.get(termID);
+            docVector.put(termID,vec1/d);
+        }
+    }
+
+
+    public Double findSimilarity(DocumentVector v){
+
+
+        double dot = 0;
+        for(Integer termID:docVector.keySet()){
+
+            double vi = docVector.get(termID);
+            double vj = v.getVector().containsKey(termID)?v.getVector().get(termID):0;
+
+           dot += vi*vj;
+
+
+        }
+
+        return dot/calculateDistance(v);
+    }
+
+
+
     public Double calculateDistance(DocumentVector v2){
 
         double distance = 0;
@@ -60,5 +91,7 @@ public class DocumentVector {
         }
         return Math.sqrt(distance);
     }
+
+    public int getDocumentID(){return documentID;}
 
 }
