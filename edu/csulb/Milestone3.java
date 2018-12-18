@@ -101,7 +101,7 @@ public class Milestone3 {
         long end = System.currentTimeMillis();
         double throughput = queryRelevance.keySet().size() / ((double) (end - start) / 1000);
         System.out.println(" " + throughput + " seconds");
-
+        System.out.println("Mean response time "+ (1/throughput)*1000+"ms");
 
         System.out.println("Through put for cluster index");
         start = System.currentTimeMillis();
@@ -112,7 +112,7 @@ public class Milestone3 {
         end = System.currentTimeMillis();
         throughput = queryRelevance.keySet().size() / ((double) (end - start) / 1000);
         System.out.println(" " + throughput + " q/secs");
-
+        System.out.println("Mean response time "+ (1/throughput)*1000+"ms");
 
 
 

@@ -2,20 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f5e58e88-6926-4c1b-b1e5-19b9f9acfae4" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/cecs429/classifier/BayesianClassifier.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/cecs429/clustering/ClusertMain.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/cecs429/clustering/Cluster.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/cecs429/clustering/ClusterPruningIndex.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/cecs429/clustering/RandomLeaderGenerator.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/edu/csulb/Milestone3.java" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/cecs429/classifier/BayesianClass.java" afterPath="$PROJECT_DIR$/cecs429/classifier/BayesianClass.java" />
-      <change beforePath="$PROJECT_DIR$/cecs429/classifier/ClassifyDocuemnts.java" afterPath="$PROJECT_DIR$/cecs429/classifier/ClassifyDocuemnts.java" />
-      <change beforePath="$PROJECT_DIR$/cecs429/classifier/DocumentVector.java" afterPath="$PROJECT_DIR$/cecs429/classifier/DocumentVector.java" />
-      <change beforePath="$PROJECT_DIR$/cecs429/classifier/RochioClass.java" afterPath="$PROJECT_DIR$/cecs429/classifier/RochioClass.java" />
-      <change beforePath="$PROJECT_DIR$/cecs429/index/DiskPositionalIndex.java" afterPath="$PROJECT_DIR$/cecs429/index/DiskPositionalIndex.java" />
-      <change beforePath="$PROJECT_DIR$/cecs429/index/RankedRetrieval.java" afterPath="$PROJECT_DIR$/cecs429/index/RankedRetrieval.java" />
-      <change beforePath="$PROJECT_DIR$/edu/csulb/MilestoneOne.java" afterPath="$PROJECT_DIR$/edu/csulb/MilestoneOne.java" />
+      <change beforePath="$PROJECT_DIR$/edu/csulb/Milestone3.java" afterPath="$PROJECT_DIR$/edu/csulb/Milestone3.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -74,11 +62,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Milestone3.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Milestone3.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/edu/csulb/Milestone3.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="231">
-              <caret line="95" column="48" lean-forward="true" selection-start-line="95" selection-start-column="48" selection-end-line="95" selection-end-column="48" />
+            <state relative-caret-position="106">
+              <caret line="123" column="0" lean-forward="true" selection-start-line="123" selection-start-column="0" selection-end-line="123" selection-end-column="0" />
               <folding>
                 <element signature="e#477#478#0" expanded="true" />
                 <element signature="e#521#522#0" expanded="true" />
@@ -178,11 +166,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DiskPositionalIndex.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="DiskPositionalIndex.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/cecs429/index/DiskPositionalIndex.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="144">
-              <caret line="185" column="14" lean-forward="false" selection-start-line="185" selection-start-column="14" selection-end-line="185" selection-end-column="14" />
+            <state relative-caret-position="365">
+              <caret line="190" column="13" lean-forward="true" selection-start-line="190" selection-start-column="13" selection-end-line="190" selection-end-column="13" />
               <folding />
             </state>
           </provider>
@@ -199,7 +187,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>todo</find>
       <find>indexwriter.</find>
       <find>write</find>
       <find>reader</find>
@@ -229,6 +216,7 @@
       <find>read</find>
       <find>word not</find>
       <find>long</find>
+      <find>word n</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -287,8 +275,8 @@
         <option value="$PROJECT_DIR$/cecs429/index/RankedRetrieval.java" />
         <option value="$PROJECT_DIR$/cecs429/classifier/DocumentVector.java" />
         <option value="$PROJECT_DIR$/cecs429/clustering/ClusterPruningIndex.java" />
-        <option value="$PROJECT_DIR$/edu/csulb/Milestone3.java" />
         <option value="$PROJECT_DIR$/cecs429/index/DiskPositionalIndex.java" />
+        <option value="$PROJECT_DIR$/edu/csulb/Milestone3.java" />
       </list>
     </option>
   </component>
@@ -614,7 +602,7 @@
       <workItem from="1542340437460" duration="5031000" />
       <workItem from="1542347828865" duration="245000" />
       <workItem from="1542350948089" duration="272000" />
-      <workItem from="1544995977325" duration="81576000" />
+      <workItem from="1544995977325" duration="82665000" />
     </task>
     <servers />
   </component>
@@ -624,7 +612,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="281733000" />
+    <option name="totallyTimeSpent" value="282822000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1308,6 +1296,14 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/cecs429/index/DiskPositionalIndex.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="365">
+          <caret line="190" column="13" lean-forward="true" selection-start-line="190" selection-start-column="13" selection-end-line="190" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/cecs429/text/BetterTokenProcessor.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="144">
@@ -1331,20 +1327,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/edu/csulb/Milestone3.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="231">
-          <caret line="95" column="48" lean-forward="true" selection-start-line="95" selection-start-column="48" selection-end-line="95" selection-end-column="48" />
+        <state relative-caret-position="106">
+          <caret line="123" column="0" lean-forward="true" selection-start-line="123" selection-start-column="0" selection-end-line="123" selection-end-column="0" />
           <folding>
             <element signature="e#477#478#0" expanded="true" />
             <element signature="e#521#522#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/cecs429/index/DiskPositionalIndex.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
-          <caret line="185" column="14" lean-forward="false" selection-start-line="185" selection-start-column="14" selection-end-line="185" selection-end-column="14" />
-          <folding />
         </state>
       </provider>
     </entry>
