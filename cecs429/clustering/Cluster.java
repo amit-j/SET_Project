@@ -1,6 +1,5 @@
 package cecs429.clustering;
 
-import cecs429.classifier.DocumentVector;
 import cecs429.documents.DocumentCorpus;
 import cecs429.index.Index;
 import cecs429.index.Posting;
@@ -12,19 +11,18 @@ import java.util.stream.IntStream;
 
 public class Cluster {
 
-
+    private static final int B = 2; //each follower can have B amount of leaders!
+    HashMap<Integer, List<Integer>> cluster;
     private List<String> vocab;
-
     private HashMap<String, Integer> vectorSpace;
     private HashMap<Integer, DocumentVector> leaderVectors;
     private HashMap<Integer, DocumentVector> followers;
     private HashMap<Integer, Double> docuementWeights;
-    HashMap<Integer, List<Integer>> cluster;
 
 
-    public Cluster(){
+    public Cluster() {
 
-        vectorSpace =new HashMap<>();
+        vectorSpace = new HashMap<>();
         followers = new HashMap<>();
         leaderVectors = new HashMap<>();
         docuementWeights = new HashMap<>();
@@ -116,7 +114,6 @@ public class Cluster {
             }
 
         }
-
 
         cluster = clusterFollowersToLeaders();
     }
@@ -226,28 +223,35 @@ public class Cluster {
     private HashMap<Integer, List<Integer>> clusterFollowersToLeaders() {
         HashMap<Integer, List<Integer>> leaderFollowerMatrix = new HashMap<>();
         for (DocumentVector follower : followers.values()) {
-            double minDist = Double.MAX_VALUE;
+
+            PriorityQueue<QueryResult> pQ = new PriorityQueue<>(B, (d1, d2) -> Double.compare(d1.dist, d2.dist));
             int leaderID = -1;
             for (DocumentVector leader : leaderVectors.values()) {
 
                 double sim = leader.findSimilarity(follower);
-                if (sim < minDist) {
-                    leaderID = leader.getDocumentID();
-                    minDist = sim;
+                pQ.offer(new QueryResult(leader.getDocumentID(), sim));
+                if (pQ.size() > B)
+                    pQ.poll();
+
+
+            }
+
+            for (QueryResult q : pQ) {
+                leaderID = q.documentID;
+                //  System.out.println("followers added to "+leaderID +" with sim :"+q.dist);
+
+                if (leaderFollowerMatrix.containsKey(leaderID)) {
+
+                    List<Integer> followers = leaderFollowerMatrix.get(leaderID);
+                    followers.add(follower.getDocumentID());
+                    leaderFollowerMatrix.put(leaderID, followers);
+                } else {
+                    ArrayList<Integer> followers = new ArrayList<>();
+                    followers.add(follower.getDocumentID());
+                    leaderFollowerMatrix.put(leaderID, followers);
                 }
 
             }
-
-            if (leaderFollowerMatrix.containsKey(leaderID)) {
-                List<Integer> followers = leaderFollowerMatrix.get(leaderID);
-                followers.add(follower.getDocumentID());
-                leaderFollowerMatrix.put(leaderID, followers);
-            } else {
-                ArrayList<Integer> followers = new ArrayList<>();
-                followers.add(follower.getDocumentID());
-                leaderFollowerMatrix.put(leaderID, followers);
-            }
-
         }
         return leaderFollowerMatrix;
     }
@@ -257,7 +261,7 @@ public class Cluster {
 
 
         DocumentVector queryVector = createQueryVector(terms);
-        double minDist = Double.MAX_VALUE;
+        double maxDist = Double.MIN_VALUE;
         int leaderID = -1;
         for (Integer docID : leaderVectors.keySet()) {
             DocumentVector leader = leaderVectors.get(docID);
@@ -266,10 +270,11 @@ public class Cluster {
             if (!cluster.containsKey(leader.getDocumentID()))
                 continue;
 
-            double dist = leader.calculateDistance(queryVector);
-            if (dist < minDist) {
-                minDist = dist;
+            double dist = leader.findSimilarity(queryVector);
+            if (dist > maxDist) {
+                maxDist = dist;
                 leaderID = leader.getDocumentID();
+                // System.out.println("dist:"+dist);
             }
 
         }
@@ -279,7 +284,7 @@ public class Cluster {
         for (Integer followerID : cluster.get(leaderID)) {
 
             DocumentVector follower = followers.get(followerID);
-            double dist = follower.calculateDistance(queryVector);
+            double dist = follower.findSimilarity(queryVector);
 
 
             results.offer(new QueryResult(followerID, dist));
@@ -311,7 +316,7 @@ public class Cluster {
 
             int freq = termFreqmap.get(term);
             double wdt = 1 + Math.log(freq);
-            vector.addWdt(wdt, vectorSpace.containsKey(term)?vectorSpace.get(term):-1);
+            vector.addWdt(wdt, vectorSpace.containsKey(term) ? vectorSpace.get(term) : -1);
         }
         return vector;
     }

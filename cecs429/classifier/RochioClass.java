@@ -1,16 +1,12 @@
 package cecs429.classifier;
 
+import cecs429.clustering.DocumentVector;
 import cecs429.documents.Document;
 import cecs429.documents.DocumentCorpus;
-import cecs429.index.Index;
 import cecs429.index.PositionalInvertedIndex;
 import cecs429.index.Posting;
-import cecs429.text.EnglishTokenStream;
 import cecs429.text.TokenProcessor;
-import com.sun.webkit.dom.DocumentImpl;
-import sun.util.resources.cldr.om.CalendarData_om_ET;
 
-import javax.print.Doc;
 import java.util.HashMap;
 import java.util.List;
 
@@ -25,7 +21,7 @@ public class RochioClass {
     private String className;
     private DocumentVector centroid;
 
-    public RochioClass(DocumentCorpus _corpus, TokenProcessor processor,String _className, PositionalInvertedIndex _index) {
+    public RochioClass(DocumentCorpus _corpus, TokenProcessor processor, String _className, PositionalInvertedIndex _index) {
 
         this.corpus = _corpus;
         index = _index;
@@ -35,15 +31,16 @@ public class RochioClass {
         className = _className;
 
 
-
-
         this.vocabList = index.getVocabulary();
 
 
     }
 
 
-    public DocumentVector getCentroid(){return  centroid;}
+    public DocumentVector getCentroid() {
+        return centroid;
+    }
+
     public void calculateCentroid() {
 
         int termID = 0;
@@ -58,7 +55,7 @@ public class RochioClass {
                     DocumentVector vector = documentVectors.get(docId);
                     vector.addWdt(wdt, termID);
                 } else {
-                    DocumentVector vector = new DocumentVector( docId);
+                    DocumentVector vector = new DocumentVector(docId);
                     vector.addWdt(wdt, termID);
                     documentVectors.put(docId, vector);
 
@@ -67,7 +64,7 @@ public class RochioClass {
                 if (docuementWeights.containsKey(docId)) {
                     Double weight = docuementWeights.get(docId);
                     weight += wdt * wdt;
-                    docuementWeights.put(docId,weight);
+                    docuementWeights.put(docId, weight);
                 } else {
 
                     Double weight = new Double(0);
@@ -89,7 +86,7 @@ public class RochioClass {
 
         }
 
-        centroid = new DocumentVector( -1); //centroid wont have any document ID
+        centroid = new DocumentVector(-1); //centroid wont have any document ID
         for (Document document : corpus.getDocuments()) {
 
             centroid.addVector(documentVectors.get(document.getId()), corpus.getCorpusSize(), docuementWeights.get(document.getId()));
@@ -97,22 +94,20 @@ public class RochioClass {
         }
 
 
-
-
     }
 
-    public Double calculateClassDistance(Document doc, HashMap<String,Double> docWeights,Double ld) {
+    public Double calculateClassDistance(Document doc, HashMap<String, Double> docWeights, Double ld) {
 
-        return getCentroid().calculateDistance(createVectorForClass(doc, docWeights,ld));
+        return getCentroid().calculateDistance(createVectorForClass(doc, docWeights, ld));
     }
 
-    private DocumentVector createVectorForClass(Document document, HashMap<String,Double> docWeights,Double ld) {
+    private DocumentVector createVectorForClass(Document document, HashMap<String, Double> docWeights, Double ld) {
 
-        DocumentVector documentVector = new DocumentVector( -1);
-      int termID = 0;
-        for(String term:vocabList){
-            if(docWeights.containsKey(term)){
-                documentVector.addWdt(docWeights.get(term)/ld,termID);
+        DocumentVector documentVector = new DocumentVector(-1);
+        int termID = 0;
+        for (String term : vocabList) {
+            if (docWeights.containsKey(term)) {
+                documentVector.addWdt(docWeights.get(term) / ld, termID);
             }
 
             termID++;

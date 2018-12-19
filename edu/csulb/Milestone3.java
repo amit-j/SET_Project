@@ -13,7 +13,7 @@ import java.nio.file.Paths;
 import java.util.*;
 
 public class Milestone3 {
-
+    //this map is of query and list of relevant documents for that query
     Map<String, Set<Integer>> queries;
     String corpusPath;
 
@@ -21,6 +21,7 @@ public class Milestone3 {
         this.corpusPath = corpusPath;
     }
 
+    //read file of queries and its list of relevant documents
     Map<String, Set<Integer>> readQueryDocs() {
 
         BufferedReader queryReader;
@@ -54,42 +55,43 @@ public class Milestone3 {
         return queries;
     }
 
-
+    //function to calculate MAP for Default Ranked Retrieval and Cluster Pruning
     public void compareMAP(DocumentCorpus corpus, Index index, TokenProcessor processor, ClusterPruningIndex clusterIndex) {
         RankedRetrieval rankedRetrieval = new RankedRetrieval(Paths.get(corpusPath + "\\index").toAbsolutePath());
 
-
+        corpus.getDocuments();
         Map<String, Set<Integer>> queryRelevance = readQueryDocs();
         double totalPrecision = 0;
 
         double meanAveragePrecision = 0;
 
-//        for (String query : queryRelevance.keySet()) {
-//
-//            List<Integer> retrievedDocs = rankedRetrieval.doRankedRetrieval(query, corpus, index, processor);
-//            meanAveragePrecision += calculateMAP(retrievedDocs, queryRelevance, query, corpus);
-//
-//
-//        }
-//
-//
-//        System.out.println("********************Mean Average Precision " + meanAveragePrecision / (queryRelevance.size()));
-//
-//        System.out.println("");
-//        System.out.println("----------------------Ranked retrival using clusers-------------------------------");
-//
-//        meanAveragePrecision = 0;
-//        for (String query : queryRelevance.keySet()) {
-//
-//
-//            List<Integer> retrievedDocs = clusterIndex.getPostings(processor.processToken(query));
-//            meanAveragePrecision += calculateMAP(retrievedDocs, queryRelevance, query, corpus);
-//
-//
-//        }
-//
-//
-//        System.out.println("********************Mean Average Precision " + meanAveragePrecision / (queryRelevance.size()));
+        for (String query : queryRelevance.keySet()) {
+
+            //   List<Integer> retrievedDocs = rankedRetrieval.doRankedRetrieval(query, corpus, index, processor);
+            //  meanAveragePrecision += calculateMAP(retrievedDocs, queryRelevance, query, corpus);
+
+
+        }
+
+
+        System.out.println("********************Mean Average Precision " + meanAveragePrecision / (queryRelevance.size()));
+
+        System.out.println("");
+        System.out.println("----------------------Ranked retrival using clusers-------------------------------");
+
+        meanAveragePrecision = 0;
+        for (String query : queryRelevance.keySet()) {
+
+
+            List<Integer> retrievedDocs = clusterIndex.getPostings(query.split("\\s+"));
+
+            meanAveragePrecision += calculateMAP(retrievedDocs, queryRelevance, query, corpus);
+
+
+        }
+
+
+        System.out.println("********************Mean Average Precision " + meanAveragePrecision / (queryRelevance.size()));
 
 
         System.out.println("Through put for Ranked Retrival index");
@@ -101,7 +103,7 @@ public class Milestone3 {
         long end = System.currentTimeMillis();
         double throughput = queryRelevance.keySet().size() / ((double) (end - start) / 1000);
         System.out.println(" " + throughput + " seconds");
-        System.out.println("Mean response time "+ (1/throughput)*1000+"ms");
+        System.out.println("Mean response time " + (1 / throughput) * 1000 + "ms");
 
         System.out.println("Through put for cluster index");
         start = System.currentTimeMillis();
@@ -112,12 +114,12 @@ public class Milestone3 {
         end = System.currentTimeMillis();
         throughput = queryRelevance.keySet().size() / ((double) (end - start) / 1000);
         System.out.println(" " + throughput + " q/secs");
-        System.out.println("Mean response time "+ (1/throughput)*1000+"ms");
-
+        System.out.println("Mean response time " + (1 / throughput) * 1000 + "ms");
 
 
     }
 
+    //calculate mean average precision using retrieved documents list and available relevant documents list
 
     public double calculateMAP(List<Integer> retrievedDocs, Map<String, Set<Integer>> queryRelevance, String query, DocumentCorpus corpus) {
 
@@ -132,11 +134,16 @@ public class Milestone3 {
 
         for (int doc : retrievedDocs) {
             precisionAt++;
-            if (relevantDocs.contains(Integer.parseInt(corpus.getDocument(doc).getName().replace(".json", "")))) {
-                numberOfRelevantDocs++;
-                precision += numberOfRelevantDocs / precisionAt;
-                System.out.println("Relevant doc Name " + corpus.getDocument(doc).getName() + "At index " + precisionAt);
+            try {
+                if (relevantDocs.contains(Integer.parseInt(corpus.getDocument(doc).getName().replace(".json", "")))) {
+                    numberOfRelevantDocs++;
+                    precision += numberOfRelevantDocs / precisionAt;
+                    System.out.println("Relevant doc Name " + corpus.getDocument(doc).getName() + "At index " + precisionAt);
+                }
+            } catch (Exception ex) {
+                System.out.println(doc);
             }
+
         }
 
         double averagePrecision = precision / relevantDocs.size();
@@ -149,4 +156,3 @@ public class Milestone3 {
 
     }
 }
-

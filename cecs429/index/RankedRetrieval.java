@@ -92,7 +92,7 @@ public class RankedRetrieval {
         for (Integer docId : rankedRetrievalPosting) {
             Document document = corpus.getDocument(docId);
             document.getContent();
-           // System.out.println("Title \"" + document.getTitle() + "\" File Name: " + corpus.getDocument(docId).getName() + " : " + docAccumulatorMap.get(docId));
+            // System.out.println("Title \"" + document.getTitle() + "\" File Name: " + corpus.getDocument(docId).getName() + " : " + docAccumulatorMap.get(docId));
         }
         return rankedRetrievalPosting;
     }

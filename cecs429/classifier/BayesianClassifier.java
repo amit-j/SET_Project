@@ -5,7 +5,7 @@ import java.util.List;
 public class BayesianClassifier {
 
 
-    public BayesianClassifier(List<BayesianClass> classes){
+    public BayesianClassifier(List<BayesianClass> classes) {
 
 
     }

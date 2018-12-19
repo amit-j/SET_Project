@@ -31,7 +31,6 @@ public class DiskPositionalIndex implements Index {
                     open();
 
 
-
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }

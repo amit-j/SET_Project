@@ -129,7 +129,6 @@ public class SinglePassInMemoryIndexWriter {
         }
 
 
-
         HashMap<Integer, List<Integer>> documentWeights = new HashMap<>(); //maps document id to list of tfd's.
 
         indexWriter.initDBStore(path);
@@ -267,7 +266,7 @@ public class SinglePassInMemoryIndexWriter {
                 }
                 Double ldsqrt = Math.sqrt(ld);
                 stream.writeDouble(ldsqrt);
-                System.out.println(ldsqrt + " for doc "+corpus.getDocument(i).getName());
+                System.out.println(ldsqrt + " for doc " + corpus.getDocument(i).getName());
             } else {
 
                 stream.writeDouble(0);

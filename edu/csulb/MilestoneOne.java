@@ -45,7 +45,7 @@ public class MilestoneOne {
         System.out.println("Please select a milestone to start ?");
         System.out.println("1. Milestone 1 (In memory Inverted Positional Index, K-Grams)");
         System.out.println("2. Milestone 2 (OnDisk Indexing, B+ Tree on disk vocabulary)");
-        System.out.println("3. Quit");
+        System.out.println("3. Milestone 3");
         System.out.print(">> ");
         mileStoneChoice = reader.readLine();
         switch (mileStoneChoice) {

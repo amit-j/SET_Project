@@ -1,7 +1,6 @@
 package cecs429.classifier;
 
 import cecs429.documents.Document;
-import cecs429.documents.DocumentCorpus;
 import cecs429.index.Index;
 import cecs429.index.Posting;
 import cecs429.text.EnglishTokenStream;
@@ -13,32 +12,22 @@ import java.util.PriorityQueue;
 
 public class BayesianClass {
 
-   private double classProbability;
+    private double classProbability;
     private int totalClassTerms;
-    private  int totalVocabCount;
+    private int totalVocabCount;
     private int classVocabSize;
-    private  Index index;
-    private  String className;
-    private HashMap<String,Double> discriminatingTerms;
-
-    public int getClassCorpusSize() {
-        return classCorpusSize;
-    }
-
+    private Index index;
+    private String className;
+    private HashMap<String, Double> discriminatingTerms;
     private int classCorpusSize;
-
-    public int getTotalDocuments() {
-        return totalDocuments;
-    }
-
     private int totalDocuments;
 
-    public BayesianClass(int totalVocabCount, Index index, int corpusSize, int totalDocuemnts, int totalClassVocabCount,String name) {
+    public BayesianClass(int totalVocabCount, Index index, int corpusSize, int totalDocuemnts, int totalClassVocabCount, String name) {
 
         classCorpusSize = corpusSize;
 
         this.totalDocuments = totalDocuemnts;
-        double prob = (double)corpusSize / totalDocuemnts;
+        double prob = (double) corpusSize / totalDocuemnts;
         classProbability = Math.log10(prob);
         totalClassTerms = totalClassVocabCount;
         this.totalVocabCount = totalVocabCount;
@@ -48,7 +37,13 @@ public class BayesianClass {
 
     }
 
+    public int getClassCorpusSize() {
+        return classCorpusSize;
+    }
 
+    public int getTotalDocuments() {
+        return totalDocuments;
+    }
 
     public double calculateProbability(Document document, TokenProcessor processor) {
 
@@ -68,10 +63,10 @@ public class BayesianClass {
                     }
 
 
-                    double denom = totalClassTerms+ totalVocabCount;
-                    double num = 1+freq;
-                    totalProb+= Math.log10(num/denom);
-                  //  totalProb += Math.log((1 + freq) /() (totalClassTerms + totalVocabCount));
+                    double denom = totalClassTerms + totalVocabCount;
+                    double num = 1 + freq;
+                    totalProb += Math.log10(num / denom);
+                    //  totalProb += Math.log((1 + freq) /() (totalClassTerms + totalVocabCount));
                 }
 
             }
@@ -84,14 +79,16 @@ public class BayesianClass {
     }
 
 
-    public void setDiscriminatingTerms(PriorityQueue<TermICTMap> ictMaps){
-       discriminatingTerms  = new HashMap<>();
-        System.out.println("Discriminating terms for class "+className+":");
-       for(TermICTMap map:ictMaps){
-           discriminatingTerms.put(index.getVocabulary().get(map.termID),map.ict);
-           System.out.println(index.getVocabulary().get(map.termID));
-       }
+    public void setDiscriminatingTerms(PriorityQueue<TermICTMap> ictMaps) {
+        discriminatingTerms = new HashMap<>();
+        System.out.println("Discriminating terms for class " + className + ":");
+        for (TermICTMap map : ictMaps) {
+            discriminatingTerms.put(index.getVocabulary().get(map.termID), map.ict);
+            System.out.println(index.getVocabulary().get(map.termID));
+        }
     }
 
-    public String getClassName(){return className;}
+    public String getClassName() {
+        return className;
+    }
 }
