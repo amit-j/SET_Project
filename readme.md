@@ -1,3 +1,26 @@
+# Search Engine made for any sized text based corpus
+
+## Overview
+  This project was made as a part of the search engines course (CECS 529) at CSU Long Beach. We have expanded on the features of the engine with each milestone releases. The per release changes and features added can be found in the corresponding readme files of the project.
+  
+## Features
+
+### Any size corpus 
+
+### Searching using K-Grams 
+
+### Search by a complete phrase
+
+### Boolean Searches
+
+### Ranked Search results
+
+### B+ Trees Vocabulary for faster searching
+
+### Different Types of Indexes
+
+### Different scoring techniques 
+
 ***************************************************** MILESTONE 2 CHANGE LOG ******************************************************
 
 Index : Index now has two different methods, GetPositionalPosting and GetPostings to avoid needlessly getting positions on ranked and And/Or queries.
