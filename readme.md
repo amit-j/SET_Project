@@ -21,7 +21,7 @@
 
 ### Different scoring techniques 
 
-***************************************************** MILESTONE 2 CHANGE LOG ******************************************************
+***************************************************** MILESTONE 2  Change log **********************************************
 
 Index : Index now has two different methods, GetPositionalPosting and GetPostings to avoid needlessly getting positions on ranked and And/Or queries.
 On Disk Index Writer : We can now build and store index on disk. Index is stored at path : Corpus/index.
@@ -32,4 +32,4 @@ Unit Testing : Changed the structure of Unit tests so that now each functionalit
 TokenProcessor now passed abstractly to methods.
 
 
-***************************************************************************************************************************************
+*****************************************************************************************************************************
