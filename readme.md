@@ -7,7 +7,7 @@
 
 ### Any size corpus 
 
-### Searching using K-Grams 
+### Searching using Wildcard charecters (* as the wildcard) K-Grams 
 
 ### Search by a complete phrase
 
@@ -20,6 +20,7 @@
 ### Different Types of Indexes
 
 ### Different scoring techniques 
+
 
 ***************************************************** MILESTONE 2  Change log **********************************************
 
